@@ -1,0 +1,5 @@
+Status code:
+
+2## -> Sucesso
+4## -> Erro do cliente
+5## -> Erro no serviço/servidor
