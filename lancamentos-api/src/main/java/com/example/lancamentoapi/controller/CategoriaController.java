@@ -27,7 +27,6 @@ public class CategoriaController {
     }
 
     @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria, HttpServletResponse response) {
 
         Categoria categoriaSalva = categoriaRepository.save(categoria);
