@@ -1,71 +1,78 @@
 package com.example.lancamentoapi.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import com.example.lancamentoapi.event.RecursoCriadoEvent;
+import com.example.lancamentoapi.model.Pessoa;
+import com.example.lancamentoapi.repository.PessoaRepository;
+import com.example.lancamentoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.lancamentoapi.event.RecursoCriadoEvent;
-import com.example.lancamentoapi.model.Pessoa;
-import com.example.lancamentoapi.repository.PessoaRepository;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
 
-	@Autowired
-	private PessoaRepository pessoaRepository;
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
-	@Autowired
-	private ApplicationEventPublisher publisher;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
-	@GetMapping
-	public List<Pessoa> listar() {
+    @Autowired
+    private PessoaService pessoaService;
 
-		return pessoaRepository.findAll();
-	}
+    @GetMapping
+    public List<Pessoa> listar() {
 
-	@PostMapping
-	public ResponseEntity<Pessoa> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
+        return pessoaRepository.findAll();
+    }
 
-		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
+    @PostMapping
+    public ResponseEntity<Pessoa> salvar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
+        Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
-	}
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
+    }
 
-		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
 
-		if (pessoa.isPresent()) {
-			return ResponseEntity.ok(pessoa.get());
-		}
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
 
-		return ResponseEntity.notFound().build();
-	}
-	
-	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
-	public void remover(@PathVariable Long id) {
-		pessoaRepository.deleteById(id);
-	}
-	
-	
+        if (pessoa.isPresent()) {
+            return ResponseEntity.ok(pessoa.get());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
+    public void remover(@PathVariable Long id) {
+        pessoaRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa) {
+
+        Pessoa pessoaBD = pessoaService.atualizar(id, pessoa);
+        return ResponseEntity.ok(pessoaBD);
+    }
+
+    @PutMapping("/{id}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizarAtributoAtivo(@PathVariable Long id, @RequestBody Boolean ativo) {
+        pessoaService.atualizarPropriedadeAtivo(id, ativo);
+    }
+
 }
