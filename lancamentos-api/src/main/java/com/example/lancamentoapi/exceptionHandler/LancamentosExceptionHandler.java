@@ -1,8 +1,11 @@
 package com.example.lancamentoapi.exceptionHandler;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -50,9 +53,9 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
     //	Tratando exceção do tipo abaixo
-    @ExceptionHandler({EmptyResultDataAccessException.class})
+    @ExceptionHandler({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
+    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
 
         String msgUsuario = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
         String msgDev = ex.toString();
@@ -61,6 +64,20 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 
     }
+
+    /*@ExceptionHandler({DataAccessResourceFailureException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleEmptyResultDataAccessException(DataAccessResourceFailureException ex, WebRequest request) {
+
+        String msgUsuario = messageSorce.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
+
+        *//*Pegando erro mais descritivo através da biblioteca commons-lang3*//*
+        String msgDev = ExceptionUtils.getRootCauseMessage(ex);
+        List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDev));
+
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+
+    }*/
 
     private List<Erro> getListaErros(BindingResult bindingResult) {
 

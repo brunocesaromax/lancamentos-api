@@ -30,4 +30,7 @@ public class LancamentoService {
         return ResponseEntity.notFound().build();
     }
 
+    public Lancamento save(Lancamento lancamento) {
+        return lancamentoRepository.save(lancamento);
+    }
 }
