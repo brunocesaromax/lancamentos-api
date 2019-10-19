@@ -38,4 +38,11 @@ public class PessoaService {
         pessoaBD.get().setAtivo(ativo);
         pessoaRepository.save(pessoaBD.get());
     }
+
+    public Pessoa buscarPeloId(Long id){
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+
+        return pessoa.orElse(null);
+
+    }
 }

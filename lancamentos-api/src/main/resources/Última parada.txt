@@ -1,3 +1,8 @@
 Atenção na aula 5.2
+Atencao na aula 5.7 sobre metamodels do JPA (Configuração particular para cade IDE)
 
-Iniciar aula 5.5
+Iniciar aula 5.9
+
+
+Problemas: Não estou conseguindo capturar o erro ao deletar tupla inexistente, Handler
+nao funcionando corretamente

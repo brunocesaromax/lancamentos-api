@@ -1,11 +1,11 @@
 package com.example.lancamentoapi.exceptionHandler;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import lombok.Data;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +29,7 @@ import java.util.List;
 @ControllerAdvice // Observa toda a aplicação
 public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @Qualifier("messageSource")
     @Autowired
     private MessageSource messageSorce;
 
@@ -53,30 +54,26 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
     //	Tratando exceção do tipo abaixo
-    @ExceptionHandler({ConstraintViolationException.class})
+    @ExceptionHandler({ConstraintViolationException.class, EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
+    public ResponseEntity<Object> handleConstraintViolationException(Exception ex, WebRequest request) {
 
         String msgUsuario = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
         String msgDev = ex.toString();
         List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDev));
 
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-
     }
-
-    /*@ExceptionHandler({DataAccessResourceFailureException.class})
+/*
+    @ExceptionHandler({EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(DataAccessResourceFailureException ex, WebRequest request) {
+    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 
-        String msgUsuario = messageSorce.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
-
-        *//*Pegando erro mais descritivo através da biblioteca commons-lang3*//*
-        String msgDev = ExceptionUtils.getRootCauseMessage(ex);
+        String msgUsuario = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+        String msgDev = ex.toString();
         List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDev));
 
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }*/
 
     private List<Erro> getListaErros(BindingResult bindingResult) {
@@ -94,6 +91,7 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
 
     }
 
+    @Data
     public static class Erro {
 
         private String msgUsuario;
@@ -102,22 +100,6 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
         public Erro(String msgUsuario, String msgDev) {
             super();
             this.msgUsuario = msgUsuario;
-            this.msgDev = msgDev;
-        }
-
-        public String getMsgUsuario() {
-            return msgUsuario;
-        }
-
-        public void setMsgUsuario(String msgUsuario) {
-            this.msgUsuario = msgUsuario;
-        }
-
-        public String getMsgDev() {
-            return msgDev;
-        }
-
-        public void setMsgDev(String msgDev) {
             this.msgDev = msgDev;
         }
 

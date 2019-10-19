@@ -6,6 +6,7 @@ import com.example.lancamentoapi.repository.PessoaRepository;
 import com.example.lancamentoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class PessoaController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
     public void remover(@PathVariable Long id) {
-        pessoaRepository.deleteById(id);
+            pessoaRepository.deleteById(id);
     }
 
     @PutMapping("/{id}")
@@ -71,7 +72,7 @@ public class PessoaController {
 
     @PutMapping("/{id}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarAtributoAtivo(@PathVariable Long id, @RequestBody Boolean ativo) {
+    public void atualizarAtributoAtivo(@PathVariable Long id, @RequestParam Boolean ativo) {
         pessoaService.atualizarPropriedadeAtivo(id, ativo);
     }
 
