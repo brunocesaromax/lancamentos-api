@@ -3,3 +3,18 @@ Status code:
 2## -> Sucesso
 4## -> Erro do cliente
 5## -> Erro no serviço/servidor
+
+
+OAuth2
+
+4 Personagens principais:
+- Usuário dono do recurso
+        |
+- Client qualquer
+    |          requisicao de token || token devolvido
+    |        - Authorization server (Servidor de autorização)
+    |
+- Resource Server (Servidor que contém os recursos)
+
+Os dois últimos podem ser separados ou juntos (Grandes empresas usam separadamente),
+no curso será juntos.
