@@ -6,10 +6,11 @@ import com.example.lancamentoapi.repository.LancamentoRepository;
 import com.example.lancamentoapi.repository.filter.LancamentoFilter;
 import com.example.lancamentoapi.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,8 +22,8 @@ public class LancamentoService {
     @Autowired
     private PessoaService pessoaService;
 
-    public List<Lancamento> buscarTodos(LancamentoFilter lancamentoFilter) {
-        return lancamentoRepository.filtrar(lancamentoFilter);
+    public Page<Lancamento> buscarTodos(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.filtrar(lancamentoFilter, pageable);
     }
 
     public ResponseEntity<?> buscar(Long id) {
