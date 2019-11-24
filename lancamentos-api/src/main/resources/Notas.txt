@@ -32,3 +32,7 @@ no curso será juntos.
 - Acess_token deve ser temporário por questão de segurança
 - O refreshToken será guardado em um cookie seguro no https, ou seja, javascript não tem acesso
 a esse cookie
+- É boa prática colocar o refresh_token em um cookie para que a aplicação não tenha acesso
+ao refresh_token
+- É possível mostrar pelo wireshark que o cookie com o refresh token é enviado pelo postman,
+porém a aplicação não sabe disso
