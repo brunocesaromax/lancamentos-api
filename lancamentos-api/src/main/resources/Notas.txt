@@ -5,7 +5,7 @@ Status code:
 5## -> Erro no serviço/servidor
 
 
-OAuth2
+##############OAuth2##############
 
 4 Personagens principais:
 - Usuário dono do recurso
@@ -19,3 +19,10 @@ OAuth2
 
 Os dois últimos podem ser separados ou juntos (Grandes empresas usam separadamente),
 no curso será juntos.
+
+#########JWT##############
+
+- site referência: jwt.io
+- No token possui informações como: Algoritmo de codificação, informações de dados (Payload)
+, quanto mais informações se querer enviar através do token, maior o mesmo será, uma assinatura
+- Composição: header, payload e assinatura
