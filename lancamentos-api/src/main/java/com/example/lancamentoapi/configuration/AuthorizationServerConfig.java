@@ -9,7 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
@@ -18,14 +19,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     /*Configuração do cliente*/
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("angular")
                 .secret("{noop}123456")
-                .scopes("read","write")
+                .scopes("read", "write")
                 .authorizedGrantTypes("password")
                 .accessTokenValiditySeconds(1800);
     }
@@ -34,11 +34,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .tokenStore(tokenStore()) //Armazenamento do token
+                .accessTokenConverter(acessTokenConverter())
                 .authenticationManager(authenticationManager);
     }
 
     @Bean
-    public TokenStore tokenStore(){
-        return new InMemoryTokenStore();
+    public JwtAccessTokenConverter acessTokenConverter() {
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+        accessTokenConverter.setSigningKey("algaworks");
+        return accessTokenConverter;
     }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(acessTokenConverter());
+    }
+
 }
