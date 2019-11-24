@@ -9,6 +9,7 @@ OAuth2
 
 4 Personagens principais:
 - Usuário dono do recurso
+
         |
 - Client qualquer
     |          requisicao de token || token devolvido
