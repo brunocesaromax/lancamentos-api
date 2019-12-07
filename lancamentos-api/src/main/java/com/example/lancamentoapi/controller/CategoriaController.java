@@ -24,6 +24,7 @@ public class CategoriaController {
     @Autowired
     private ApplicationEventPublisher publisher; 
 
+//    @CrossOrigin(maxAge = 10) // Permitir que todas origens consiguem fazer essa requisição
     @GetMapping
     public List<Categoria> listar() {
 

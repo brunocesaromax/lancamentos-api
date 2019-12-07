@@ -36,3 +36,9 @@ a esse cookie
 ao refresh_token
 - É possível mostrar pelo wireshark que o cookie com o refresh token é enviado pelo postman,
 porém a aplicação não sabe disso
+
+############# CORS ######################
+-> Proteção implementada no Javascript que só pode fazer requisições para a mesma
+origem (Solução: CORS)
+->(Documentação) https://spring.io/guides/gs/rest-service-cors/
+-> Ainda não foi implementado uma forma de integração do CORS com o spring security oauth2
