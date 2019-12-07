@@ -8,9 +8,9 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "category")
 @Data
-public class Categoria {
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,21 +18,6 @@ public class Categoria {
 	
 	@NotNull
 	@Size(min = 3, max = 50)
-	private String nome;
+	private String name;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 }

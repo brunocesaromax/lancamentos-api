@@ -16,9 +16,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/categorias").permitAll() //Categorias todos podem acessar o restante tem que estar autenticado
+                .antMatchers("/categories").permitAll() //Categorias todos podem acessar o restante tem que estar autenticado
                 .anyRequest().authenticated()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Não manter estado de seção
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Não manter state de seção
                 .and().csrf().disable(); // Configuração para evitar problemas como um javascriptInjection na aplicação
     }
 

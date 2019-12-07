@@ -27,7 +27,7 @@ import java.util.List;
 
 // Captura exceções de ResponseEntities
 @ControllerAdvice // Observa toda a aplicação
-public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler {
+public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Qualifier("messageSource")
     @Autowired
@@ -38,68 +38,68 @@ public class LancamentosExceptionHandler extends ResponseEntityExceptionHandler 
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        String msgUsuario = messageSorce.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
+        String msgUser = messageSorce.getMessage("msg.invalid", null, LocaleContextHolder.getLocale());
         String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
-        List<Erro> erros = Collections.singletonList(new Erro(msgUsuario, msgDev));
+        List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
-        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        List<Erro> erros = getListaErros(ex.getBindingResult());
-        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+        List<Error> errors = getErrorsList(ex.getBindingResult());
+        return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
     }
 
-    //	Tratando exceção do tipo abaixo
+    //	Tratando exceção do type abaixo
     @ExceptionHandler({ConstraintViolationException.class, EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleConstraintViolationException(Exception ex, WebRequest request) {
 
-        String msgUsuario = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+        String msgUser = messageSorce.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
         String msgDev = ex.toString();
-        List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDev));
+        List<Error> errors = Arrays.asList(new Error(msgUser, msgDev));
 
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 /*
     @ExceptionHandler({EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 
-        String msgUsuario = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+        String msgUser = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
         String msgDev = ex.toString();
-        List<Erro> erros = Arrays.asList(new Erro(msgUsuario, msgDev));
+        List<Error> erros = Arrays.asList(new Error(msgUser, msgDev));
 
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }*/
 
-    private List<Erro> getListaErros(BindingResult bindingResult) {
+    private List<Error> getErrorsList(BindingResult bindingResult) {
 
-        List<Erro> erros = new ArrayList<>();
+        List<Error> errors = new ArrayList<>();
 
-//		Retornar todos os erros nos campos do objeto
+//		Retornar todos os errors nos campos do objeto
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            String msgUsuario = messageSorce.getMessage(fieldError, LocaleContextHolder.getLocale());
+            String msgUser = messageSorce.getMessage(fieldError, LocaleContextHolder.getLocale());
             String msgDev = fieldError.toString();
-            erros.add(new Erro(msgUsuario, msgDev));
+            errors.add(new Error(msgUser, msgDev));
         }
 
-        return erros;
+        return errors;
 
     }
 
     @Data
-    public static class Erro {
+    public static class Error {
 
-        private String msgUsuario;
+        private String msgUser;
         private String msgDev;
 
-        public Erro(String msgUsuario, String msgDev) {
+        public Error(String msgUser, String msgDev) {
             super();
-            this.msgUsuario = msgUsuario;
+            this.msgUser = msgUser;
             this.msgDev = msgDev;
         }
 
