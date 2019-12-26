@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,17 +36,20 @@ public class LaunchController {
     private MessageSource messageSource;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
     public Page<Launch> list(@RequestBody(required = false) LaunchFilter launchFilter,
                              Pageable pageable) {
         return launchService.findAll(launchFilter, pageable);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         return launchService.findById(id);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_CREATE_LAUNCH') and #oauth2.hasScope('write')")
     public ResponseEntity<Launch> save(@Valid @RequestBody Launch launch, HttpServletResponse response) {
 
         Launch launchSave = launchService.save(launch);
@@ -57,6 +61,7 @@ public class LaunchController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
+    @PreAuthorize("hasAuthority('ROLE_REMOVE_LAUNCH') and #oauth2.hasScope('write')")
     public void remove(@PathVariable Long id) {
         launchService.delete(id);
     }
