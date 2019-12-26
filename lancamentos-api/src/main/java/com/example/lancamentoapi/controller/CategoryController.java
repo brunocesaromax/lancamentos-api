@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,12 +27,14 @@ public class CategoryController {
 
 //    @CrossOrigin(maxAge = 10) // Permitir que todas origens consiguem fazer essa requisição
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
     public List<Category> list() {
 
         return categoryRepository.findAll();
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_CREATE_CATEGORY') and #oauth2.hasScope('write')")
     public ResponseEntity<Category> save(@Valid @RequestBody Category category, HttpServletResponse response) {
 
         Category categorySave = categoryRepository.save(category);
@@ -43,6 +46,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findById(@PathVariable Long id){
 
         Optional<Category> category = categoryRepository.findById(id);
