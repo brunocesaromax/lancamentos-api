@@ -4,6 +4,7 @@ import com.example.lancamentoapi.event.ResourceCreatedEvent;
 import com.example.lancamentoapi.exceptionHandler.LaunchExceptionHandler.Error;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
+import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.LaunchService;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class LaunchController {
     public Page<Launch> list(@RequestBody(required = false) LaunchFilter launchFilter,
                              Pageable pageable) {
         return launchService.findAll(launchFilter, pageable);
+    }
+
+    @GetMapping(params = "summary")// Parametro de decisão para escolher este endpoint
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
+    public Page<LaunchSummary> sumUp(@RequestBody(required = false) LaunchFilter launchFilter,
+                                     Pageable pageable) {
+        return launchService.sumUp(launchFilter, pageable);
     }
 
     @GetMapping("/{id}")

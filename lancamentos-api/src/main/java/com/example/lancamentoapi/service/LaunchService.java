@@ -4,6 +4,7 @@ import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Person;
 import com.example.lancamentoapi.repository.LaunchRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
+import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,5 +51,9 @@ public class LaunchService {
 
     public void delete(Long id) {
         launchRepository.deleteById(id);
+    }
+
+    public Page<LaunchSummary> sumUp(LaunchFilter launchFilter, Pageable pageable) {
+        return launchRepository.sumUp(launchFilter, pageable);
     }
 }
