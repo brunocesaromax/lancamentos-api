@@ -1,5 +1,7 @@
 package com.example.lancamentoapi.cors;
 
+import com.example.lancamentoapi.configuration.property.ApiProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -13,8 +15,8 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    //todo: Configurar para diferentes ambientes
-    private String originPermitted = "";
+    @Autowired
+    private ApiProperty apiProperty;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -22,10 +24,10 @@ public class CorsFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        resp.setHeader("Access-Control-Allow-Origin", originPermitted);
+        resp.setHeader("Access-Control-Allow-Origin", apiProperty.getOriginPermitted());
         resp.setHeader("Access-Control-Allow-Credentials", "true");
 
-        if ("OPTIONS".equals(req.getMethod()) && originPermitted.equals(req.getHeader("Origin"))) {
+        if ("OPTIONS".equals(req.getMethod()) && apiProperty.getOriginPermitted().equals(req.getHeader("Origin"))) {
             resp.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
             resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
             resp.setHeader("Access-Control-Max-Age", "3600");

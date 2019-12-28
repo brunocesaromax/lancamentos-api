@@ -1,5 +1,7 @@
 package com.example.lancamentoapi.token;
 
+import com.example.lancamentoapi.configuration.property.ApiProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +21,9 @@ import java.util.Objects;
 
 @ControllerAdvice
 public class RefreshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
+
+    @Autowired
+    private ApiProperty apiProperty;
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -53,7 +58,7 @@ public class RefreshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessTok
     private void addRefreshTokenInCookie(String refreshToken, HttpServletRequest req, HttpServletResponse resp) {
         Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
         refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(false); //todo: Migrar para true em prod
+        refreshTokenCookie.setSecure(apiProperty.getSecurity().isEnableHttps());
         refreshTokenCookie.setPath(req.getContextPath()+"/oauth/token");
         refreshTokenCookie.setMaxAge(2592000); //30 dias
         resp.addCookie(refreshTokenCookie);
