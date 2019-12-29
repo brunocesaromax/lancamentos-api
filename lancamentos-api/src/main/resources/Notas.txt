@@ -45,4 +45,15 @@ origem (Solução: CORS)
 
 ############# HEROKU ######################
 -> Link: www.heroku.com
--> npm install -g heroku
+-> $npm install -g heroku
+
+Instruções:
+- Git deve estar instalado na máquina
+- Criar (nome deve ser único): $heroku create launchs-api
+- Criar Mysql integrado a aplicação com o comando: $heroku addons:create jawsdb --app launchs-api
+- Conteúdo da variável JAWSDB_URL :$heroku config:get JAWSDB_URL --app launchs-api
+- mysql://rdcwkue9x5kezoan:ffp2aglx6f9zlkpp@jj820qt5lpu6krut.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/eayie26guar4jrbl
+- Setando variáveis declaradas no properties de produção:
+   $heroku config:set JDBC_DATABASE_URL=jdbc:mysql://jj820qt5lpu6krut.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/eayie26guar4jrbl JDBC_DATABASE_USERNAME=rdcwkue9x5kezoan JDBC_DATABASE_PASSWORD=ffp2aglx6f9zlkpp --app launchs-api
+- Visualizar variáveis configuradas: $heroku config --app launchs-api
+- Configurar o Procfile para que o heroku utilize o property de prod
