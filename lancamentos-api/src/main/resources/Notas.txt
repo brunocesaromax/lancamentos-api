@@ -42,3 +42,7 @@ porém a aplicação não sabe disso
 origem (Solução: CORS)
 ->(Documentação) https://spring.io/guides/gs/rest-service-cors/
 -> Ainda não foi implementado uma forma de integração do CORS com o spring security oauth2
+
+############# HEROKU ######################
+-> Link: www.heroku.com
+-> npm install -g heroku
