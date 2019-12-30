@@ -2,6 +2,7 @@ package com.example.lancamentoapi.token;
 
 import com.example.lancamentoapi.configuration.property.ApiProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
+@Profile("oauth-security")
 @ControllerAdvice
 public class RefreshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 
