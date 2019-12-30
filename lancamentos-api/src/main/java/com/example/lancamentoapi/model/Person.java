@@ -29,7 +29,7 @@ public class Person {
 
 	@Transient
 	@JsonIgnore
-	public Boolean isInativo(){
+	public Boolean isInactive(){
 		return !this.active;
 	}
 }

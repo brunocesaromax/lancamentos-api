@@ -39,10 +39,8 @@ public class PersonService {
         personRepository.save(pessoaBD.get());
     }
 
-    public Person buscarPeloId(Long id){
+    public Person findById(Long id){
         Optional<Person> pessoa = personRepository.findById(id);
-
         return pessoa.orElse(null);
-
     }
 }

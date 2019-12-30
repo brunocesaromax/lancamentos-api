@@ -74,6 +74,18 @@ public class LaunchController {
         launchService.delete(id);
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_CREATE_LAUNCH') and #oauth2.hasScope('write')")
+    public ResponseEntity<Launch> update(@PathVariable Long id, @Valid @RequestBody Launch launch) {
+        try {
+            Launch launchSaved = launchService.update(id, launch);
+            return ResponseEntity.ok(launchSaved);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     /*Como é um tratamento particular de Lançamento pode ser tratado no próprio controlador*/
     @ExceptionHandler({PersonInexistentOrInactiveException.class})
     public ResponseEntity<Object> handlePersonInexistentOrInactiveException(PersonInexistentOrInactiveException ex) {

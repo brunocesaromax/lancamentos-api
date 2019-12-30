@@ -6,6 +6,7 @@ import com.example.lancamentoapi.repository.LaunchRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,12 +41,7 @@ public class LaunchService {
 
     public Launch save(Launch launch) {
 
-        Person person = personService.buscarPeloId(launch.getPerson().getId());
-
-        if (person == null || person.isInativo()) {
-            throw new PersonInexistentOrInactiveException();
-        }
-
+        validatePerson(launch.getPerson());
         return launchRepository.save(launch);
     }
 
@@ -55,5 +51,36 @@ public class LaunchService {
 
     public Page<LaunchSummary> sumUp(LaunchFilter launchFilter, Pageable pageable) {
         return launchRepository.sumUp(launchFilter, pageable);
+    }
+
+    public Launch update(Long id, Launch launch) {
+        Launch launchBD = findExistentLaunch(id);
+
+        if (!launch.getPerson().equals(launchBD.getPerson())){
+            validatePerson(launch.getPerson());
+        }
+
+        BeanUtils.copyProperties(launch, launchBD, "id");
+        return launchRepository.save(launchBD);
+    }
+
+    private void validatePerson(Person person) {
+        if (person.getId() != null){
+            person = personService.findById(person.getId());
+        }
+
+        if (person == null || person.isInactive()){
+            throw new PersonInexistentOrInactiveException();
+        }
+    }
+
+    private Launch findExistentLaunch(Long id) {
+        Optional<Launch> launchBD = launchRepository.findById(id);
+
+        if (!launchBD.isPresent()){
+            throw new IllegalArgumentException();
+        }else{
+            return launchBD.get();
+        }
     }
 }
