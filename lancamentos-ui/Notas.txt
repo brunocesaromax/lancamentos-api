@@ -12,5 +12,6 @@ Tipos de diretivas:
 - Estruturais: <h2 *ngIf="logado">Olá {{userName}} </h2> (Manipula/Modifica o DOM)
 - Atributos: Modifica o comportamento/aparência de um elemento no DOM.
 
-Fazer property Binding em outros componentes:
-- Usar @Input()
+Fazer property Binding em outros componentes, Comunicação entre os componentes:
+- Usar @Input() Entrada
+- @Output() Saída - eventos Ex: @Output() funcionarioAdd = new EventEmitter();
