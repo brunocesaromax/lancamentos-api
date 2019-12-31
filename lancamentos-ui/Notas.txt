@@ -3,3 +3,6 @@ Formas de Data Binding:
 -> Property Binding = [prop]="name"
 -> Event Binding = (click)= "save()"
 -> Two Way Data Binding = [(ngModel)]="name"
+
+Variáveis de referência:
+<input type="text" class=form-control" #inputName>
