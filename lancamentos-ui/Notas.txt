@@ -28,4 +28,16 @@ Estilo CSS dinâmico com a diretiva ngClass:
 1º [ngClass]="['badge', 'badge-default']"
 2º [ngClass]="getClassListCss()"
 
+Bibliotecas de componentes:
+- Angular Material
+- Angular Materialize
+- ng-bootstrap
+- ngx-bootstrap
+- primeng
+
+Instalações de dependências noprojeto:
+$npm install primeng --save
+$npm install fontawesome --save
+
+
 
