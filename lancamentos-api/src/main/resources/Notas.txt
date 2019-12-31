@@ -57,3 +57,4 @@ Instruções:
    $heroku config:set JDBC_DATABASE_URL=jdbc:mysql://jj820qt5lpu6krut.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/eayie26guar4jrbl JDBC_DATABASE_USERNAME=rdcwkue9x5kezoan JDBC_DATABASE_PASSWORD=ffp2aglx6f9zlkpp --app launchs-api
 - Visualizar variáveis configuradas: $heroku config --app launchs-api
 - Configurar o Procfile para que o heroku utilize o property de prod
+
