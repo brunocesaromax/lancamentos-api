@@ -1,0 +1,5 @@
+Formas de Data Binding:
+-> Interpolação = {{name}}
+-> Property Binding = [prop]="name"
+-> Event Binding = (click)= "save()"
+-> Two Way Data Binding = [(ngModel)]="name"
