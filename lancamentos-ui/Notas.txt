@@ -9,5 +9,8 @@ Variáveis de referência:
 
 Tipos de diretivas:
 - Componentes: <person-list><person-list/>
-- Estruturais: <h2 *ngIf="logado">Olá {{userName}} </h2> (Manipula o DOM)
+- Estruturais: <h2 *ngIf="logado">Olá {{userName}} </h2> (Manipula/Modifica o DOM)
 - Atributos: Modifica o comportamento/aparência de um elemento no DOM.
+
+Fazer property Binding em outros componentes:
+- Usar @Input()
