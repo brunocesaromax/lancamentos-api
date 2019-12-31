@@ -15,3 +15,9 @@ Tipos de diretivas:
 Fazer property Binding em outros componentes, Comunicação entre os componentes:
 - Usar @Input() Entrada
 - @Output() Saída - eventos Ex: @Output() funcionarioAdd = new EventEmitter();
+
+Possível adicionar estilo CSS dentro do próprio componente com styles: []
+
+Estilo CSS dinâmico com ngStyle:
+1º [ngStyle]="{ 'background-color': 'red' }"
+2º [ngStyle]="getCardStyle()"
