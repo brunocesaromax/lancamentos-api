@@ -6,3 +6,8 @@ Formas de Data Binding:
 
 Variáveis de referência:
 <input type="text" class=form-control" #inputName>
+
+Tipos de diretivas:
+- Componentes: <person-list><person-list/>
+- Estruturais: <h2 *ngIf="logado">Olá {{userName}} </h2> (Manipula o DOM)
+- Atributos: Modifica o comportamento/aparência de um elemento no DOM.
