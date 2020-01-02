@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, Verdana, sans-serif;
+  color: #404C51;
+  margin: 0;
+}
+
+label {
+  font-weight: bold;
+}
+
+/*Só vai aplicar .container se a largura da tela for no mínimo 1200px*/
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+  }
+}
