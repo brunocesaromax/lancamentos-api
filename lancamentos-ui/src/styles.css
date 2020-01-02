@@ -31,3 +31,19 @@ label {
   width: 90px;
   text-align: center;
 }
+
+.launch-button {
+  left: -9px;
+}
+
+.trash-button {
+  top: -22px;
+  background-color: red !important;
+  border: red !important;
+  height: 20px;
+}
+
+.edit-button {
+  height: 21px;
+  width: 27px;
+}
