@@ -16,3 +16,13 @@ label {
     margin: 0 auto;
   }
 }
+
+.col-value {
+  width: 120px;
+  text-align: right;
+}
+
+.col-date {
+  width: 120px;
+  text-align: center;
+}
