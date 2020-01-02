@@ -40,8 +40,8 @@
             <td class="col-date"> {{launch.payday}}</td>
             <td class="col-value" [style.color]="launch.type === 'EXPENSE' ? 'red' : 'blue'">{{launch.value}}</td>
             <td class="col-actions">
-              <a pButton><i class="pi pi-pencil"></i></a>
-              <button pButton><i class="pi pi-trash"></i></button>
+              <a pButton pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i class="pi pi-pencil"></i></a>
+              <button pButton pTooltip="Excluir" tooltipPosition="top" style="margin:5px"><i class="pi pi-trash"></i></button>
             </td>
           </tr>
         </ng-template>
