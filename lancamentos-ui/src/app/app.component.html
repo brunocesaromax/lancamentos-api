@@ -24,7 +24,7 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="launchs">
+      <p-table [value]="launchs" [paginator]="true" [rows]="2">
         <ng-template pTemplate="header">
           <tr>
             <th *ngFor="let header of headers">
