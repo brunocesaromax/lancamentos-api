@@ -9,13 +9,15 @@ import {TooltipModule} from 'primeng/tooltip';
 import { LaunchsSearchComponent } from './launchs-search/launchs-search.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonsSearchComponent } from './persons-search/persons-search.component';
+import { ColoredFieldDirective } from './colored-field.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LaunchsSearchComponent,
     NavbarComponent,
-    PersonsSearchComponent
+    PersonsSearchComponent,
+    ColoredFieldDirective
   ],
   imports: [
     BrowserModule,

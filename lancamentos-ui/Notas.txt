@@ -39,5 +39,9 @@ Instalações de dependências noprojeto:
 $npm install primeng --save
 $npm install fontawesome --save
 
+Diretivas:
+- criar: $ng g d 'directive-name'
+
+
 
 
