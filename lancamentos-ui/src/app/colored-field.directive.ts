@@ -2,7 +2,8 @@ import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from
 
 @Directive({
   // Seletor de atributo, poderia ser também apenas input
-  selector: '[appColoredField]'
+  selector: '[appColoredField]',
+  exportAs: 'coloredField'
 })
 export class ColoredFieldDirective {
 
@@ -13,13 +14,13 @@ export class ColoredFieldDirective {
   constructor() {
   }
 
-  @HostListener('focus') onFocus() {
+  @HostListener('focus') toColor() {
     // this.renderer.setStyle(this.elementRef.nativeElement,
     //   'backgroundColor', 'green');
     this.backgroundColor = this.color;
   }
 
-  @HostListener('blur') withoutFocus() {
+  @HostListener('blur') discolor() {
     // this.renderer.setStyle(this.elementRef.nativeElement,
     //   'backgroundColor', 'transparent');
     this.backgroundColor = 'transparent';
