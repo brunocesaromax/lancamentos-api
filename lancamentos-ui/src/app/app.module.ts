@@ -6,10 +6,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
+import { LaunchsSearchComponent } from './launchs-search/launchs-search.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LaunchsSearchComponent
   ],
   imports: [
     BrowserModule,
