@@ -22,7 +22,7 @@ export class LaunchsSearchComponent implements OnInit {
     }
   ];
 
-  headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor'];
+  headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
 
   constructor() { }
 
