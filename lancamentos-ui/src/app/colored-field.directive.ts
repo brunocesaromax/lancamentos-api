@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostBinding, HostListener, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
 
 @Directive({
   // Seletor de atributo, poderia ser também apenas input
@@ -6,15 +6,17 @@ import {Directive, ElementRef, HostBinding, HostListener, Renderer2} from '@angu
 })
 export class ColoredFieldDirective {
 
+  @Input() color = 'gray';
+
   @HostBinding('style.backgroundColor') backgroundColor: string;
 
-  constructor(
-  ) { }
+  constructor() {
+  }
 
   @HostListener('focus') onFocus() {
     // this.renderer.setStyle(this.elementRef.nativeElement,
     //   'backgroundColor', 'green');
-    this.backgroundColor = 'yellow';
+    this.backgroundColor = this.color;
   }
 
   @HostListener('blur') withoutFocus() {
