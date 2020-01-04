@@ -14,6 +14,6 @@ export class FormExampleComponent implements OnInit {
   }
 
   save(userForm: NgForm) {
-    console.log(userForm);
+    console.log(userForm.value.name);
   }
 }
