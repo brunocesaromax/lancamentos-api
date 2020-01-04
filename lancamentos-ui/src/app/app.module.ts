@@ -10,6 +10,8 @@ import { LaunchsSearchComponent } from './launchs-search/launchs-search.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonsSearchComponent } from './persons-search/persons-search.component';
 import { ColoredFieldDirective } from './colored-field.directive';
+import { FormExampleComponent } from './form-example/form-example.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { ColoredFieldDirective } from './colored-field.directive';
     LaunchsSearchComponent,
     NavbarComponent,
     PersonsSearchComponent,
-    ColoredFieldDirective
+    ColoredFieldDirective,
+    FormExampleComponent
   ],
   imports: [
     BrowserModule,
     InputTextModule,
     ButtonModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

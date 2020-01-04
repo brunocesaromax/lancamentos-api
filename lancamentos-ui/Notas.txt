@@ -42,6 +42,11 @@ $npm install fontawesome --save
 Diretivas:
 - criar: $ng g d 'directive-name'
 
+Formulários:
+1º Template-driven forms
+2º Reactive forms (model-driven)
+- <form #userForm="ngForm" (ngSubmit)="salvar(userForm)"
+
 
 
 

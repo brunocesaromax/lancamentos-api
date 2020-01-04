@@ -1,0 +1,27 @@
+<div class="container">
+
+  <form #userForm="ngForm" (ngSubmit)="save(userForm)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <label>Nome </label>
+        <input type="text" pInputText>
+      </div>
+      <div class="ui-g-12">
+        <label>E-mail </label>
+        <input type="text" pInputText>
+      </div>
+      <div class="ui-g-12">
+        <label>Profissão </label>
+        <select>
+          <option value="">Selecione</option>
+          <option>Desenvolvedor</option>
+          <option>Artista</option>
+        </select>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar"></button>
+      </div>
+    </div>
+  </form>
+</div>
