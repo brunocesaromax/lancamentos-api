@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -8,12 +8,15 @@ import {NgForm} from '@angular/forms';
 })
 export class FormExampleComponent implements OnInit {
 
-  constructor() { }
+  professions = ['Programador', 'Empresário', 'Zelador', 'Outros'];
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   save(userForm: NgForm) {
-    console.log(userForm.value.name);
+    console.log(userForm);
   }
 }
