@@ -12,6 +12,7 @@ import { PersonsSearchComponent } from './persons-search/persons-search.componen
 import { ColoredFieldDirective } from './colored-field.directive';
 import { FormExampleComponent } from './form-example/form-example.component';
 import {FormsModule} from '@angular/forms';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {FormsModule} from '@angular/forms';
     ButtonModule,
     TableModule,
     TooltipModule,
-    FormsModule
+    FormsModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
