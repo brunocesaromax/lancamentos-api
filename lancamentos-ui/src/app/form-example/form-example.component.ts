@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
+class Client {
+  name: string;
+  email: string;
+  profession: string;
+}
+
 @Component({
   selector: 'app-form-example',
   templateUrl: './form-example.component.html',
@@ -8,6 +14,7 @@ import {NgForm} from '@angular/forms';
 })
 export class FormExampleComponent implements OnInit {
 
+  client = new Client();
   professions = ['Programador', 'Empresário', 'Zelador', 'Outros'];
   profession = 'Outros';
 
@@ -18,6 +25,9 @@ export class FormExampleComponent implements OnInit {
   }
 
   save(userForm: NgForm) {
-    console.log(userForm.value.profession);
+    // this.client.name = userForm.value.name;
+    // this.client.email = userForm.value.email;
+    // this.client.profession = userForm.value.profession;
+    console.log(this.client);
   }
 }
