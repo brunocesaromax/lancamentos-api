@@ -9,6 +9,7 @@ import {NgForm} from '@angular/forms';
 export class FormExampleComponent implements OnInit {
 
   professions = ['Programador', 'Empresário', 'Zelador', 'Outros'];
+  profession = 'Outros';
 
   constructor() {
   }
@@ -17,6 +18,6 @@ export class FormExampleComponent implements OnInit {
   }
 
   save(userForm: NgForm) {
-    console.log(userForm);
+    console.log(userForm.value.profession);
   }
 }

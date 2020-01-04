@@ -12,7 +12,7 @@
       </div>
       <div class="ui-g-12">
         <label>Profissão </label>
-        <select name="profession" ngModel>
+        <select name="profession" [ngModel]="profession">
           <option value="">Selecione</option>
           <option *ngFor="let profession of professions"
                   [value]="profession">{{profession}}</option>
