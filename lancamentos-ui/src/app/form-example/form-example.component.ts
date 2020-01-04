@@ -28,6 +28,7 @@ export class FormExampleComponent implements OnInit {
     // this.client.name = userForm.value.name;
     // this.client.email = userForm.value.email;
     // this.client.profession = userForm.value.profession;
-    console.log(this.client);
+    // console.log(this.client);
+    console.log(userForm);
   }
 }
