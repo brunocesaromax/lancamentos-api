@@ -11,20 +11,23 @@
       <div class="ui-g-12">
         <label>Nome </label>
         <input type="text" name="name" pInputText [(ngModel)]="client.name"
-               required minlength="5" autocomplete="off">
+               required minlength="5" autocomplete="off" #name="ngModel">
+        <div *ngIf="name.hasError('required')">Informe um nome</div>
+        <div *ngIf="name.hasError('minlength')">O nome deve ser completo</div>
       </div>
       <div class="ui-g-12">
         <label>E-mail </label>
-        <input type="email" name="email" pInputText [(ngModel)]="client.email"
-               required>
+        <input type="email" name="email" pInputText [(ngModel)]="client.email" #email="ngModel" required="" email>
+        <div *ngIf="email.invalid">Informe um e-mail válido</div>
       </div>
       <div class="ui-g-12">
         <label>Profissão </label>
-        <select name="profession" [(ngModel)]="client.profession" required>
+        <select name="profession" [(ngModel)]="client.profession" #profession="ngModel" required>
           <option value="">Selecione</option>
           <option *ngFor="let profession of professions"
                   [value]="profession">{{profession}}</option>
         </select>
+        <div *ngIf="profession.invalid">Informe uma profissão</div>
       </div>
 
       <div class="ui-g-12">
