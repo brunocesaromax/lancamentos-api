@@ -30,5 +30,9 @@ export class FormExampleComponent implements OnInit {
     // this.client.profession = userForm.value.profession;
     // console.log(this.client);
     console.log(userForm);
+
+    // Limpa o formulário e o estado do mesmo
+    // os values devem ser os mesmos do form
+    userForm.reset({profession: '', name: ''});
   }
 }

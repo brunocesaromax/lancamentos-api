@@ -1,7 +1,5 @@
 <div class="container">
-  {{userForm.valid}}
-  <br/>
-  {{userForm.invalid}}
+  {{client | json}}
 
   <div *ngIf="userForm.invalid && userForm.dirty">
     <p-message severity="error" text="Preencha todos os campos corretamente."></p-message>
