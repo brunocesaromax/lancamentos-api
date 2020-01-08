@@ -13,6 +13,8 @@ import { ColoredFieldDirective } from './colored-field.directive';
 import { FormExampleComponent } from './form-example/form-example.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
+import { LaunchFormComponent } from './launch-form/launch-form.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {MessageModule} from 'primeng/message';
     NavbarComponent,
     PersonsSearchComponent,
     ColoredFieldDirective,
-    FormExampleComponent
+    FormExampleComponent,
+    LaunchFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import {MessageModule} from 'primeng/message';
     TableModule,
     TooltipModule,
     FormsModule,
-    MessageModule
+    MessageModule,
+    InputTextareaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
