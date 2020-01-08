@@ -15,6 +15,8 @@ import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
 import { LaunchFormComponent } from './launch-form/launch-form.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CalendarModule} from 'primeng/calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,15 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
     TableModule,
     TooltipModule,
     FormsModule,
     MessageModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
