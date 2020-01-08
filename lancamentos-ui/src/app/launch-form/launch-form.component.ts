@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-launch-form',
@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./launch-form.component.css']
 })
 export class LaunchFormComponent implements OnInit {
+  types = [
+    { label: 'Receita', value: 'RECEIPT' },
+    { label: 'Despesa', value: 'EXPENSE' }
+  ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
