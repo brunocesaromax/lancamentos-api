@@ -33,7 +33,8 @@ import { MessageComponent } from './message/message.component';
     ColoredFieldDirective,
     FormExampleComponent,
     LaunchFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
