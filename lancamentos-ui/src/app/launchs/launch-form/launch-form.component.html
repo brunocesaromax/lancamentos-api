@@ -28,7 +28,7 @@
                name="description"
                ngModel #description="ngModel"
                required minlength="5"/>
-        <app-message
+       <!-- <app-message
           [control]="description"
           error="required"
           text="Informe um descrição">
@@ -37,7 +37,7 @@
           [control]="description"
           error="minlength"
           text="Informe um descrição de no mínimo {{description.errors?.minlength?.requiredLength}} caracteres">
-        </app-message>
+        </app-message>-->
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor </label>
@@ -47,11 +47,11 @@
                placeholder="R$0,00"
                name="value" ngModel #value="ngModel"
                required/>
-        <app-message
+        <!--<app-message
           [control]="value"
           error="required"
           text="Informe um valor">
-        </app-message>
+        </app-message>-->
       </div>
       <div class="ui-g-6 ui-md-6 ui-fluid">
         <label>Categoria </label>
@@ -60,11 +60,11 @@
           [placeholder]="'Selecione'"
           name="category" ngModel #category="ngModel"
           required></p-dropdown>
-        <app-message
+       <!-- <app-message
           [control]="category"
           error="required"
           text="Informe uma categoria">
-        </app-message>
+        </app-message>-->
       </div>
       <div class="ui-g-6 ui-md-6 ui-fluid">
         <label>Pessoa </label>
@@ -74,11 +74,11 @@
                     name="person" ngModel #person="ngModel"
                     required>
         </p-dropdown>
-        <app-message
+        <!--<app-message
           [control]="person"
           error="required"
           text="Informe uma pessoa">
-        </app-message>
+        </app-message>-->
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Observação </label>

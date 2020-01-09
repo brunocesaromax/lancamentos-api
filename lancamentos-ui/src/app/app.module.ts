@@ -6,14 +6,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
-import {LaunchsSearchComponent} from './launchs-search/launchs-search.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {PersonsSearchComponent} from './persons-search/persons-search.component';
 import {ColoredFieldDirective} from './colored-field.directive';
 import {FormExampleComponent} from './form-example/form-example.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
-import {LaunchFormComponent} from './launch-form/launch-form.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -23,22 +21,19 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {PersonFormComponent} from './person-form/person-form.component';
 import {InputMaskModule} from 'primeng/inputmask';
 import {MessageComponent} from './message/message.component';
-import {LaunchsGridComponent} from './launchs-grid/launchs-grid.component';
 import {PersonsGridComponent} from './persons-grid/persons-grid.component';
 import {NavigationModule} from './navigation/navigation.module';
+import {LaunchsModule} from './launchs/launchs.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LaunchsSearchComponent,
     NavbarComponent,
     PersonsSearchComponent,
     ColoredFieldDirective,
     FormExampleComponent,
-    LaunchFormComponent,
     PersonFormComponent,
     MessageComponent,
-    LaunchsGridComponent,
     PersonsGridComponent
   ],
   imports: [
@@ -56,9 +51,13 @@ import {NavigationModule} from './navigation/navigation.module';
     DropdownModule,
     CurrencyMaskModule,
     InputMaskModule,
-    NavigationModule
+    NavigationModule,
+    LaunchsModule
   ],
   providers: [],
+  exports: [
+    MessageComponent
+  ],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
 })
 export class AppModule {
