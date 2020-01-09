@@ -58,3 +58,5 @@ Módulos em Angular:
 - São utilizados para guardar componentes, diretivas e pipes relacionados
 - Pode se criar modulos utilitarios, modulos que contem ferramentas que podem
  ser utilizadas em várias partes do projeto angular
+- Criar componentes dentro de submodulos basta colocar o path do modulo:
+ng g c buttons/button-big --spec=false

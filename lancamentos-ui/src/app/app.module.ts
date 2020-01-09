@@ -6,14 +6,14 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
-import { LaunchsSearchComponent } from './launchs-search/launchs-search.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { PersonsSearchComponent } from './persons-search/persons-search.component';
-import { ColoredFieldDirective } from './colored-field.directive';
-import { FormExampleComponent } from './form-example/form-example.component';
+import {LaunchsSearchComponent} from './launchs-search/launchs-search.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {PersonsSearchComponent} from './persons-search/persons-search.component';
+import {ColoredFieldDirective} from './colored-field.directive';
+import {FormExampleComponent} from './form-example/form-example.component';
 import {FormsModule} from '@angular/forms';
 import {MessageModule} from 'primeng/message';
-import { LaunchFormComponent } from './launch-form/launch-form.component';
+import {LaunchFormComponent} from './launch-form/launch-form.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,9 +22,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {PersonFormComponent} from './person-form/person-form.component';
 import {InputMaskModule} from 'primeng/inputmask';
-import { MessageComponent } from './message/message.component';
-import { LaunchsGridComponent } from './launchs-grid/launchs-grid.component';
-import { PersonsGridComponent } from './persons-grid/persons-grid.component';
+import {MessageComponent} from './message/message.component';
+import {LaunchsGridComponent} from './launchs-grid/launchs-grid.component';
+import {PersonsGridComponent} from './persons-grid/persons-grid.component';
+import {ButtonsModule} from './buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -54,10 +55,11 @@ import { PersonsGridComponent } from './persons-grid/persons-grid.component';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
-    InputMaskModule
+    InputMaskModule,
+    ButtonsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
 })
 export class AppModule {
 }

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PersonsGridComponent } from './persons-grid.component';
+import {PersonsGridComponent} from './persons-grid.component';
 
 describe('PersonsGridComponent', () => {
   let component: PersonsGridComponent;
