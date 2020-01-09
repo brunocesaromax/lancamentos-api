@@ -53,3 +53,8 @@ $    npm install ng2-currency-mask --save
 Criando componente sem o html e o css
 $  ng g c message --spec=false --inline-template --inline-style
 
+Módulos em Angular:
+- appmodule é o modulo raíz de toda aplicação
+- São utilizados para guardar componentes, diretivas e pipes relacionados
+- Pode se criar modulos utilitarios, modulos que contem ferramentas que podem
+ ser utilizadas em várias partes do projeto angular
