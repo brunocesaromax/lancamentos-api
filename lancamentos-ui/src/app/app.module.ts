@@ -25,7 +25,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {MessageComponent} from './message/message.component';
 import {LaunchsGridComponent} from './launchs-grid/launchs-grid.component';
 import {PersonsGridComponent} from './persons-grid/persons-grid.component';
-import {ButtonsModule} from './buttons/buttons.module';
+import {NavigationModule} from './navigation/navigation.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,7 @@ import {ButtonsModule} from './buttons/buttons.module';
     DropdownModule,
     CurrencyMaskModule,
     InputMaskModule,
-    ButtonsModule
+    NavigationModule
   ],
   providers: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
