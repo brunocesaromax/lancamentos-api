@@ -22,6 +22,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {PersonFormComponent} from './person-form/person-form.component';
 import {InputMaskModule} from 'primeng/inputmask';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {InputMaskModule} from 'primeng/inputmask';
     ColoredFieldDirective,
     FormExampleComponent,
     LaunchFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

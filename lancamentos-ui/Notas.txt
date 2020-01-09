@@ -50,5 +50,6 @@ Formulários:
 Adicionando mascara de numeros:
 $    npm install ng2-currency-mask --save
 
-
+Criando componente sem o html e o css
+$  ng g c message --spec=false --inline-template --inline-style
 
