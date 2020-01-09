@@ -62,3 +62,4 @@ Módulos em Angular:
 ng g c buttons/button-big --spec=false
 - Para usar um componente interno de um módulo, basta nao exportar o mesmo
 - Quando criar um módulo? Resposta: Funcionalidades relacionadas (Feature Modules)
+- Elementos que vao ser usados na raiz da aplicação devem estar no coreModule
