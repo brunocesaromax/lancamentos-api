@@ -24,6 +24,4 @@ export class MessageComponent {
   hasError() {
     return this.control.hasError(this.error) && this.control.dirty;
   }
-
-
 }

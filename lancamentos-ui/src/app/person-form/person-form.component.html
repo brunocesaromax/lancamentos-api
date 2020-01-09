@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #personForm="ngForm">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Nova Pessoa</h1>
@@ -7,12 +7,33 @@
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text"/>
+        <input pInputText
+               type="text"
+               name="name"
+               ngModel #name="ngModel"
+               required
+               minlength="5"/>
+        <app-message [control]="name"
+                     text="Informe o nome"
+                     error="required"
+        ></app-message>
+        <app-message [control]="name"
+                     text="Informe o nome de no mínimo {{name.errors?.minlength?.requiredLength}} caracteres"
+                     error="minlength"
+        ></app-message>
       </div>
 
       <div class="ui-g-9 ui-fluid">
         <label>Logradouro</label>
-        <input pInputText type="text"/>
+        <input pInputText
+               type="text"
+               name="street"
+               ngModel #street="ngModel"
+               required/>
+        <app-message [control]="street"
+                     text="Informe o logradouro"
+                     error="required"
+        ></app-message>
       </div>
 
       <div class="ui-g-3 ui-fluid">
@@ -27,26 +48,61 @@
 
       <div class="ui-g-4 ui-fluid">
         <label>Bairro</label>
-        <input pInputText type="text"/>
+        <input pInputText
+               type="text"
+               name="neighborhood"
+               ngModel #neighborhood="ngModel"
+               required/>
+        <app-message [control]="neighborhood"
+                     text="Informe o bairro"
+                     error="required"
+        ></app-message>
       </div>
 
       <div class="ui-g-4 ui-fluid">
         <label>CEP</label>
-        <p-inputMask  mask="99999-999" placeholder="99999-999"></p-inputMask>
+        <p-inputMask
+          mask="99999-999"
+          placeholder="99999-999"
+          name="zipCode" ngModel #zipCode="ngModel"
+          required
+        ></p-inputMask>
+        <app-message [control]="zipCode"
+                     text="Informe o CEP"
+                     error="required"
+        ></app-message>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>Cidade</label>
-        <input pInputText type="text"/>
+        <input pInputText type="text"
+               name="city" ngModel #city="ngModel"
+               required/>
+        <app-message [control]="city"
+                     text="Informe a cidade"
+                     error="required"
+        ></app-message>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>Estado</label>
-        <input pInputText type="text"/>
+        <input pInputText type="text"
+               name="state" ngModel #state="ngModel"
+               required/>
+        <app-message [control]="state"
+                     text="Informe o estado"
+                     error="required"
+        ></app-message>
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-" style="margin:5px"></button>
+        <button pButton
+                type="submit"
+                label="Salvar"
+                class="ui-button-"
+                style="margin:5px"
+                [disabled]="personForm.invalid"
+        ></button>
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
         <a style="margin:10px" href="javascript:;">Voltar para a pesquisa</a>
       </div>
