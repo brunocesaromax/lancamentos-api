@@ -47,3 +47,7 @@ label {
   height: 21px;
   width: 27px;
 }
+
+.ui-dropdown-filter-container {
+  width: 30%;
+}

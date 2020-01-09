@@ -11,6 +11,17 @@ export class LaunchFormComponent implements OnInit {
     { label: 'Despesa', value: 'EXPENSE' }
   ];
 
+  categories = [
+    { label: 'Alimentação', value: 1 },
+    { label: 'Transporte', value: 2 }
+  ];
+
+  persons = [
+    { label: 'João', value: 4 },
+    { label: 'Sebastião', value: 9 },
+    { label: 'Maria', value: 3 },
+  ];
+
   constructor() {
   }
 
