@@ -47,6 +47,8 @@ Formulários:
 2º Reactive forms (model-driven)
 - <form #userForm="ngForm" (ngSubmit)="salvar(userForm)"
 
+Adicionando mascara de numeros:
+$    npm install ng2-currency-mask --save
 
 
 
