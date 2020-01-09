@@ -20,7 +20,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
-import { PersonFormComponent } from './person-form/person-form.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { PersonFormComponent } from './person-form/person-form.component';
     PersonsSearchComponent,
     ColoredFieldDirective,
     FormExampleComponent,
-    LaunchFormComponent,
-    PersonFormComponent
+    LaunchFormComponent
   ],
   imports: [
     BrowserModule,
