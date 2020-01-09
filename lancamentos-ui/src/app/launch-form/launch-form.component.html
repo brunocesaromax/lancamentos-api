@@ -23,14 +23,25 @@
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
-        <label>Descrição </label>
-        <input pInputText type="text"/>
+        <label>Descrição {{ description.errors | json }}</label>
+        <input pInputText type="text"
+               name="description"
+               ngModel #description="ngModel"
+               required minlength="5"/>
+        <div *ngIf="description.hasError('required') && description.dirty" class="ui-message ui-message-error">
+          Informe um descrição
+        </div>
+        <div *ngIf="description.hasError('minlength') && description.dirty" class="ui-message ui-message-error">
+          Informe um descrição de no mínimo {{description.errors.minlength.requiredLength}} caracteres
+        </div>
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor </label>
         <input currencyMask
                [options]="{prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false}"
-               pInputText type="text" placeholder="R$0,00"/>
+               pInputText type="text"
+               placeholder="R$0,00"
+               name="value" ngModel=""/>
       </div>
       <div class="ui-g-6 ui-md-6 ui-fluid">
         <label>Categoria </label>
