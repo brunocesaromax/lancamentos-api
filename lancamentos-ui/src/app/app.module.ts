@@ -25,7 +25,6 @@ import {LogService} from './examples/log.service';
   providers: [
     EmployeeService,
     LogService,
-    { provide: 'LogPrefix', useValue: 'LOG'}
   ],
   exports: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/

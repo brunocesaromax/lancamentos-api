@@ -72,3 +72,5 @@ projeto em geral
 - É nelas que ficam as regras de negócio
 - ngOnInit e feita depois do construtor, construtor apenas para atribuições
 - Problema de duas instâncias do mesmo serviço
+- Por convenção deve-se colocar o @Injectable em todas as classes de serviço
+do projeto
