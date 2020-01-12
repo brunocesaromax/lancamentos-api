@@ -21,15 +21,3 @@ export class EmployeeService {
   }
 
 }
-
-export class EmployeeServiceAbbreviated extends EmployeeService {
-
-  constructor(private numCharacters: number) {
-    super();
-  }
-
-  add(value: string) {
-    super.add(value.substr(0, this.numCharacters).concat('...'));
-  }
-
-}
