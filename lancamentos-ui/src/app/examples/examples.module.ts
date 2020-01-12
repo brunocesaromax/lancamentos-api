@@ -7,11 +7,16 @@ import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {MessageModule} from 'primeng/message';
+import { EmployeeFormComponent } from './employee/employee-form.component';
 
 @NgModule({
   declarations: [
     FormExampleComponent,
-    ColoredFieldDirective
+    ColoredFieldDirective,
+    EmployeeFormComponent
+  ],
+  exports: [
+    EmployeeFormComponent
   ],
   imports: [
     CommonModule,

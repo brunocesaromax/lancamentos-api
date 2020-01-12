@@ -68,4 +68,7 @@ Serviços:
 -> Def Uma funcionalidade em comum deve ser fornecida para vários componente ou
 módulos
 - Deixa os componentes mais limpos, evita duplicação de código e organiza melhor o
-projeto como um todo
+projeto em geral
+- É nelas que ficam as regras de negócio
+- ngOnInit e feita depois do construtor, construtor apenas para atribuições
+- Problema de duas instâncias do mesmo serviço

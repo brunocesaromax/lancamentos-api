@@ -1,6 +1,17 @@
-<app-navbar></app-navbar>
+<!--<app-navbar></app-navbar>-->
 <!--<app-launchs-search></app-launchs-search>-->
-<app-launch-form></app-launch-form>
+<!--<app-launch-form></app-launch-form>-->
 <!--<app-persons-search></app-persons-search>-->
 <!--<app-person-form></app-person-form>-->
 <!--<app-form-example></app-form-example>-->
+<div class="container">
+  <app-employee-form></app-employee-form>
+
+  <div class="fc-row" style="margin-top: 20px">
+
+    <div class="ui-grid-col-2" *ngFor="let e of employees">
+      {{e | json}}
+    </div>
+  </div>
+
+</div>
