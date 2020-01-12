@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {ColoredFieldDirective} from './examples/colored-field.directive';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LaunchsModule} from './launchs/launchs.module';
 import {PersonsModule} from './persons/persons.module';
