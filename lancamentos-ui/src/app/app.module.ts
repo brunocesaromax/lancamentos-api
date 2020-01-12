@@ -9,6 +9,10 @@ import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
 import {EmployeeService, EmployeeServiceAbbreviated} from './examples/employee/employee.service';
 
+const createEmployeeService = () => {
+  return new EmployeeServiceAbbreviated(2);
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,7 @@ import {EmployeeService, EmployeeServiceAbbreviated} from './examples/employee/e
     ExamplesModule
   ],
   providers: [
-    {provide: EmployeeService, useClass: EmployeeServiceAbbreviated}
+    {provide: EmployeeService, useFactory: createEmployeeService}
   ],
   exports: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
