@@ -21,3 +21,11 @@ export class EmployeeService {
   }
 
 }
+
+export class EmployeeServiceAbbreviated extends EmployeeService{
+
+  add(value: string) {
+    super.add(value.substr(0, 3).concat('...'));
+  }
+
+}

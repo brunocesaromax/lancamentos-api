@@ -7,7 +7,7 @@ import {LaunchsModule} from './launchs/launchs.module';
 import {PersonsModule} from './persons/persons.module';
 import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
-import {EmployeeService} from './examples/employee/employee.service';
+import {EmployeeService, EmployeeServiceAbbreviated} from './examples/employee/employee.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import {EmployeeService} from './examples/employee/employee.service';
     ExamplesModule
   ],
   providers: [
-    EmployeeService
+    {provide: EmployeeService, useClass: EmployeeServiceAbbreviated}
   ],
   exports: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
