@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {MessageModule} from 'primeng/message';
 import { EmployeeFormComponent } from './employee/employee-form.component';
+import {EmployeeService} from './employee/employee.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,9 @@ import { EmployeeFormComponent } from './employee/employee-form.component';
     FormsModule,
     MessageModule,
     InputTextModule
+  ],
+  providers: [
+    EmployeeService
   ]
 })
 export class ExamplesModule { }

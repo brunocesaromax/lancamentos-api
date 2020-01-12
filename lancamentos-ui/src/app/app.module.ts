@@ -7,7 +7,6 @@ import {LaunchsModule} from './launchs/launchs.module';
 import {PersonsModule} from './persons/persons.module';
 import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
-import {EmployeeService} from './examples/employee/employee.service';
 import {LogService} from './examples/log.service';
 
 @NgModule({
@@ -20,10 +19,9 @@ import {LogService} from './examples/log.service';
     LaunchsModule,
     PersonsModule,
     CoreModule,
-    ExamplesModule
+    ExamplesModule,
   ],
   providers: [
-    EmployeeService,
     LogService,
   ],
   exports: [],
