@@ -7,6 +7,7 @@ import {LaunchsModule} from './launchs/launchs.module';
 import {PersonsModule} from './persons/persons.module';
 import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
+import {EmployeeService} from './examples/employee/employee.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import {ExamplesModule} from './examples/examples.module';
     CoreModule,
     ExamplesModule
   ],
-  providers: [],
-  exports: [
+  providers: [
+    EmployeeService
   ],
+  exports: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
 })
 export class AppModule {

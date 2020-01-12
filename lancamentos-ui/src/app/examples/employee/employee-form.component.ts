@@ -8,10 +8,9 @@ import {EmployeeService} from './employee.service';
 })
 export class EmployeeFormComponent {
 
-  employeeService: EmployeeService;
-
-  constructor() {
-    this.employeeService = new EmployeeService();
+  constructor(
+    private employeeService: EmployeeService
+  ) {
   }
 
   add(name: string) {
