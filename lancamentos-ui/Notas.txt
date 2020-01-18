@@ -74,3 +74,5 @@ projeto em geral
 - Problema de duas instâncias do mesmo serviço
 - Por convenção deve-se colocar o @Injectable em todas as classes de serviço
 do projeto
+
+***********json-server -> API-FAKE para testes**********

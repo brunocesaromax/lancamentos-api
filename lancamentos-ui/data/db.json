@@ -1,0 +1,24 @@
+{
+  "cities": [
+    {
+      "id": 2,
+      "name": "Rio Verde"
+    },
+    {
+      "id": 3,
+      "name": "Aparecida de Goiânia"
+    },
+    {
+      "name": "Belo Horizonte",
+      "id": 4
+    },
+    {
+      "name": "Araçu",
+      "id": 5
+    },
+    {
+      "name": "Rio de Janeiro",
+      "id": 6
+    }
+  ]
+}

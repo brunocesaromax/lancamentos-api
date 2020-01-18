@@ -8,6 +8,10 @@ import {PersonsModule} from './persons/persons.module';
 import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
 import {LogService} from './examples/log.service';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import {LogService} from './examples/log.service';
     PersonsModule,
     CoreModule,
     ExamplesModule,
+    InputTextModule,
+    ButtonModule,
+    TableModule,
+    FormsModule,
   ],
   providers: [
     LogService,

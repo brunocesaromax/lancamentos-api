@@ -1,21 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {EmployeeService} from './examples/employee/employee.service';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  employees = [];
+export class AppComponent {
 
-  constructor(
-    private employeeService: EmployeeService
-  ) {
+  cities = [
+    {id: 1, name: 'Uberlândia'},
+    {id: 2, name: 'São Paulo'},
+    {id: 3, name: 'Florianópolis'},
+    {id: 4, name: 'Curitiba'},
+  ];
+  headers = [
+    'Código',
+    'Nome',
+    ''
+  ];
+
+  add(name: string) {
+    alert(name);
   }
 
-  ngOnInit() {
-    this.employees = this.employeeService.list();
+  delete(id: number) {
+    alert(id);
+  }
+
+  update(city: any) {
+    alert(JSON.stringify(city));
   }
 
 }
