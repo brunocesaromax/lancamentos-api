@@ -40,9 +40,12 @@ export class ServicesTestComponent implements OnInit {
   update(city: any) {
     this.cityService.update(city)
       .subscribe(() => {
-        alert('Cidade Atualizada com sucesso!');
-        this.list();
-      });
+          alert('Cidade Atualizada com sucesso!');
+          this.list();
+        },
+        () => {
+          alert('Erro ao atualizar cidade!!');
+        });
   }
 
   list() {
