@@ -24,21 +24,25 @@ export class ServicesTestComponent implements OnInit {
 
   add(name: string) {
     this.cityService.add({name}) // O mesmo que name: name
-      .subscribe(data => {
+      .subscribe(() => {
         this.list();
       });
   }
 
   delete(id: number) {
     this.cityService.delete(id)
-      .subscribe(response => {
+      .subscribe(() => {
         alert('Cidade Excluida com sucesso');
         this.list();
       });
   }
 
   update(city: any) {
-    alert(JSON.stringify(city));
+    this.cityService.update(city)
+      .subscribe(() => {
+        alert('Cidade Atualizada com sucesso!');
+        this.list();
+      });
   }
 
   list() {

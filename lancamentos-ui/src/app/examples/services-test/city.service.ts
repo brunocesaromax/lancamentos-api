@@ -23,4 +23,8 @@ export class CityService {
   delete(id: number): Observable<any> {
     return this.httpClient.delete(`http://localhost:3000/cities/${id}`);
   }
+
+  update(city: any): Observable<any> {
+    return this.httpClient.put(`http://localhost:3000/cities/${city.id}`, city);
+  }
 }
