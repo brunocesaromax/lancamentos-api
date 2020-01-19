@@ -30,7 +30,11 @@ export class ServicesTestComponent implements OnInit {
   }
 
   delete(id: number) {
-    alert(id);
+    this.cityService.delete(id)
+      .subscribe(response => {
+        alert('Cidade Excluida com sucesso');
+        this.list();
+      });
   }
 
   update(city: any) {

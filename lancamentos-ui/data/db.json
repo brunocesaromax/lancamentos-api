@@ -1,14 +1,6 @@
 {
   "cities": [
     {
-      "id": 2,
-      "name": "Rio Verde"
-    },
-    {
-      "id": 3,
-      "name": "Aparecida de Goiânia"
-    },
-    {
       "name": "Belo Horizonte",
       "id": 4
     },
@@ -25,24 +17,8 @@
       "id": 7
     },
     {
-      "name": "Paixão de Cristo",
-      "id": 8
-    },
-    {
-      "name": "Pixel",
-      "id": 9
-    },
-    {
       "name": "radadop",
       "id": 10
-    },
-    {
-      "name": "Beira mar",
-      "id": 11
-    },
-    {
-      "name": "caãmba",
-      "id": 12
     }
   ]
 }

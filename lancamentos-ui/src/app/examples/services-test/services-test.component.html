@@ -29,7 +29,12 @@
             </div>
           </td>
           <td class="col-actions">
-            <button pButton class="trash-button" pTooltip="Excluir" tooltipPosition="top" style="margin:5px"><i class="pi pi-trash"></i></button>
+            <button pButton class="trash-button"
+                    pTooltip="Excluir"
+                    tooltipPosition="top"
+                    style="margin:5px"><i
+              class="pi pi-trash"
+            (click)="delete(city.id)"></i></button>
           </td>
         </tr>
       </ng-template>
