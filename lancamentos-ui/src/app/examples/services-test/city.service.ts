@@ -15,4 +15,8 @@ export class CityService {
   list(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/cities');
   }
+
+  add(city: any): Observable<any> {
+    return this.httpClient.post('http://localhost:3000/cities', city);
+  }
 }

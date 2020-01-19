@@ -19,15 +19,14 @@ export class ServicesTestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cityService.list()
-      .subscribe(data => {
-        this.cities = data;
-      });
-
+    this.list();
   }
 
   add(name: string) {
-    alert(name);
+    this.cityService.add({name}) // O mesmo que name: name
+      .subscribe(data => {
+        this.list();
+      });
   }
 
   delete(id: number) {
@@ -36,5 +35,12 @@ export class ServicesTestComponent implements OnInit {
 
   update(city: any) {
     alert(JSON.stringify(city));
+  }
+
+  list() {
+    this.cityService.list()
+      .subscribe(data => {
+        this.cities = data;
+      });
   }
 }
