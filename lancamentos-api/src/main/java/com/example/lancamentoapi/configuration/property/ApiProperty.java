@@ -10,7 +10,8 @@ public class ApiProperty {
 
     @Setter
     @Getter
-    private String originPermitted = "http://localhost:8000";
+//    private String originPermitted = "http://localhost:8000";
+    private String originPermitted;
 
     @Getter
     private final Security security = new Security();
