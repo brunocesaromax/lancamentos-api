@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LaunchFormComponent} from './launch-form/launch-form.component';
 import {LaunchsSearchComponent} from './launchs-search/launchs-search.component';
-import {LaunchsGridComponent} from './launchs-grid/launchs-grid.component';
 import {FormsModule} from '@angular/forms';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputTextModule} from 'primeng/inputtext';
@@ -21,7 +20,6 @@ import {SharedModule} from '../shared/shared.module';
   declarations: [
     LaunchFormComponent,
     LaunchsSearchComponent,
-    LaunchsGridComponent
   ],
   imports: [
     CommonModule,

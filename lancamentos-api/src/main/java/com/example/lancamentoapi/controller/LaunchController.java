@@ -38,14 +38,14 @@ public class LaunchController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
-    public Page<Launch> list(@RequestBody(required = false) LaunchFilter launchFilter,
+    public Page<Launch> list(@ModelAttribute LaunchFilter launchFilter,
                              Pageable pageable) {
         return launchService.findAll(launchFilter, pageable);
     }
 
     @GetMapping(params = "summary")// Parametro de decisão para escolher este endpoint
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
-    public Page<LaunchSummary> sumUp(@RequestBody(required = false) LaunchFilter launchFilter,
+    public Page<LaunchSummary> sumUp(@ModelAttribute LaunchFilter launchFilter,
                                      Pageable pageable) {
         return launchService.sumUp(launchFilter, pageable);
     }
