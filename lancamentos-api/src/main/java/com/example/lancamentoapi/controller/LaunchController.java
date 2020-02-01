@@ -66,7 +66,7 @@ public class LaunchController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
     @PreAuthorize("hasAuthority('ROLE_REMOVE_LAUNCH') and #oauth2.hasScope('write')")
-    public void remove(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         launchService.delete(id);
     }
 

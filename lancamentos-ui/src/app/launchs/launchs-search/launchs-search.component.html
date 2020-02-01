@@ -33,7 +33,7 @@
       <p-table [value]="launchs" [responsive]="true"
                [paginator]="true" [rows]="filter.pageSize"
                [lazy]="true" [totalRecords]="totalElements"
-               (onLazyLoad)="changePage($event)">
+               (onLazyLoad)="changePage($event)" #table>
       <ng-template pTemplate="header">
         <tr>
           <th *ngFor="let header of headers">
@@ -52,7 +52,11 @@
           <td class="col-actions">
             <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i
               class="pi pi-pencil"></i></a>
-            <button pButton class="trash-button" pTooltip="Excluir" tooltipPosition="top" style="margin:5px"><i
+            <button pButton class="trash-button"
+                    pTooltip="Excluir"
+                    tooltipPosition="top"
+                    (click)="delete(launch)"
+                    style="margin:5px"><i
               class="pi pi-trash"></i></button>
           </td>
         </tr>

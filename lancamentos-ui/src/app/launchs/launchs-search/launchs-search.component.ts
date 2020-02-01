@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LaunchFilter, LaunchService} from '../launch.service';
 import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
 
@@ -15,6 +15,8 @@ export class LaunchsSearchComponent implements OnInit {
   launchs = [];
   headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
 
+  @ViewChild('table', {static: true}) table;
+
   constructor(private launchService: LaunchService) {
   }
 
@@ -27,7 +29,6 @@ export class LaunchsSearchComponent implements OnInit {
 
     this.launchService.search(this.filter)
       .subscribe(resp => {
-        console.log(resp);
         this.totalElements = resp.totalElements;
         this.launchs = resp.content;
       });
@@ -36,5 +37,13 @@ export class LaunchsSearchComponent implements OnInit {
   changePage(event: LazyLoadEvent) {
     const page = event.first / event.rows;
     this.search(page);
+  }
+
+  delete(launch: any) {
+    this.launchService.delete(launch.id)
+      .subscribe(resp => {
+        this.table.first = 0;
+        this.search();
+      });
   }
 }

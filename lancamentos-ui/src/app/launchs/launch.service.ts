@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
@@ -8,7 +8,7 @@ export class LaunchFilter {
   dueDayStart: Date;
   dueDayEnd: Date;
   page = 0;
-  pageSize = 2;
+  pageSize = 4;
 }
 
 @Injectable({
@@ -18,7 +18,8 @@ export class LaunchService {
 
   private launchsUrl = 'http://localhost:8080/launchs';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   search(filter: LaunchFilter): Observable<any> {
     let headers = new HttpHeaders();
@@ -44,5 +45,12 @@ export class LaunchService {
     }
 
     return this.httpClient.get(`${this.launchsUrl}?summary`, {headers, params});
+  }
+
+  delete(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.delete(`${this.launchsUrl}/${id}`, { headers });
   }
 }
