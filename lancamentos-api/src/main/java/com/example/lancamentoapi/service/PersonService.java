@@ -1,19 +1,20 @@
 package com.example.lancamentoapi.service;
 
 import com.example.lancamentoapi.model.Person;
+import com.example.lancamentoapi.model.Person_;
 import com.example.lancamentoapi.repository.PersonRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
     public Person update(Long id, Person person) {
 
@@ -23,7 +24,7 @@ public class PersonService {
             throw new EmptyResultDataAccessException(1);
         }
 
-        BeanUtils.copyProperties(person, pessoaBD.get(), "id"); //Modo de update
+        BeanUtils.copyProperties(person, pessoaBD.get(), Person_.ID); //Modo de update
         return personRepository.save(pessoaBD.get());
     }
 

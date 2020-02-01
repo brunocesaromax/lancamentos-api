@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import * as moment from 'moment';
 
 export interface LaunchFilter {
   description: string;
+  dueDayStart: Date;
+  dueDayEnd: Date;
 }
 
 @Injectable({
@@ -23,6 +26,16 @@ export class LaunchService {
 
     if (filter.description) {
       params = params.append('description', filter.description);
+    }
+
+    if (filter.dueDayStart) {
+      params = params.append('dueDayStart',
+        moment(filter.dueDayStart).format('YYYY-MM-DD'));
+    }
+
+    if (filter.dueDayEnd) {
+      params = params.append('dueDayEnd',
+        moment(filter.dueDayEnd).format('YYYY-MM-DD'));
     }
 
     return this.httpClient.get(`${this.launchsUrl}?summary`, {headers, params});

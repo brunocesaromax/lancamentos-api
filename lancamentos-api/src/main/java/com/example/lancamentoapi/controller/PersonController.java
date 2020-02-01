@@ -4,7 +4,7 @@ import com.example.lancamentoapi.event.ResourceCreatedEvent;
 import com.example.lancamentoapi.model.Person;
 import com.example.lancamentoapi.repository.PersonRepository;
 import com.example.lancamentoapi.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +18,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
+@RequiredArgsConstructor
 public class PersonController {
 
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private ApplicationEventPublisher publisher;
-
-    @Autowired
-    private PersonService personService;
+    private final PersonRepository personRepository;
+    private final ApplicationEventPublisher publisher;
+    private final PersonService personService;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_PERSON') and #oauth2.hasScope('read')")

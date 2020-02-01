@@ -3,7 +3,7 @@ package com.example.lancamentoapi.controller;
 import com.example.lancamentoapi.event.ResourceCreatedEvent;
 import com.example.lancamentoapi.model.Category;
 import com.example.lancamentoapi.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-    
-    @Autowired
-    private ApplicationEventPublisher publisher; 
+    private final CategoryRepository categoryRepository;
+    private final ApplicationEventPublisher publisher;
 
 //    @CrossOrigin(maxAge = 10) // Permitir que todas origens consiguem fazer essa requisição
     @GetMapping

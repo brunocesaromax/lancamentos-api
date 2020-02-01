@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LaunchService} from '../launch.service';
+import {LaunchFilter, LaunchService} from '../launch.service';
 
 @Component({
   selector: 'app-launchs-search',
@@ -10,17 +10,26 @@ import {LaunchService} from '../launch.service';
 export class LaunchsSearchComponent implements OnInit {
 
   description: string;
+  dueDayStart: Date;
+  dueDayEnd: Date;
   launchs = [];
   headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
 
-  constructor(private launchService: LaunchService) {}
+  constructor(private launchService: LaunchService) {
+  }
 
   ngOnInit() {
     this.search();
   }
 
   search() {
-    this.launchService.search({description: this.description})
+    const filter: LaunchFilter = {
+      description: this.description,
+      dueDayStart: this.dueDayStart,
+      dueDayEnd: this.dueDayEnd
+    };
+
+    this.launchService.search(filter)
       .subscribe(resp => {
         this.launchs = resp.content;
       });

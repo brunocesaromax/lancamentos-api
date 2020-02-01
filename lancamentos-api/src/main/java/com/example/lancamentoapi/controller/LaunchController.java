@@ -7,7 +7,7 @@ import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.LaunchService;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -25,16 +25,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/launchs")
+@RequiredArgsConstructor
 public class LaunchController {
 
-    @Autowired
-    private LaunchService launchService;
-
-    @Autowired
-    private ApplicationEventPublisher publisher;
-
-    @Autowired
-    private MessageSource messageSource;
+    private final LaunchService launchService;
+    private final ApplicationEventPublisher publisher;
+    private final MessageSource messageSource;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")

@@ -14,10 +14,12 @@
 
       <div class="ui-g-12">
         <label style="display: block;">Vencimento</label>
-        <input type="text" pInputText style="width: 95px;">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+        name="dueDayStart" [(ngModel)]="dueDayStart"></p-calendar>
 
         <label> até </label>
-        <input type="text" pInputText style="width: 95px;">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+                    name="dueDayEnd" [(ngModel)]="dueDayEnd"></p-calendar>
       </div>
 
       <div class="ui-g-12">
@@ -28,7 +30,8 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="launchs" [paginator]="true" [rows]="2" [responsive]="true">
+      <p-table [value]="launchs" [paginator]="true" [rows]="2"
+               [responsive]="true" >
         <ng-template pTemplate="header">
           <tr>
             <th *ngFor="let header of headers">
@@ -50,6 +53,13 @@
               <button pButton class="trash-button" pTooltip="Excluir" tooltipPosition="top" style="margin:5px"><i
                 class="pi pi-trash"></i></button>
             </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+<!--            <td [attr.colspan]="columns.length">-->
+            <td [colSpan]="6">Nenhum lançamento foi encontrado!</td>
+<!--            </td>-->
           </tr>
         </ng-template>
       </p-table>

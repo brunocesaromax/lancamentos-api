@@ -1,13 +1,14 @@
 package com.example.lancamentoapi.service;
 
 import com.example.lancamentoapi.model.Launch;
+import com.example.lancamentoapi.model.Launch_;
 import com.example.lancamentoapi.model.Person;
 import com.example.lancamentoapi.repository.LaunchRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class LaunchService {
 
-    @Autowired
-    private LaunchRepository launchRepository;
-
-    @Autowired
-    private PersonService personService;
+    private final LaunchRepository launchRepository;
+    private final PersonService personService;
 
     public Page<Launch> findAll(LaunchFilter launchFilter, Pageable pageable) {
         return launchRepository.filterOut(launchFilter, pageable);
@@ -60,7 +59,7 @@ public class LaunchService {
             validatePerson(launch.getPerson());
         }
 
-        BeanUtils.copyProperties(launch, launchBD, "id");
+        BeanUtils.copyProperties(launch, launchBD, Launch_.ID);
         return launchRepository.save(launchBD);
     }
 

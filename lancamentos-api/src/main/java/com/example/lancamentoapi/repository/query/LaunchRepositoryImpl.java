@@ -1,6 +1,9 @@
 package com.example.lancamentoapi.repository.query;
 
+import com.example.lancamentoapi.model.Category_;
 import com.example.lancamentoapi.model.Launch;
+import com.example.lancamentoapi.model.Launch_;
+import com.example.lancamentoapi.model.Person_;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import org.springframework.data.domain.Page;
@@ -39,7 +42,6 @@ public class LaunchRepositoryImpl implements LaunchRepositoryQuery {
         addRestrictionsInPagination(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(launchFilter));
-
     }
 
     @Override
@@ -50,14 +52,14 @@ public class LaunchRepositoryImpl implements LaunchRepositoryQuery {
         Root<Launch> root = criteriaQuery.from(Launch.class);
 
         criteriaQuery.select(builder.construct(LaunchSummary.class,
-                root.get("id"),
-                root.get("description"),
-                root.get("dueDate"),
-                root.get("payday"),
-                root.get("value"),
-                root.get("type"),
-                root.get("category").get("name"),
-                root.get("person").get("name")));
+                root.get(Launch_.ID),
+                root.get(Launch_.DESCRIPTION),
+                root.get(Launch_.DUE_DATE),
+                root.get(Launch_.PAYDAY),
+                root.get(Launch_.VALUE),
+                root.get(Launch_.TYPE),
+                root.get(Launch_.CATEGORY).get(Category_.NAME),
+                root.get(Launch_.PERSON).get(Person_.NAME)));
 
         /*restrições*/
         Predicate[] predicates = getRestrictions(launchFilter, builder, root);
@@ -79,17 +81,17 @@ public class LaunchRepositoryImpl implements LaunchRepositoryQuery {
 
                 // where description like '%Ssga%'
                 predicates.add(builder.like(
-                        builder.lower(root.get("description")), "%" + launchFilter.getDescription().toLowerCase() + "%"));
+                        builder.lower(root.get(Launch_.DESCRIPTION)), "%" + launchFilter.getDescription().toLowerCase() + "%"));
             }
 
             if (launchFilter.getDueDayStart() != null) {
                 predicates.add(
-                        builder.greaterThanOrEqualTo(root.get("dueDate"), launchFilter.getDueDayStart()));
+                        builder.greaterThanOrEqualTo(root.get(Launch_.DUE_DATE), launchFilter.getDueDayStart()));
             }
 
             if (launchFilter.getDueDayEnd() != null) {
                 predicates.add(
-                        builder.lessThanOrEqualTo(root.get("dueDate"), launchFilter.getDueDayEnd()));
+                        builder.lessThanOrEqualTo(root.get(Launch_.DUE_DATE), launchFilter.getDueDayEnd()));
             }
         }
 
