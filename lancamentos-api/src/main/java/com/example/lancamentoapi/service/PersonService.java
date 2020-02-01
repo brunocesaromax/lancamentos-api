@@ -6,6 +6,8 @@ import com.example.lancamentoapi.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,5 +45,9 @@ public class PersonService {
     public Person findById(Long id){
         Optional<Person> pessoa = personRepository.findById(id);
         return pessoa.orElse(null);
+    }
+
+    public Page<Person> pagination(String name, Pageable pageable) {
+        return personRepository.findAllByName(name, pageable);
     }
 }

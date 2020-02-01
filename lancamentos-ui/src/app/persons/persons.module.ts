@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {PersonFormComponent} from './person-form/person-form.component';
 import {PersonsSearchComponent} from './persons-search/persons-search.component';
 import {FormsModule} from '@angular/forms';
-import {PersonsGridComponent} from './persons-grid/persons-grid.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -21,7 +20,6 @@ import {SharedModule} from '../shared/shared.module';
   declarations: [
     PersonsSearchComponent,
     PersonFormComponent,
-    PersonsGridComponent
   ],
   imports: [
     CommonModule,

@@ -23,7 +23,6 @@ export class LaunchsSearchComponent implements OnInit {
   }
 
   search(page = 0) {
-
     this.filter.page = page;
 
     this.launchService.search(this.filter)
