@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LaunchFilter, LaunchService} from '../launch.service';
+import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
 
 @Component({
   selector: 'app-launchs-search',
@@ -9,6 +10,7 @@ import {LaunchFilter, LaunchService} from '../launch.service';
 
 export class LaunchsSearchComponent implements OnInit {
 
+  totalElements = 0;
   filter = new LaunchFilter();
   launchs = [];
   headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
@@ -17,14 +19,23 @@ export class LaunchsSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.search();
+    // this.search();
   }
 
-  search() {
+  search(page = 0) {
+
+    this.filter.page = page;
+
     this.launchService.search(this.filter)
       .subscribe(resp => {
         console.log(resp);
+        this.totalElements = resp.totalElements;
         this.launchs = resp.content;
       });
+  }
+
+  changePage(event: LazyLoadEvent) {
+    const page = event.first / event.rows;
+    this.search(page);
   }
 }
