@@ -9,9 +9,7 @@ import {LaunchFilter, LaunchService} from '../launch.service';
 
 export class LaunchsSearchComponent implements OnInit {
 
-  description: string;
-  dueDayStart: Date;
-  dueDayEnd: Date;
+  filter = new LaunchFilter();
   launchs = [];
   headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
 
@@ -23,14 +21,9 @@ export class LaunchsSearchComponent implements OnInit {
   }
 
   search() {
-    const filter: LaunchFilter = {
-      description: this.description,
-      dueDayStart: this.dueDayStart,
-      dueDayEnd: this.dueDayEnd
-    };
-
-    this.launchService.search(filter)
+    this.launchService.search(this.filter)
       .subscribe(resp => {
+        console.log(resp);
         this.launchs = resp.content;
       });
   }

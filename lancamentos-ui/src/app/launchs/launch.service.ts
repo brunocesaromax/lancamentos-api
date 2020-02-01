@@ -3,10 +3,12 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
 
-export interface LaunchFilter {
+export class LaunchFilter {
   description: string;
   dueDayStart: Date;
   dueDayEnd: Date;
+  page = 0;
+  pageSize = 2;
 }
 
 @Injectable({
@@ -23,6 +25,9 @@ export class LaunchService {
     let params = new HttpParams();
 
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    params = params.set('page', filter.page.toString());
+    params = params.set('size', filter.pageSize.toString());
 
     if (filter.description) {
       params = params.append('description', filter.description);
