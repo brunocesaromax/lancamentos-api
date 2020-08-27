@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {LaunchFilter, LaunchService} from '../launch.service';
 import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
+import {ToastyService} from 'ng2-toasty';
 
 @Component({
   selector: 'app-launchs-search',
@@ -17,11 +18,12 @@ export class LaunchsSearchComponent implements OnInit {
 
   @ViewChild('table', {static: true}) table;
 
-  constructor(private launchService: LaunchService) {
+  constructor(private launchService: LaunchService,
+              private toastyService: ToastyService) {
   }
 
   ngOnInit() {
-    // this.search();
+    this.search();
   }
 
   search(page = 0) {
@@ -41,9 +43,10 @@ export class LaunchsSearchComponent implements OnInit {
 
   delete(launch: any) {
     this.launchService.delete(launch.id)
-      .subscribe(resp => {
+      .subscribe(() => {
         this.table.first = 0;
         this.search();
+        this.toastyService.success('Lançamento removido com sucesso!');
       });
   }
 }

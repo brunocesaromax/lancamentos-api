@@ -8,6 +8,7 @@ import {PersonsModule} from './persons/persons.module';
 import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
 import {LogService} from './examples/log.service';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {LogService} from './examples/log.service';
     PersonsModule,
     CoreModule,
     ExamplesModule,
+    ToastyModule.forRoot() // Usando forRoot por estar no app.module
   ],
   providers: [
     LogService,
