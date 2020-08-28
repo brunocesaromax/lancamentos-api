@@ -9,6 +9,8 @@ import {CoreModule} from './core/core.module';
 import {ExamplesModule} from './examples/examples.module';
 import {LogService} from './examples/log.service';
 import {ToastyModule} from 'ng2-toasty';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import {ToastyModule} from 'ng2-toasty';
     PersonsModule,
     CoreModule,
     ExamplesModule,
-    ToastyModule.forRoot() // Usando forRoot por estar no app.module
+    ToastyModule.forRoot(), // Usando forRoot por estar no app.module
+    ConfirmDialogModule,
   ],
   providers: [
     LogService,
+    ConfirmationService
   ],
   exports: [],
   bootstrap: [AppComponent] /*Componente que ira iniciar a aplicação*/
