@@ -3,6 +3,8 @@ import {LaunchFilter, LaunchService} from '../launch.service';
 import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
 import {ToastyService} from 'ng2-toasty';
 import {ConfirmationService} from 'primeng';
+import 'rxjs/add/operator/catch';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-launchs-search',
@@ -20,6 +22,7 @@ export class LaunchsSearchComponent implements OnInit {
   @ViewChild('table', {static: true}) table;
 
   constructor(private launchService: LaunchService,
+              private errorHandlerService: ErrorHandlerService,
               private toastyService: ToastyService,
               private confirmationService: ConfirmationService) {
   }
@@ -33,9 +36,11 @@ export class LaunchsSearchComponent implements OnInit {
 
     this.launchService.search(this.filter)
       .subscribe(resp => {
-        this.totalElements = resp.totalElements;
-        this.launchs = resp.content;
-      });
+          this.totalElements = resp.totalElements;
+          this.launchs = resp.content;
+        },
+        error => this.errorHandlerService.handle(error)
+      );
   }
 
   changePage(event: LazyLoadEvent) {
@@ -55,9 +60,11 @@ export class LaunchsSearchComponent implements OnInit {
   delete(launch: any) {
     this.launchService.delete(launch.id)
       .subscribe(() => {
-        this.table.first = 0;
-        this.search();
-        this.toastyService.success('Lançamento excluído com sucesso!');
-      });
+          this.table.first = 0;
+          this.search();
+          this.toastyService.success('Lançamento excluído com sucesso!');
+        },
+        error => this.errorHandlerService.handle(error)
+      );
   }
 }
