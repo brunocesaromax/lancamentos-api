@@ -41,4 +41,11 @@ export class PersonService {
 
     return this.httpClient.get(`${this.personsUrl}`, {headers});
   }
+
+  delete(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.delete(`${this.personsUrl}/${id}`, { headers });
+  }
 }

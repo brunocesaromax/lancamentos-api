@@ -23,7 +23,7 @@
       <p-table [value]="persons" [responsive]="true"
                [paginator]="true" [rows]="filter.pageSize"
                [lazy]="true" [totalRecords]="totalElements"
-               (onLazyLoad)="changePage($event)">>
+               (onLazyLoad)="changePage($event)" #table>>
         <ng-template pTemplate="header">
           <tr>
             <th *ngFor="let header of headers">
@@ -39,7 +39,12 @@
             <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'" tooltipPosition="top">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-actions">
               <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i class="pi pi-pencil"></i></a>
-              <button pButton class="trash-button" pTooltip="Excluir" tooltipPosition="top" style="margin:5px"><i class="pi pi-trash"></i></button>
+              <button pButton class="trash-button"
+                      pTooltip="Excluir"
+                      tooltipPosition="top"
+                      (click)="deleteConfirm(person)"
+                      style="margin:5px"><i
+                class="pi pi-trash"></i></button>
             </td>
           </tr>
         </ng-template>

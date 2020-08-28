@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PersonFilter, PersonService} from '../person.service';
 import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
 import {Person} from '../Person';
+import {ErrorHandlerService} from '../../core/error-handler.service';
+import {ToastyService} from 'ng2-toasty';
+import {ConfirmationService} from 'primeng';
 
 @Component({
   selector: 'app-persons-search',
@@ -15,7 +18,12 @@ export class PersonsSearchComponent implements OnInit {
   persons: Person[] = [];
   headers = ['nome', 'cidade', 'estado', 'status', ''];
 
-  constructor(private personService: PersonService) {
+  @ViewChild('table', {static: true}) table;
+
+  constructor(private personService: PersonService,
+              private errorHandlerService: ErrorHandlerService,
+              private toastyService: ToastyService,
+              private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
@@ -28,8 +36,6 @@ export class PersonsSearchComponent implements OnInit {
       .subscribe(resp => {
         this.totalElements = resp.totalElements;
         this.persons = resp.content.map(person => Object.assign(new Person(), person));
-        console.log(this.persons);
-        // console.log(this.persons);
       });
   }
 
@@ -38,11 +44,23 @@ export class PersonsSearchComponent implements OnInit {
     this.search(page);
   }
 
-  findAll() {
-    this.personService.findAll()
-      .subscribe(resp => {
-        this.persons = Object.assign([], resp);
-      });
+  deleteConfirm(person: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.delete(person);
+      }
+    });
   }
 
+  delete(person: any) {
+    this.personService.delete(person.id)
+      .subscribe(() => {
+          this.table.first = 0;
+          this.search();
+          this.toastyService.success('Pessoa excluída com sucesso!');
+        },
+        error => this.errorHandlerService.handle(error)
+      );
+  }
 }
