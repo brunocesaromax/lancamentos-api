@@ -1,11 +1,15 @@
 package com.example.lancamentoapi.controller;
 
 import com.example.lancamentoapi.event.ResourceCreatedEvent;
+import com.example.lancamentoapi.exceptionHandler.LaunchExceptionHandler;
 import com.example.lancamentoapi.model.Person;
 import com.example.lancamentoapi.repository.PersonRepository;
 import com.example.lancamentoapi.service.PersonService;
+import com.example.lancamentoapi.service.exception.PersonExistentInLaunchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +31,7 @@ public class PersonController {
     private final PersonRepository personRepository;
     private final ApplicationEventPublisher publisher;
     private final PersonService personService;
+    private final MessageSource messageSource;
 
     @GetMapping(params = "pagination")
     @PreAuthorize("hasAuthority('ROLE_SEARCH_PERSON') and #oauth2.hasScope('read')")
@@ -64,7 +70,7 @@ public class PersonController {
     @ResponseStatus(HttpStatus.NO_CONTENT) // Sucesso porém sem conteúdo
     @PreAuthorize("hasAuthority('ROLE_REMOVE_PERSON') and #oauth2.hasScope('write')")
     public void remover(@PathVariable Long id) {
-        personRepository.deleteById(id);
+        personService.deleteById(id);
     }
 
     @PutMapping("/{id}")
@@ -81,4 +87,12 @@ public class PersonController {
         personService.updateFieldActive(id, active);
     }
 
+    @ExceptionHandler({PersonExistentInLaunchException.class})
+    public ResponseEntity<Object> handlePersonExistentInLaunchException(PersonExistentInLaunchException ex) {
+        String msgUser = messageSource.getMessage("person.existent.in.launch", null, LocaleContextHolder.getLocale());
+        String msgDev = Optional.ofNullable(ex.getCause()).isPresent() ? ex.getCause().toString() : ex.toString();
+        List<LaunchExceptionHandler.Error> errors = Collections.singletonList(new LaunchExceptionHandler.Error(msgUser, msgDev));
+
+        return ResponseEntity.badRequest().body(errors);
+    }
 }
