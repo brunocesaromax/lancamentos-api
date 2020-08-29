@@ -83,8 +83,8 @@ public class PersonController {
     @PutMapping("/{id}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAuthority('ROLE_UPDATE_PERSON') and #oauth2.hasScope('write')")
-    public void UpdateFieldActive(@PathVariable Long id, @RequestParam Boolean active) {
-        personService.updateFieldActive(id, active);
+    public void updateFieldActive(@PathVariable Long id, @RequestBody Boolean value) {
+        personService.updateFieldActive(id, value);
     }
 
     @ExceptionHandler({PersonExistentInLaunchException.class})

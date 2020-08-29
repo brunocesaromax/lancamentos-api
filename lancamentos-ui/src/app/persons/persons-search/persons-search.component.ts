@@ -63,4 +63,15 @@ export class PersonsSearchComponent implements OnInit {
         error => this.errorHandlerService.handle(error)
       );
   }
+
+  changeStatus(person: any) {
+    this.personService.changeStatus(person.id, person.active)
+      .subscribe(() => {
+          this.table.first = 0;
+          this.search();
+          this.toastyService.success(person.active ? 'Pessoa inativada com sucesso!' : 'Pessoa ativada com sucesso!');
+        },
+        error => this.errorHandlerService.handle(error)
+      );
+  }
 }

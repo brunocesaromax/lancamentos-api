@@ -46,6 +46,15 @@ export class PersonService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.httpClient.delete(`${this.personsUrl}/${id}`, { headers });
+    return this.httpClient.delete(`${this.personsUrl}/${id}`, {headers});
+  }
+
+  changeStatus(id: number, currentStatus: boolean): Observable<any> {
+    let headers = new HttpHeaders();
+
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus, {headers});
   }
 }

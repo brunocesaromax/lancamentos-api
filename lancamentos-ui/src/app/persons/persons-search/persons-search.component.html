@@ -2,19 +2,19 @@
   <div class="ui-g">
     <form autocomplete="off" (ngSubmit)="search()">
 
-    <div class="ui-g-12">
-      <h1>Pessoas</h1>
-    </div>
+      <div class="ui-g-12">
+        <h1>Pessoas</h1>
+      </div>
 
-    <div class="ui-g-12 ui-fluid">
-      <label>Nome </label>
-      <input type="text" pInputText name="name"
-      [(ngModel)]="filter.name">
-    </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome </label>
+        <input type="text" pInputText name="name"
+               [(ngModel)]="filter.name">
+      </div>
 
-    <div class="ui-g-12">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
     </form>
   </div>
 
@@ -36,9 +36,11 @@
             <td>{{person.name}}</td>
             <td>{{person.address.city}}</td>
             <td>{{person.address.state}}</td>
-            <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'" tooltipPosition="top">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
+            <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'"
+                   tooltipPosition="top" (click)="changeStatus(person)">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-actions">
-              <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i class="pi pi-pencil"></i></a>
+              <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i
+                class="pi pi-pencil"></i></a>
               <button pButton class="trash-button"
                       pTooltip="Excluir"
                       tooltipPosition="top"
