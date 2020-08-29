@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CategoryService} from '../../categories/category.service';
+import {ErrorHandlerService} from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-launch-form',
@@ -7,25 +9,32 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LaunchFormComponent implements OnInit {
   types = [
-    { label: 'Receita', value: 'RECEIPT' },
-    { label: 'Despesa', value: 'EXPENSE' }
+    {label: 'Receita', value: 'RECEIPT'},
+    {label: 'Despesa', value: 'EXPENSE'}
   ];
 
-  categories = [
-    { label: 'Alimentação', value: 1 },
-    { label: 'Transporte', value: 2 }
-  ];
+  categories = [];
 
   persons = [
-    { label: 'João', value: 4 },
-    { label: 'Sebastião', value: 9 },
-    { label: 'Maria', value: 3 },
+    {label: 'João', value: 4},
+    {label: 'Sebastião', value: 9},
+    {label: 'Maria', value: 3},
   ];
 
-  constructor() {
+  constructor(private categoryService: CategoryService,
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   ngOnInit() {
+    this.loadCategories();
   }
 
+  loadCategories() {
+    return this.categoryService.findAll()
+      .subscribe(categories => {
+          this.categories = categories.map(c => ({label: c.name, value: c.id}));
+        },
+        error => this.errorHandlerService.handle(error)
+      );
+  }
 }
