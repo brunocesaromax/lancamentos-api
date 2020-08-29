@@ -17,5 +17,4 @@ public class UserSession extends User {
         super(user.getEmail(), user.getPassword(), authorities);
         this.user = user;
     }
-
 }

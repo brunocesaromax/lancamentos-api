@@ -77,7 +77,6 @@ public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Data
     public static class Error {
-
         private String msgUser;
         private String msgDev;
 
