@@ -8,18 +8,12 @@ import javax.persistence.Column;
 class Address {
 	
 	private String street;
-	
 	private String number;
-	
 	private String complement;
-	
 	private String neighborhood;
 
 	@Column(name = "zip_code")
 	private String zipCode;
-	
 	private String city;
-	
 	private String state;
-
 }

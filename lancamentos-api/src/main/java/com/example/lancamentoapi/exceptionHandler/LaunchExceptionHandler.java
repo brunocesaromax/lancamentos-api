@@ -21,7 +21,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,6 @@ public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
-
         String msgUser = messageSorce.getMessage("msg.invalid", null, LocaleContextHolder.getLocale());
         String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
@@ -48,36 +46,23 @@ public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
-
         List<Error> errors = getErrorsList(ex.getBindingResult());
         return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request);
     }
+
 
     //	Tratando exceção do type abaixo
     @ExceptionHandler({ConstraintViolationException.class, EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleConstraintViolationException(Exception ex, WebRequest request) {
-
         String msgUser = messageSorce.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
         String msgDev = ex.toString();
-        List<Error> errors = Arrays.asList(new Error(msgUser, msgDev));
+        List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
-/*
-    @ExceptionHandler({EmptyResultDataAccessException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
-
-        String msgUser = messageSorce.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
-        String msgDev = ex.toString();
-        List<Error> erros = Arrays.asList(new Error(msgUser, msgDev));
-
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }*/
 
     private List<Error> getErrorsList(BindingResult bindingResult) {
-
         List<Error> errors = new ArrayList<>();
 
 //		Retornar todos os errors nos campos do objeto
@@ -88,7 +73,6 @@ public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return errors;
-
     }
 
     @Data
@@ -102,7 +86,6 @@ public class LaunchExceptionHandler extends ResponseEntityExceptionHandler {
             this.msgUser = msgUser;
             this.msgDev = msgDev;
         }
-
     }
 
 }

@@ -13,7 +13,6 @@ public class ResourceCreatedListener implements ApplicationListener<ResourceCrea
 
 	@Override
 	public void onApplicationEvent(ResourceCreatedEvent event) {
-
 		HttpServletResponse response = event.getResponse();
 		Long id = event.getId();
 		

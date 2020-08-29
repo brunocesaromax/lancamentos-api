@@ -9,10 +9,12 @@ import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,14 +23,18 @@ import java.util.Optional;
 public class LaunchService {
 
     private final LaunchRepository launchRepository;
-    private final PersonService personService;
+    private PersonService personService;
+
+    @Autowired
+    public void setPersonService(PersonService personService) {
+        this.personService = personService;
+    }
 
     public Page<Launch> findAll(LaunchFilter launchFilter, Pageable pageable) {
         return launchRepository.filterOut(launchFilter, pageable);
     }
 
     public ResponseEntity<?> findById(Long id) {
-
         Optional<Launch> lancamentoBD = launchRepository.findById(id);
 
         if (lancamentoBD.isPresent()) {
@@ -39,7 +45,6 @@ public class LaunchService {
     }
 
     public Launch save(Launch launch) {
-
         validatePerson(launch.getPerson());
         return launchRepository.save(launch);
     }
@@ -64,11 +69,11 @@ public class LaunchService {
     }
 
     private void validatePerson(Person person) {
-        if (person.getId() != null){
+        if (Optional.ofNullable(person).map(Person::getId).isPresent()){
             person = personService.findById(person.getId());
         }
 
-        if (person == null || person.isInactive()){
+        if (!Optional.ofNullable(person).isPresent() || person.isInactive()){
             throw new PersonInexistentOrInactiveException();
         }
     }
@@ -81,5 +86,10 @@ public class LaunchService {
         }else{
             return launchBD.get();
         }
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsWithPersonId(Long id) {
+        return launchRepository.existsByPersonId(id);
     }
 }
