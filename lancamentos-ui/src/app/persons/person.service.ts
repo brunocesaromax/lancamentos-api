@@ -35,7 +35,7 @@ export class PersonService {
     return this.httpClient.get(`${this.personsUrl}?pagination`, {headers, params});
   }
 
-  findAll() {
+  findAll(): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
