@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../categories/category.service';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {PersonService} from '../../persons/person.service';
+import {Launch} from '../../core/model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-launch-form',
@@ -16,6 +18,7 @@ export class LaunchFormComponent implements OnInit {
 
   categories = [];
   persons = [];
+  launch = new Launch();
 
   constructor(private categoryService: CategoryService,
               private errorHandlerService: ErrorHandlerService,
@@ -43,5 +46,9 @@ export class LaunchFormComponent implements OnInit {
         },
         error => this.errorHandlerService.handle(error)
       );
+  }
+
+  save(launchForm: NgForm) {
+    console.log(this.launch);
   }
 }

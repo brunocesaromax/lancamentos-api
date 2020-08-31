@@ -1,12 +1,12 @@
 <div class="container">
-  <form #launchForm="ngForm">
+  <form #launchForm="ngForm" autocomplete="off" (ngSubmit)="save(launchForm)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Novo Lançamento</h1>
       </div>
 
       <div class="ui-g-12">
-        <p-selectButton [options]="types" #type></p-selectButton>
+        <p-selectButton [options]="types" [(ngModel)]="launch.type"  name="type" #type></p-selectButton>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
@@ -15,18 +15,20 @@
                     [inline]="false"
                     [readonlyInput]="false"
                     [showIcon]="true"
+                    [(ngModel)]="launch.dueDate"
+                    name="dueDate"
         ></p-calendar>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{type.value === 'RECEIPT' ? 'Recebimento' : 'Pagamento'}} </label>
-        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="launch.payday" name="payday"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição</label>
         <input pInputText type="text"
                name="description"
-               ngModel #description="ngModel"
+               [(ngModel)]="launch.description" #description="ngModel"
                required minlength="5"/>
         <app-message
           [control]="description"
@@ -45,7 +47,7 @@
                [options]="{prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false}"
                pInputText type="text"
                placeholder="R$0,00"
-               name="value" ngModel #value="ngModel"
+               name="value" [(ngModel)]="launch.value" #value="ngModel"
                required/>
         <app-message
           [control]="value"
@@ -58,7 +60,7 @@
         <p-dropdown
           [options]="categories"
           [placeholder]="'Selecione'"
-          name="category" ngModel #category="ngModel"
+          name="category" [(ngModel)]="launch.category.id" #category="ngModel"
           required></p-dropdown>
         <app-message
           [control]="category"
@@ -71,7 +73,7 @@
         <p-dropdown [options]="persons"
                     [placeholder]="'Selecione'"
                     [filter]="true"
-                    name="person" ngModel #person="ngModel"
+                    name="person" [(ngModel)]="launch.person.id" #person="ngModel"
                     required>
         </p-dropdown>
         <app-message
@@ -82,7 +84,7 @@
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Observação </label>
-        <textarea pInputTextarea rows="3"></textarea>
+        <textarea pInputTextarea rows="3" [(ngModel)]="launch.observation" name="observation"></textarea>
       </div>
       <div class="ui-g-12">
         <button pButton
