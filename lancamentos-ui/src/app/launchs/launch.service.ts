@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
+import {Launch} from '../core/model';
 
 export class LaunchFilter {
   description: string;
@@ -51,6 +52,14 @@ export class LaunchService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.httpClient.delete(`${this.launchsUrl}/${id}`, { headers });
+    return this.httpClient.delete(`${this.launchsUrl}/${id}`, {headers});
+  }
+
+  save(launch: Launch): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // headers = headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.post(this.launchsUrl, launch, {headers});
   }
 }

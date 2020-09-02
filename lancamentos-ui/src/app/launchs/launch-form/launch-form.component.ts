@@ -4,6 +4,8 @@ import {ErrorHandlerService} from '../../core/error-handler.service';
 import {PersonService} from '../../persons/person.service';
 import {Launch} from '../../core/model';
 import {NgForm} from '@angular/forms';
+import {LaunchService} from '../launch.service';
+import {ToastyService} from 'ng2-toasty';
 
 @Component({
   selector: 'app-launch-form',
@@ -22,7 +24,9 @@ export class LaunchFormComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private errorHandlerService: ErrorHandlerService,
-              private personService: PersonService) {
+              private personService: PersonService,
+              private launchService: LaunchService,
+              private toastyService: ToastyService) {
   }
 
   ngOnInit() {
@@ -49,6 +53,14 @@ export class LaunchFormComponent implements OnInit {
   }
 
   save(launchForm: NgForm) {
-    console.log(this.launch);
+    this.launchService.save(this.launch)
+      .subscribe(() => {
+          this.toastyService.success('Lançamento adicionando com sucesso!');
+          launchForm.reset();
+          this.launch = new Launch();
+        },
+        error => this.errorHandlerService.handle(error)
+      );
+
   }
 }
