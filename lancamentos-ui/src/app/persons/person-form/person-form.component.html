@@ -1,5 +1,5 @@
 <div class="container">
-  <form #personForm="ngForm">
+  <form #personForm="ngForm" autocomplete="off" (ngSubmit)="save(personForm)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Nova Pessoa</h1>
@@ -10,7 +10,7 @@
         <input pInputText
                type="text"
                name="name"
-               ngModel #name="ngModel"
+               [(ngModel)]="person.name" #name="ngModel"
                required
                minlength="5"/>
         <app-message [control]="name"
@@ -28,7 +28,7 @@
         <input pInputText
                type="text"
                name="street"
-               ngModel #street="ngModel"
+               [(ngModel)]="person.address.street" #street="ngModel"
                required/>
         <app-message [control]="street"
                      text="Informe o logradouro"
@@ -38,12 +38,12 @@
 
       <div class="ui-g-3 ui-fluid">
         <label>Número</label>
-        <input pInputText type="text"/>
+        <input pInputText name="number" [(ngModel)]="person.address.number" type="text"/>
       </div>
 
       <div class="ui-g-4 ui-fluid">
         <label>Complemento</label>
-        <input pInputText type="text"/>
+        <input pInputText name="complement" [(ngModel)]="person.address.complement" type="text"/>
       </div>
 
       <div class="ui-g-4 ui-fluid">
@@ -51,7 +51,7 @@
         <input pInputText
                type="text"
                name="neighborhood"
-               ngModel #neighborhood="ngModel"
+               [(ngModel)]="person.address.neighborhood" #neighborhood="ngModel"
                required/>
         <app-message [control]="neighborhood"
                      text="Informe o bairro"
@@ -64,7 +64,7 @@
         <p-inputMask
           mask="99999-999"
           placeholder="99999-999"
-          name="zipCode" ngModel #zipCode="ngModel"
+          name="zipCode" [(ngModel)]="person.address.zipCode" #zipCode="ngModel"
           required
         ></p-inputMask>
         <app-message [control]="zipCode"
@@ -76,7 +76,7 @@
       <div class="ui-g-6 ui-fluid">
         <label>Cidade</label>
         <input pInputText type="text"
-               name="city" ngModel #city="ngModel"
+               name="city" [(ngModel)]="person.address.city" #city="ngModel"
                required/>
         <app-message [control]="city"
                      text="Informe a cidade"
@@ -87,7 +87,7 @@
       <div class="ui-g-6 ui-fluid">
         <label>Estado</label>
         <input pInputText type="text"
-               name="state" ngModel #state="ngModel"
+               name="state" [(ngModel)]="person.address.state" #state="ngModel"
                required/>
         <app-message [control]="state"
                      text="Informe o estado"

@@ -58,7 +58,6 @@ export class LaunchService {
   save(launch: Launch): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    // headers = headers.append('Content-Type', 'application/json');
 
     return this.httpClient.post(this.launchsUrl, launch, {headers});
   }

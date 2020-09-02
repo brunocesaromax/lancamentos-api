@@ -61,6 +61,5 @@ export class LaunchFormComponent implements OnInit {
         },
         error => this.errorHandlerService.handle(error)
       );
-
   }
 }
