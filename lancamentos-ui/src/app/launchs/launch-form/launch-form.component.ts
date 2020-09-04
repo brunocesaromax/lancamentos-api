@@ -6,6 +6,7 @@ import {Launch} from '../../core/model';
 import {NgForm} from '@angular/forms';
 import {LaunchService} from '../launch.service';
 import {ToastyService} from 'ng2-toasty';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-launch-form',
@@ -26,10 +27,13 @@ export class LaunchFormComponent implements OnInit {
               private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
               private launchService: LaunchService,
-              private toastyService: ToastyService) {
+              private toastyService: ToastyService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    console.log(this.route.snapshot.params.id);
+
     this.loadCategories();
     this.loadPersons();
   }

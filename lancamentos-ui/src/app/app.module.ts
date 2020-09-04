@@ -19,6 +19,7 @@ registerLocaleData(localePt);
 const routes: Routes = [
   {path: 'launchs', component: LaunchsSearchComponent},
   {path: 'launchs/new', component: LaunchFormComponent},
+  {path: 'launchs/:id', component: LaunchFormComponent},
   {path: 'persons', component: PersonsSearchComponent}
 ];
 

@@ -50,7 +50,7 @@
           <td class="col-value"
               [style.color]="launch.type === 'EXPENSE' ? 'red' : 'blue'">{{launch.value | currency:'BRL'}}</td>
           <td class="col-actions">
-            <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i
+            <a pButton class="edit-button" pTooltip="Editar" [routerLink]="['/launchs', launch.id]" tooltipPosition="top" style="margin:5px"><i
               class="pi pi-pencil"></i></a>
             <button pButton class="trash-button"
                     pTooltip="Excluir"
