@@ -9,8 +9,9 @@
 
   <ul class="navbar-menu" [hidden]="!showMenu">
     <li class="navbar-user">Bruno César</li>
-    <li class="navbar-menuitem"><a href="#">Lançamentos</a></li>
-    <li class="navbar-menuitem"><a href="#">Pessoas</a></li>
+<!--    <li class="navbar-menuitem"><a href="/launchs">Lançamentos</a></li> &lt;!&ndash; Dessa forma a aplicaçao e reiniciada a tod momento, nao indicado&ndash;&gt;-->
+    <li class="navbar-menuitem"><a routerLink="/launchs">Lançamentos</a></li>
+    <li class="navbar-menuitem"><a routerLink="/persons">Pessoas</a></li>
     <li class="navbar-menuitem"><a href="#">Sair</a></li>
   </ul>
 </nav>

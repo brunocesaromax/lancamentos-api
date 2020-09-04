@@ -6,6 +6,7 @@ import {ToastyModule} from 'ng2-toasty';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {LogService} from '../examples/log.service';
 import {ConfirmationService} from 'primeng/api';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {ConfirmationService} from 'primeng/api';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ToastyModule.forRoot(), // Usando forRoot por estar no app.module
     ConfirmDialogModule,
   ],
