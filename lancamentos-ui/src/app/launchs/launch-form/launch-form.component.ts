@@ -6,7 +6,7 @@ import {Launch} from '../../core/model';
 import {NgForm} from '@angular/forms';
 import {LaunchService} from '../launch.service';
 import {ToastyService} from 'ng2-toasty';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-launch-form',
@@ -29,11 +29,12 @@ export class LaunchFormComponent implements OnInit {
               private personService: PersonService,
               private launchService: LaunchService,
               private toastyService: ToastyService,
-              private route: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
-    const launchId = this.route.snapshot.params.id;
+    const launchId = this.activatedRoute.snapshot.params.id;
 
     if (launchId) {
       this.loadLaunch(launchId);
@@ -112,10 +113,10 @@ export class LaunchFormComponent implements OnInit {
 
   add(launchForm: NgForm) {
     this.launchService.save(this.launch)
-      .subscribe(() => {
+      .subscribe(launchSaved => {
           this.toastyService.success('Lançamento adicionando com sucesso!');
-          launchForm.reset();
-          this.launch = new Launch();
+          // Aplicando navegação imperativa
+          this.router.navigate(['/launchs', launchSaved.id]);
         },
         error => this.errorHandlerService.handle(error)
       );
@@ -130,5 +131,17 @@ export class LaunchFormComponent implements OnInit {
         },
         error => this.errorHandlerService.handle(error)
       );
+  }
+
+  new(launchForm: NgForm) {
+    // Poderia apenas utilizar o routerLink nesse caso
+    launchForm.reset();
+
+    // Função necessária para não perder o tipo do lançamento
+    setTimeout(function() {
+      this.launch = new Launch();
+    }.bind(this), 1);
+
+    this.router.navigate(['/launchs/new']);
   }
 }
