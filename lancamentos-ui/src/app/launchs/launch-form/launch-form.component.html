@@ -2,7 +2,7 @@
   <form #launchForm="ngForm" autocomplete="off" (ngSubmit)="save(launchForm)">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo Lançamento</h1>
+        <h1>{{ isEdit ? 'Edição de' : 'Novo' }} Lançamento</h1>
       </div>
 
       <div class="ui-g-12">
@@ -20,7 +20,7 @@
         ></p-calendar>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label>{{type.value === 'RECEIPT' ? 'Recebimento' : 'Pagamento'}} </label>
+        <label>{{type.value === 'RECIPE' ? 'Recebimento' : 'Pagamento'}} </label>
         <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="launch.payday" name="payday"></p-calendar>
       </div>
 

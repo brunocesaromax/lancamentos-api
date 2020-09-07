@@ -15,7 +15,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class LaunchFormComponent implements OnInit {
   types = [
-    {label: 'Receita', value: 'RECEIPT'},
+    {label: 'Receita', value: 'RECIPE'},
     {label: 'Despesa', value: 'EXPENSE'}
   ];
 
@@ -32,10 +32,27 @@ export class LaunchFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params.id);
+    const launchId = this.route.snapshot.params.id;
+
+    if (launchId) {
+      this.loadLaunch(launchId);
+    }
 
     this.loadCategories();
     this.loadPersons();
+  }
+
+  get isEdit() {
+    return Boolean(this.launch.id);
+  }
+
+  loadLaunch(id: number) {
+    this.launchService.findById(id)
+      .subscribe(launch => {
+          this.launchService.stringsToDates(Array.of(launch));
+          this.launch = launch;
+        },
+        error => this.errorHandlerService.handle(error));
   }
 
   loadCategories() {

@@ -76,14 +76,14 @@ export class LaunchService {
     return this.httpClient.get(`${this.launchsUrl}/${id}`, {headers});
   }
 
-  private stringsToDates(launchs: Launch[]): void {
+  stringsToDates(launchs: any[]): void {
     launchs.forEach(launch => {
-      if (launch.payday !== null) {
-        launch.payday = moment(launch.payday, 'DD/MM/YYYY').toDate();
+      if (launch.payday) {
+        launch.payday = moment(launch.payday).format('DD/MM/YYYY');
       }
 
-      if (launch.dueDate !== null) {
-        launch.dueDate = moment(launch.dueDate, 'DD/MM/YYYY').toDate();
+      if (launch.dueDate) {
+        launch.dueDate = moment(launch.dueDate).format('DD/MM/YYYY');
       }
     });
   }
