@@ -37,11 +37,8 @@ import {SharedModule} from '../shared/shared.module';
     DropdownModule,
     CurrencyMaskModule,
     InputMaskModule,
-    SharedModule,
+    SharedModule
   ],
-  exports: [
-    PersonFormComponent,
-    PersonsSearchComponent
-  ]
+  exports: []
 })
 export class PersonsModule { }

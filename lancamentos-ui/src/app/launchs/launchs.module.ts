@@ -41,9 +41,6 @@ import {RouterModule} from '@angular/router';
     InputMaskModule,
     SharedModule,
   ],
-  exports: [
-    LaunchFormComponent,
-    LaunchsSearchComponent,
-  ]
+  exports: []
 })
 export class LaunchsModule { }

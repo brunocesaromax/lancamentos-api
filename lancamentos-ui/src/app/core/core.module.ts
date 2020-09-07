@@ -7,10 +7,12 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {LogService} from '../examples/log.service';
 import {ConfirmationService} from 'primeng/api';
 import {RouterModule} from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found.component';
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
