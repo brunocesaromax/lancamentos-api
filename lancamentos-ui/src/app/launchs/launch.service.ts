@@ -61,4 +61,30 @@ export class LaunchService {
 
     return this.httpClient.post(this.launchsUrl, launch, {headers});
   }
+
+  update(launch: Launch): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.put(`${this.launchsUrl}/${launch.id}`, launch, {headers});
+  }
+
+  findById(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.get(`${this.launchsUrl}/${id}`, {headers});
+  }
+
+  private stringsToDates(launchs: Launch[]): void {
+    launchs.forEach(launch => {
+      if (launch.payday !== null) {
+        launch.payday = moment(launch.payday, 'DD/MM/YYYY').toDate();
+      }
+
+      if (launch.dueDate !== null) {
+        launch.dueDate = moment(launch.dueDate, 'DD/MM/YYYY').toDate();
+      }
+    });
+  }
 }
