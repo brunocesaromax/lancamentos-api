@@ -34,15 +34,13 @@ public class LaunchController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
-    public Page<Launch> list(@ModelAttribute LaunchFilter launchFilter,
-                             Pageable pageable) {
+    public Page<Launch> list(@ModelAttribute LaunchFilter launchFilter, Pageable pageable) {
         return launchService.findAll(launchFilter, pageable);
     }
 
     @GetMapping(params = "summary")// Parametro de decisão para escolher este endpoint
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
-    public Page<LaunchSummary> sumUp(@ModelAttribute LaunchFilter launchFilter,
-                                     Pageable pageable) {
+    public Page<LaunchSummary> sumUp(@ModelAttribute LaunchFilter launchFilter, Pageable pageable) {
         return launchService.sumUp(launchFilter, pageable);
     }
 
@@ -55,11 +53,8 @@ public class LaunchController {
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CREATE_LAUNCH') and #oauth2.hasScope('write')")
     public ResponseEntity<Launch> save(@Valid @RequestBody Launch launch, HttpServletResponse response) {
-
         Launch launchSave = launchService.save(launch);
-
         publisher.publishEvent(new ResourceCreatedEvent(this, response, launchSave.getId()));
-
         return ResponseEntity.status(HttpStatus.CREATED).body(launchSave);
     }
 
@@ -85,7 +80,6 @@ public class LaunchController {
     /*Como é um tratamento particular de Lançamento pode ser tratado no próprio controlador*/
     @ExceptionHandler({PersonInexistentOrInactiveException.class})
     public ResponseEntity<Object> handlePersonInexistentOrInactiveException(PersonInexistentOrInactiveException ex) {
-
         String msgUser = messageSource.getMessage("person.inesistent-or-inactive", null, LocaleContextHolder.getLocale());
         String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));

@@ -27,16 +27,13 @@ public class CategoryController {
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
     public List<Category> list() {
-
         return categoryRepository.findAll();
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CREATE_CATEGORY') and #oauth2.hasScope('write')")
     public ResponseEntity<Category> save(@Valid @RequestBody Category category, HttpServletResponse response) {
-
         Category categorySave = categoryRepository.save(category);
-
         publisher.publishEvent(new ResourceCreatedEvent(this, response, categorySave.getId()));
         
         /*Retornando objeto criado para o cliente, facilita o desenvolvimento da parte cliente*/
@@ -46,7 +43,6 @@ public class CategoryController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findById(@PathVariable Long id){
-
         Optional<Category> category = categoryRepository.findById(id);
 
         if (category.isPresent()){
