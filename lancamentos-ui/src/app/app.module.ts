@@ -17,6 +17,7 @@ import {PersonsSearchComponent} from './persons/persons-search/persons-search.co
 registerLocaleData(localePt);
 
 const routes: Routes = [
+  {path: '', redirectTo: 'launchs', pathMatch: 'full'},
   {path: 'launchs', component: LaunchsSearchComponent},
   {path: 'launchs/new', component: LaunchFormComponent},
   {path: 'launchs/:id', component: LaunchFormComponent},
