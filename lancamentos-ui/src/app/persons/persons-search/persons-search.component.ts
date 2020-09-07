@@ -5,6 +5,7 @@ import {Person} from '../Person';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {ToastyService} from 'ng2-toasty';
 import {ConfirmationService} from 'primeng';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-persons-search',
@@ -23,10 +24,12 @@ export class PersonsSearchComponent implements OnInit {
   constructor(private personService: PersonService,
               private errorHandlerService: ErrorHandlerService,
               private toastyService: ToastyService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de pessoas');
   }
 
   search(page = 0) {

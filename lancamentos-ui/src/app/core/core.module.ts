@@ -23,8 +23,8 @@ import {Title} from '@angular/platform-browser';
   ],
   exports: [
     NavbarComponent,
-    ToastyModule, // exportar para o app module por usar
-    ConfirmDialogModule // exportar para o app module por usar
+    ToastyModule, // exportar para o app module poder usar
+    ConfirmDialogModule // exportar para o app module poder usar
   ],
   providers: [
     ErrorHandlerService,

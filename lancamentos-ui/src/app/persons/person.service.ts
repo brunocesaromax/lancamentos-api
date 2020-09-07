@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Person} from '../core/model';
+import {Launch, Person} from '../core/model';
 
 export class PersonFilter {
   name = null;
@@ -64,5 +64,19 @@ export class PersonService {
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.httpClient.post(this.personsUrl, person, {headers});
+  }
+
+  update(person: Person): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.put(`${this.personsUrl}/${person.id}`, person, {headers});
+  }
+
+  findById(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.httpClient.get(`${this.personsUrl}/${id}`, {headers});
   }
 }

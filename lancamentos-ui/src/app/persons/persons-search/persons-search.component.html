@@ -39,7 +39,7 @@
             <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'"
                    tooltipPosition="top" (click)="changeStatus(person)">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-actions">
-              <a pButton class="edit-button" pTooltip="Editar" tooltipPosition="top" style="margin:5px"><i
+              <a pButton class="edit-button" pTooltip="Editar" [routerLink]="['/persons', person.id]" tooltipPosition="top" style="margin:5px"><i
                 class="pi pi-pencil"></i></a>
               <button pButton class="trash-button"
                       pTooltip="Excluir"
@@ -58,7 +58,7 @@
       </p-table>
 
       <div class="ui-g-12">
-        <a pButton label="Nova Pessoa" class="launch-button"></a>
+        <a pButton label="Nova Pessoa" routerLink="/persons/new" class="launch-button"></a>
       </div>
 
     </div>

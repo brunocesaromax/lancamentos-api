@@ -15,6 +15,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {InputMaskModule} from 'primeng/inputmask';
 import {SharedModule} from '../shared/shared.module';
+import {PersonsRoutingModule} from './persons-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {SharedModule} from '../shared/shared.module';
     DropdownModule,
     CurrencyMaskModule,
     InputMaskModule,
-    SharedModule
+    SharedModule,
+    PersonsRoutingModule
   ],
   exports: []
 })
