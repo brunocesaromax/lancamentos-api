@@ -7,9 +7,6 @@ import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {path: '', redirectTo: 'launchs', pathMatch: 'full'},
-  {path: 'launchs', component: LaunchsSearchComponent},
-  {path: 'launchs/new', component: LaunchFormComponent},
-  {path: 'launchs/:id', component: LaunchFormComponent},
   {path: 'persons', component: PersonsSearchComponent},
   {path: 'page-not-found', component: PageNotFoundComponent},
   // ** = Qualquer rota não encontrada

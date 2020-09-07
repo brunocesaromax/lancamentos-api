@@ -15,7 +15,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {InputMaskModule} from 'primeng/inputmask';
 import {SharedModule} from '../shared/shared.module';
-import {RouterModule} from '@angular/router';
+import {LaunchsRoutingModule} from './launchs-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
     SelectButtonModule,
     InputTextModule,
     ButtonModule,
@@ -40,6 +39,7 @@ import {RouterModule} from '@angular/router';
     CurrencyMaskModule,
     InputMaskModule,
     SharedModule,
+    LaunchsRoutingModule
   ],
   exports: []
 })
