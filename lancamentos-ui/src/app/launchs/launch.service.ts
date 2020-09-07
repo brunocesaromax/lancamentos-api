@@ -79,11 +79,11 @@ export class LaunchService {
   stringsToDates(launchs: any[]): void {
     launchs.forEach(launch => {
       if (launch.payday) {
-        launch.payday = moment(launch.payday).format('DD/MM/YYYY');
+        launch.payday = moment(launch.payday).toDate();
       }
 
       if (launch.dueDate) {
-        launch.dueDate = moment(launch.dueDate).format('DD/MM/YYYY');
+        launch.dueDate = moment(launch.dueDate).toDate();
       }
     });
   }

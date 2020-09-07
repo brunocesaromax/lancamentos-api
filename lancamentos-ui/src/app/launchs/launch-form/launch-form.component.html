@@ -16,12 +16,13 @@
                     [readonlyInput]="false"
                     [showIcon]="true"
                     [(ngModel)]="launch.dueDate"
+                    [locale]="ptBrLocale"
                     name="dueDate"
         ></p-calendar>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{type.value === 'RECIPE' ? 'Recebimento' : 'Pagamento'}} </label>
-        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="launch.payday" name="payday"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="launch.payday" name="payday" [locale]="ptBrLocale"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">

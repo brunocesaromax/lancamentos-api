@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,37 +13,37 @@ import java.time.LocalDate;
 @Table(name = "launch")
 @Data
 public class Launch {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@NotNull
-	private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotNull
-	@Column(name = "due_date")
-	private LocalDate dueDate;
+    @NotNull
+    private String description;
 
-	@Column(name = "payday")
-	private LocalDate payday;
+    @NotNull
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
-	@NotNull
-	private BigDecimal value;
+    @Column(name = "payday")
+    private LocalDate payday;
 
-	private String observation;
+    @NotNull
+    private BigDecimal value;
 
-	@NotNull
-	@Enumerated(EnumType.STRING) // Melhor para consultas escritas a mao
-	private TypeLaunch type;
+    private String observation;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
+    @NotNull
+    @Enumerated(EnumType.STRING) // Melhor para consultas escritas a mao
+    private TypeLaunch type;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "person_id")
-	private Person person;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 }

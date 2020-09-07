@@ -22,6 +22,7 @@ export class LaunchFormComponent implements OnInit {
   categories = [];
   persons = [];
   launch = new Launch();
+  ptBrLocale: any;
 
   constructor(private categoryService: CategoryService,
               private errorHandlerService: ErrorHandlerService,
@@ -40,6 +41,34 @@ export class LaunchFormComponent implements OnInit {
 
     this.loadCategories();
     this.loadPersons();
+
+    this.ptBrLocale = {
+      closeText: 'Fechar',
+      prevText: 'Anterior',
+      nextText: 'Próximo',
+      currentText: 'Começo',
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+        'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+      dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      weekHeader: 'Semana',
+      firstDay: 0,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: '',
+      timeOnlyTitle: 'Só Horas',
+      timeText: 'Tempo',
+      hourText: 'Hora',
+      minuteText: 'Minuto',
+      secondText: 'Segundo',
+      ampm: false,
+      month: 'Mês',
+      week: 'Semana',
+      day: 'Dia',
+      allDayText: 'Todo o Dia'
+    };
   }
 
   get isEdit() {
@@ -74,11 +103,30 @@ export class LaunchFormComponent implements OnInit {
   }
 
   save(launchForm: NgForm) {
+    if (this.isEdit) {
+      this.update(launchForm);
+    } else {
+      this.add(launchForm);
+    }
+  }
+
+  add(launchForm: NgForm) {
     this.launchService.save(this.launch)
       .subscribe(() => {
           this.toastyService.success('Lançamento adicionando com sucesso!');
           launchForm.reset();
           this.launch = new Launch();
+        },
+        error => this.errorHandlerService.handle(error)
+      );
+  }
+
+  update(launchForm: NgForm) {
+    this.launchService.update(this.launch)
+      .subscribe(launchUpdated => {
+          this.launchService.stringsToDates(Array.of(launchUpdated));
+          this.launch = launchUpdated;
+          this.toastyService.success('Lançamento atualizado com sucesso!');
         },
         error => this.errorHandlerService.handle(error)
       );
