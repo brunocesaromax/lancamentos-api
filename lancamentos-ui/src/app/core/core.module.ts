@@ -8,6 +8,7 @@ import {LogService} from '../examples/log.service';
 import {ConfirmationService} from 'primeng/api';
 import {RouterModule} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
+import {Title} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
     ErrorHandlerService,
     LogService,
     ConfirmationService,
+    Title,
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ]
 })

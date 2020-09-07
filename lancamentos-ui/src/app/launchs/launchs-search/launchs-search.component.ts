@@ -5,6 +5,7 @@ import {ToastyService} from 'ng2-toasty';
 import {ConfirmationService} from 'primeng';
 import 'rxjs/add/operator/catch';
 import {ErrorHandlerService} from '../../core/error-handler.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-launchs-search',
@@ -24,10 +25,12 @@ export class LaunchsSearchComponent implements OnInit {
   constructor(private launchService: LaunchService,
               private errorHandlerService: ErrorHandlerService,
               private toastyService: ToastyService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de lançamentos');
     this.search();
   }
 

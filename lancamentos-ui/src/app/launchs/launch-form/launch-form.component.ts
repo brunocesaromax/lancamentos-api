@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
 import {LaunchService} from '../launch.service';
 import {ToastyService} from 'ng2-toasty';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-launch-form',
@@ -30,10 +31,13 @@ export class LaunchFormComponent implements OnInit {
               private launchService: LaunchService,
               private toastyService: ToastyService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('Novo lançamento');
+
     const launchId = this.activatedRoute.snapshot.params.id;
 
     if (launchId) {
@@ -81,6 +85,7 @@ export class LaunchFormComponent implements OnInit {
       .subscribe(launch => {
           this.launchService.stringsToDates(Array.of(launch));
           this.launch = launch;
+          this.updateEditTitle();
         },
         error => this.errorHandlerService.handle(error));
   }
@@ -127,6 +132,7 @@ export class LaunchFormComponent implements OnInit {
       .subscribe(launchUpdated => {
           this.launchService.stringsToDates(Array.of(launchUpdated));
           this.launch = launchUpdated;
+          this.updateEditTitle();
           this.toastyService.success('Lançamento atualizado com sucesso!');
         },
         error => this.errorHandlerService.handle(error)
@@ -143,5 +149,9 @@ export class LaunchFormComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/launchs/new']);
+  }
+
+  updateEditTitle() {
+    this.title.setTitle(`Edição de lançamento: ${this.launch.description}`);
   }
 }
