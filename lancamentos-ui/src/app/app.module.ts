@@ -10,6 +10,7 @@ import {ExamplesModule} from './examples/examples.module';
 import {registerLocaleData} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import {AppRoutingModule} from './app-routing.module';
+import {SecurityModule} from './security/security.module';
 
 registerLocaleData(localePt);
 
@@ -22,6 +23,7 @@ registerLocaleData(localePt);
     BrowserAnimationsModule,
     LaunchsModule,
     PersonsModule,
+    SecurityModule,
     CoreModule,
     ExamplesModule,
     AppRoutingModule
