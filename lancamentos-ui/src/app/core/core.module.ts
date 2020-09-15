@@ -9,6 +9,7 @@ import {ConfirmationService} from 'primeng/api';
 import {RouterModule} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import {Title} from '@angular/platform-browser';
+import {AuthService} from '../security/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {Title} from '@angular/platform-browser';
     LogService,
     ConfirmationService,
     Title,
+    AuthService,
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ]
 })
