@@ -7,9 +7,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {LogService} from '../examples/log.service';
 import {ConfirmationService} from 'primeng/api';
 import {RouterModule} from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found.component';
+import {PageNotFoundComponent} from './page-not-found.component';
 import {Title} from '@angular/platform-browser';
 import {AuthService} from '../security/auth.service';
+import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import {AuthService} from '../security/auth.service';
     ConfirmationService,
     Title,
     AuthService,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    JwtHelperService,
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ]
 })
-export class CoreModule { } // Parte do app.module
+export class CoreModule {
+} // Parte do app.module
