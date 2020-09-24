@@ -21,10 +21,7 @@ export class PersonService {
   }
 
   search(filter: PersonFilter): Observable<any> {
-    let headers = new HttpHeaders();
     let params = new HttpParams();
-
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     params = params.set('page', filter.page.toString());
     params = params.set('size', filter.pageSize.toString());
@@ -33,50 +30,30 @@ export class PersonService {
       params = params.append('name', filter.name);
     }
 
-    return this.httpClient.get(`${this.personsUrl}?pagination`, {headers, params});
+    return this.httpClient.get(`${this.personsUrl}?pagination`, {params});
   }
 
   findAll(): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.get(`${this.personsUrl}`, {headers});
+    return this.httpClient.get(`${this.personsUrl}`);
   }
 
   delete(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.delete(`${this.personsUrl}/${id}`, {headers});
+    return this.httpClient.delete(`${this.personsUrl}/${id}`);
   }
 
   changeStatus(id: number, currentStatus: boolean): Observable<any> {
-    let headers = new HttpHeaders();
-
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    headers = headers.append('Content-Type', 'application/json');
-
-    return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus, {headers});
+    return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus);
   }
 
   save(person: Person): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.post(this.personsUrl, person, {headers});
+    return this.httpClient.post(this.personsUrl, person);
   }
 
   update(person: Person): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.put(`${this.personsUrl}/${person.id}`, person, {headers});
+    return this.httpClient.put(`${this.personsUrl}/${person.id}`, person);
   }
 
   findById(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.get(`${this.personsUrl}/${id}`, {headers});
+    return this.httpClient.get(`${this.personsUrl}/${id}`);
   }
 }

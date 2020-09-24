@@ -13,9 +13,6 @@ export class CategoryService {
   }
 
   findAll(): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.get(`${this.categoriesUrl}?pagination`, {headers});
+    return this.httpClient.get(`${this.categoriesUrl}?pagination`);
   }
 }

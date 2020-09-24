@@ -23,10 +23,7 @@ export class LaunchService {
   }
 
   search(filter: LaunchFilter): Observable<any> {
-    let headers = new HttpHeaders();
     let params = new HttpParams();
-
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     params = params.set('page', filter.page.toString());
     params = params.set('size', filter.pageSize.toString());
@@ -45,35 +42,23 @@ export class LaunchService {
         moment(filter.dueDayEnd).format('YYYY-MM-DD'));
     }
 
-    return this.httpClient.get(`${this.launchsUrl}?summary`, {headers, params});
+    return this.httpClient.get(`${this.launchsUrl}?summary`, {params});
   }
 
   delete(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.delete(`${this.launchsUrl}/${id}`, {headers});
+    return this.httpClient.delete(`${this.launchsUrl}/${id}`);
   }
 
   save(launch: Launch): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.post(this.launchsUrl, launch, {headers});
+    return this.httpClient.post(this.launchsUrl, launch);
   }
 
   update(launch: Launch): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.put(`${this.launchsUrl}/${launch.id}`, launch, {headers});
+    return this.httpClient.put(`${this.launchsUrl}/${launch.id}`, launch);
   }
 
   findById(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.httpClient.get(`${this.launchsUrl}/${id}`, {headers});
+    return this.httpClient.get(`${this.launchsUrl}/${id}`);
   }
 
   stringsToDates(launchs: any[]): void {
