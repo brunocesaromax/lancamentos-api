@@ -25,6 +25,9 @@ export class AuthService {
     // client and secret
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjoxMjM0NTY=');
 
+    // Limpando o token atual para acrescentar um novo
+    localStorage.clear();
+
     return this.httpClient.post(this.oauthTokenUrl, body, {headers})
       .pipe(
         tap((response: any) => this.storeToken(response.access_token)),
@@ -35,6 +38,10 @@ export class AuthService {
           return throwError(exception);
         })
       );
+  }
+
+  hasPermission(permission: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permission);
   }
 
   private storeToken(token: string) {
