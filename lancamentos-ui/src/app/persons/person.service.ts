@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Launch, Person} from '../core/model';
+import {Person} from '../core/model';
+import {LaunchHttp} from '../security/lauch-http.service';
 
 export class PersonFilter {
   name = null;
@@ -12,12 +13,11 @@ export class PersonFilter {
 @Injectable({
   providedIn: 'root'
 })
-
 export class PersonService {
 
   private personsUrl = 'http://localhost:8080/persons';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: LaunchHttp) {
   }
 
   search(filter: PersonFilter): Observable<any> {

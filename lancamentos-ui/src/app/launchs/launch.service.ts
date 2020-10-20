@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import {Launch} from '../core/model';
+import {LaunchHttp} from '../security/lauch-http.service';
 
 export class LaunchFilter {
   description: string;
@@ -19,7 +20,7 @@ export class LaunchService {
 
   private launchsUrl = 'http://localhost:8080/launchs';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: LaunchHttp) {
   }
 
   search(filter: LaunchFilter): Observable<any> {

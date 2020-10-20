@@ -4,6 +4,8 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
+export const TOKEN_NAME = 'token';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +30,9 @@ export class AuthService {
     // Limpando o token atual para acrescentar um novo
     localStorage.clear();
 
-    return this.httpClient.post(this.oauthTokenUrl, body, {headers})
+    // withCredentials = true para requisições cross-site (porta diferente)
+
+    return this.httpClient.post(this.oauthTokenUrl, body, {headers, withCredentials: true})
       .pipe(
         tap((response: any) => this.storeToken(response.access_token)),
         catchError(exception => {
@@ -40,6 +44,30 @@ export class AuthService {
       );
   }
 
+  getNewAccessToken() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjoxMjM0NTY=');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.httpClient.post<any>(this.oauthTokenUrl, body, {headers, withCredentials: true})
+      .toPromise()
+      .then(response => {
+        this.storeToken(response.access_token);
+        console.log('Novo acess token criado!');
+        return Promise.resolve(null);
+      }).catch(() => {
+        console.log('Erro ao renovar token.');
+        return Promise.resolve(null);
+      });
+  }
+
+  isAccessTokenInvalid() {
+    const token = localStorage.getItem(TOKEN_NAME);
+    return !token || this.jwtHelperService.isTokenExpired(token);
+  }
+
   hasPermission(permission: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permission);
   }
@@ -48,11 +76,11 @@ export class AuthService {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
 
     // LocalStorage permite acessar um objeto de armazenamento que está guardado no navegador do usuário
-    localStorage.setItem('token', token);
+    localStorage.setItem(TOKEN_NAME, token);
   }
 
   private loadToken() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(TOKEN_NAME);
 
     if (token) {
       this.storeToken(token);

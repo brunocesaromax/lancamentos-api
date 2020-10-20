@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {LaunchHttp} from '../../security/lauch-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 export class CityService {
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: LaunchHttp
   ) {
   }
 
