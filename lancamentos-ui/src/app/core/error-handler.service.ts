@@ -16,6 +16,10 @@ export class ErrorHandlerService {
     if (errorResponse instanceof HttpErrorResponse && errorResponse.status >= 400 && errorResponse.status < 500) {
       if (errorResponse.error instanceof Array) {
         msg = errorResponse.error[0].msgUser;
+
+      } else if (errorResponse.status === 403) {
+        msg = 'Você não tem permissão para executar essa ação';
+
       } else {
         console.log('Ocorreu um erro:', errorResponse);
       }

@@ -6,6 +6,7 @@ import {ConfirmationService} from 'primeng';
 import 'rxjs/add/operator/catch';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {Title} from '@angular/platform-browser';
+import {AuthService} from '../../security/auth.service';
 
 @Component({
   selector: 'app-launchs-search',
@@ -26,6 +27,7 @@ export class LaunchsSearchComponent implements OnInit {
               private errorHandlerService: ErrorHandlerService,
               private toastyService: ToastyService,
               private confirmationService: ConfirmationService,
+              private auth: AuthService,
               private title: Title) {
   }
 
