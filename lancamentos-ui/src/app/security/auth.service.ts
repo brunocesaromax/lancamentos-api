@@ -72,6 +72,18 @@ export class AuthService {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permission);
   }
 
+  hasAnyPermission(roles: string[]) {
+    let result = false;
+
+    roles.forEach(role => {
+      if (this.hasPermission(role)) {
+        result = true;
+      }
+    });
+
+    return result;
+  }
+
   private storeToken(token: string) {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
 

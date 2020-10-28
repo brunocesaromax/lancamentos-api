@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {SecurityRoutingModule} from './security-routing.module';
-import { LoginFormComponent } from './login-form/login-form.component';
+import {LoginFormComponent} from './login-form/login-form.component';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
+import {AuthGuard} from './auth.guard';
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -14,6 +15,9 @@ import {InputTextModule} from 'primeng/inputtext';
     FormsModule,
     ButtonModule,
     InputTextModule
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class SecurityModule { }

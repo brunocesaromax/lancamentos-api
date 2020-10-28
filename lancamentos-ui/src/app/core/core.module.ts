@@ -11,10 +11,12 @@ import {PageNotFoundComponent} from './page-not-found.component';
 import {Title} from '@angular/platform-browser';
 import {AuthService} from '../security/auth.service';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
+import {NotAuthorizedComponent} from './not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
+    NotAuthorizedComponent,
     PageNotFoundComponent
   ],
   imports: [
