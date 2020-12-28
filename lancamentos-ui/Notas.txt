@@ -76,3 +76,6 @@ projeto em geral
 do projeto
 
 ***********json-server -> API-FAKE para testes**********
+
+Build da aplicação angular e geração do diretório 'dist':
+- ng build --prod --configuration=production
