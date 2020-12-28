@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {AuthGuard} from './auth.guard';
+import {LogoutService} from './logout.service';
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -17,7 +18,8 @@ import {AuthGuard} from './auth.guard';
     InputTextModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SecurityModule { }

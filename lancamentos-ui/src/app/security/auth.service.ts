@@ -84,6 +84,11 @@ export class AuthService {
     return result;
   }
 
+  clearAccessToken() {
+    localStorage.removeItem(TOKEN_NAME);
+    this.jwtPayload = null;
+  }
+
   private storeToken(token: string) {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
 
