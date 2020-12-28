@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'launchs/:id',
     component: LaunchFormComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['ROLE_CREATE_LAUNCH'] }
+    data: { roles: ['ROLE_SEARCH_LAUNCH'] }
   },
 ];
 
