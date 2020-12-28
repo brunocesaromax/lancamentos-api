@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpParams} from '@angular/common/http';
+import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Person} from '../core/model';
 import {LaunchHttp} from '../security/lauch-http.service';
+import {environment} from '../../environments/environment';
 
 export class PersonFilter {
   name = null;
@@ -15,9 +16,10 @@ export class PersonFilter {
 })
 export class PersonService {
 
-  private personsUrl = 'http://localhost:8080/persons';
+  personsUrl: string;
 
   constructor(private httpClient: LaunchHttp) {
+    this.personsUrl = `${environment.apiUrl}/persons`;
   }
 
   search(filter: PersonFilter): Observable<any> {
@@ -42,7 +44,8 @@ export class PersonService {
   }
 
   changeStatus(id: number, currentStatus: boolean): Observable<any> {
-    return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus);
+    const headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus, {headers});
   }
 
   save(person: Person): Observable<any> {

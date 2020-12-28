@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
 import {LaunchHttp} from './lauch-http.service';
 import {AuthService} from './auth.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogoutService {
 
-  tokensRevokeUrl = 'http://localhost:8080/tokens/revoke';
+  tokensRevokeUrl: string;
 
   constructor(private http: LaunchHttp,
               private auth: AuthService) {
+    this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
   }
 
   // Remoção do cookie que guarda o refresh token e em seguida remoção do access token

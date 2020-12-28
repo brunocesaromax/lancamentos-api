@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 export const TOKEN_NAME = 'token';
 
@@ -11,11 +12,12 @@ export const TOKEN_NAME = 'token';
 })
 export class AuthService {
 
-  oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  oauthTokenUrl: string;
   jwtPayload: any;
 
   constructor(private httpClient: HttpClient,
               private jwtHelperService: JwtHelperService) {
+    this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
     this.loadToken();
   }
 

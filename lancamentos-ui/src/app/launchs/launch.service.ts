@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import {Launch} from '../core/model';
 import {LaunchHttp} from '../security/lauch-http.service';
+import {environment} from '../../environments/environment';
 
 export class LaunchFilter {
   description: string;
@@ -18,9 +19,10 @@ export class LaunchFilter {
 })
 export class LaunchService {
 
-  private launchsUrl = 'http://localhost:8080/launchs';
+  launchsUrl: string;
 
   constructor(private httpClient: LaunchHttp) {
+    this.launchsUrl = `${environment.apiUrl}/launchs`;
   }
 
   search(filter: LaunchFilter): Observable<any> {
