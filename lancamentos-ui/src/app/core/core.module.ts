@@ -5,7 +5,7 @@ import {ErrorHandlerService} from './error-handler.service';
 import {ToastyModule} from 'ng2-toasty';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {LogService} from '../examples/log.service';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/primeng';
 import {RouterModule} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found.component';
 import {Title} from '@angular/platform-browser';
