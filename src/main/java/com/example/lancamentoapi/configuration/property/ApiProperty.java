@@ -16,10 +16,10 @@ public class ApiProperty {
     @Getter
     private final Security security = new Security();
 
-    public static class Security{
+    public static class Security {
 
         @Setter
         @Getter
-        private  boolean enableHttps;
+        private boolean enableHttps;
     }
 }
