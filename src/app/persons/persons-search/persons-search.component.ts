@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PersonFilter, PersonService} from '../person.service';
-import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
+import {LazyLoadEvent} from 'primeng/api';
 import {Person} from '../Person';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {ToastyService} from 'ng2-toasty';
-import {ConfirmationService} from 'primeng';
+import {ConfirmationService} from 'primeng/primeng';
 import {Title} from '@angular/platform-browser';
 
 @Component({

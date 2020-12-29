@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {LaunchFilter, LaunchService} from '../launch.service';
-import {LazyLoadEvent} from 'primeng/api/lazyloadevent';
+import {LazyLoadEvent} from 'primeng/api';
 import {ToastyService} from 'ng2-toasty';
-import {ConfirmationService} from 'primeng';
+import {ConfirmationService} from 'primeng/primeng';
 import 'rxjs/add/operator/catch';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {Title} from '@angular/platform-browser';
