@@ -1,0 +1,101 @@
+<div class="container">
+  <form #launchForm="ngForm" autocomplete="off" (ngSubmit)="save(launchForm)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ isEdit ? 'Edição de' : 'Novo' }} Lançamento</h1>
+      </div>
+
+      <div class="ui-g-12">
+        <p-selectButton [options]="types" [(ngModel)]="launch.type"  name="type" #type></p-selectButton>
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label>Vencimento </label>
+        <p-calendar dateFormat="dd/mm/yy"
+                    [inline]="false"
+                    [readonlyInput]="false"
+                    [showIcon]="true"
+                    [(ngModel)]="launch.dueDate"
+                    [locale]="ptBrLocale"
+                    name="dueDate"
+        ></p-calendar>
+      </div>
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label>{{type.value === 'RECIPE' ? 'Recebimento' : 'Pagamento'}} </label>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="launch.payday" name="payday" [locale]="ptBrLocale"></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text"
+               name="description"
+               [(ngModel)]="launch.description" #description="ngModel"
+               required minlength="5"/>
+        <app-message
+          [control]="description"
+          error="required"
+          text="Informe um descrição">
+        </app-message>
+        <app-message
+          [control]="description"
+          error="minlength"
+          text="Informe um descrição de no mínimo {{description.errors?.minlength?.requiredLength}} caracteres">
+        </app-message>
+      </div>
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>Valor </label>
+        <input currencyMask
+               [options]="{prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false}"
+               pInputText type="text"
+               placeholder="R$0,00"
+               name="value" [(ngModel)]="launch.value" #value="ngModel"
+               required/>
+        <app-message
+          [control]="value"
+          error="required"
+          text="Informe um valor">
+        </app-message>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+        <label>Categoria </label>
+        <p-dropdown
+          [options]="categories"
+          [placeholder]="'Selecione'"
+          name="category" [(ngModel)]="launch.category.id" #category="ngModel"
+          required></p-dropdown>
+        <app-message
+          [control]="category"
+          error="required"
+          text="Informe uma categoria">
+        </app-message>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+        <label>Pessoa </label>
+        <p-dropdown [options]="persons"
+                    [placeholder]="'Selecione'"
+                    [filter]="true"
+                    name="person" [(ngModel)]="launch.person.id" #person="ngModel"
+                    required>
+        </p-dropdown>
+        <app-message
+          [control]="person"
+          error="required"
+          text="Informe uma pessoa">
+        </app-message>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Observação </label>
+        <textarea pInputTextarea rows="3" [(ngModel)]="launch.observation" name="observation"></textarea>
+      </div>
+      <div class="ui-g-12">
+        <button pButton
+                type="submit"
+                label="Salvar"
+                style="margin:5px"
+                [disabled]="launchForm.invalid"></button>
+        <button pButton type="button" label="Novo" (click)="new(launchForm)" class="ui-button-info"></button>
+        <a style="margin:10px" routerLink="/launchs" href="javascript:;">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>
