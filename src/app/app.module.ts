@@ -33,7 +33,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        allowedDomains: ['localhost:8080'],
+        allowedDomains: ['localhost:8080', 'launchs-api.herokuapp.com'],
         disallowedRoutes: [],
       },
     }),
