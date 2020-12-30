@@ -109,7 +109,7 @@ export class LaunchFormComponent implements OnInit {
       .subscribe(launch => {
           this.launchService.stringsToDates(Array.of(launch));
           // this.launch = launch;
-          this.form.setValue(launch);
+          this.form.patchValue(launch);
           this.updateEditTitle();
         },
         error => this.errorHandlerService.handle(error));
@@ -157,7 +157,7 @@ export class LaunchFormComponent implements OnInit {
       .subscribe(launchUpdated => {
           this.launchService.stringsToDates(Array.of(launchUpdated));
           // this.launch = launchUpdated;
-          this.form.setValue(launchUpdated);
+          this.form.patchValue(launchUpdated);
           this.updateEditTitle();
           this.toastyService.success('Lançamento atualizado com sucesso!');
         },
