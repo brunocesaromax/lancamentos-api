@@ -6,19 +6,19 @@ import {AuthGuard} from '../security/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'launchs',
+    path: '',
     component: LaunchsSearchComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_SEARCH_LAUNCH'] }
   },
   {
-    path: 'launchs/new',
+    path: 'new',
     component: LaunchFormComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_CREATE_LAUNCH'] }
   },
   {
-    path: 'launchs/:id',
+    path: ':id',
     component: LaunchFormComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_SEARCH_LAUNCH'] }
