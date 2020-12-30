@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LaunchFormComponent} from './launch-form/launch-form.component';
 import {LaunchsSearchComponent} from './launchs-search/launchs-search.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -25,6 +25,7 @@ import {LaunchsRoutingModule} from './launchs-routing.module';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     SelectButtonModule,
     InputTextModule,
     ButtonModule,

@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoryService} from '../../categories/category.service';
-import {ErrorHandlerService} from '../../core/error-handler.service';
-import {PersonService} from '../../persons/person.service';
-import {Launch} from '../../core/model';
-import {NgForm} from '@angular/forms';
-import {LaunchService} from '../launch.service';
-import {ToastyService} from 'ng2-toasty';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Title} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../categories/category.service';
+import { ErrorHandlerService } from '../../core/error-handler.service';
+import { PersonService } from '../../persons/person.service';
+import { Launch } from '../../core/model';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { LaunchService } from '../launch.service';
+import { ToastyService } from 'ng2-toasty';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-launch-form',
@@ -25,17 +25,25 @@ export class LaunchFormComponent implements OnInit {
   launch = new Launch();
   ptBrLocale: any;
 
+  form: FormGroup;
+
   constructor(private categoryService: CategoryService,
               private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
               private launchService: LaunchService,
               private toastyService: ToastyService,
               private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
               private router: Router,
               private title: Title) {
   }
 
+  get isEdit() {
+    return Boolean(this.launch.id);
+  }
+
   ngOnInit() {
+    this.configureForm();
     this.title.setTitle('Novo lançamento');
 
     const launchId = this.activatedRoute.snapshot.params.id;
@@ -76,8 +84,24 @@ export class LaunchFormComponent implements OnInit {
     };
   }
 
-  get isEdit() {
-    return Boolean(this.launch.id);
+  configureForm() {
+    this.form = this.formBuilder.group({
+      id: [],
+      type: ['RECIPE', Validators.required],
+      dueDate: [null, Validators.required],
+      payday: [],
+      description: [null, [Validators.required, Validators.minLength(5)]],
+      value: [null, Validators.required],
+      person: this.formBuilder.group({
+        id: [null, Validators.required],
+        name: []
+      }),
+      category: this.formBuilder.group({
+        id: [null, Validators.required],
+        name: []
+      }),
+      observation: []
+    });
   }
 
   loadLaunch(id: number) {
