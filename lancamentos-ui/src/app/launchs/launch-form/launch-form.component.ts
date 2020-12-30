@@ -3,7 +3,7 @@ import { CategoryService } from '../../categories/category.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PersonService } from '../../persons/person.service';
 import { Launch } from '../../core/model';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LaunchService } from '../launch.service';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class LaunchFormComponent implements OnInit {
 
   categories = [];
   persons = [];
-  launch = new Launch();
+  // launch = new Launch();
   ptBrLocale: any;
 
   form: FormGroup;
@@ -39,7 +39,7 @@ export class LaunchFormComponent implements OnInit {
   }
 
   get isEdit() {
-    return Boolean(this.launch.id);
+    return Boolean(this.form.get('id').value);
   }
 
   ngOnInit() {
@@ -108,7 +108,8 @@ export class LaunchFormComponent implements OnInit {
     this.launchService.findById(id)
       .subscribe(launch => {
           this.launchService.stringsToDates(Array.of(launch));
-          this.launch = launch;
+          // this.launch = launch;
+          this.form.setValue(launch);
           this.updateEditTitle();
         },
         error => this.errorHandlerService.handle(error));
@@ -132,16 +133,16 @@ export class LaunchFormComponent implements OnInit {
       );
   }
 
-  save(launchForm: NgForm) {
+  save() {
     if (this.isEdit) {
-      this.update(launchForm);
+      this.update();
     } else {
-      this.add(launchForm);
+      this.add();
     }
   }
 
-  add(launchForm: NgForm) {
-    this.launchService.save(this.launch)
+  add() {
+    this.launchService.save(this.form.value)
       .subscribe(launchSaved => {
           this.toastyService.success('Lançamento adicionando com sucesso!');
           // Aplicando navegação imperativa
@@ -151,11 +152,12 @@ export class LaunchFormComponent implements OnInit {
       );
   }
 
-  update(launchForm: NgForm) {
-    this.launchService.update(this.launch)
+  update() {
+    this.launchService.update(this.form.value)
       .subscribe(launchUpdated => {
           this.launchService.stringsToDates(Array.of(launchUpdated));
-          this.launch = launchUpdated;
+          // this.launch = launchUpdated;
+          this.form.setValue(launchUpdated);
           this.updateEditTitle();
           this.toastyService.success('Lançamento atualizado com sucesso!');
         },
@@ -163,9 +165,10 @@ export class LaunchFormComponent implements OnInit {
       );
   }
 
-  new(launchForm: NgForm) {
+  new() {
     // Poderia apenas utilizar o routerLink nesse caso
-    launchForm.reset();
+    // launchForm.reset();
+    this.form.reset();
 
     // Função necessária para não perder o tipo do lançamento
     setTimeout(function() {
@@ -176,6 +179,6 @@ export class LaunchFormComponent implements OnInit {
   }
 
   updateEditTitle() {
-    this.title.setTitle(`Edição de lançamento: ${this.launch.description}`);
+    this.title.setTitle(`Edição de lançamento: ${this.form.get('description').value}`);
   }
 }
