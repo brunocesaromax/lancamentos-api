@@ -39,12 +39,12 @@
         <app-message
           [control]="form.get('description')"
           error="required"
-          text="Informe um descrição">
+          text="Descrição é um campo obrigatório">
         </app-message>
         <app-message
           [control]="form.get('description')"
           error="minlength"
-          text="Informe um descrição de no mínimo {{form.get('description').errors?.minlength?.requiredLength}} caracteres">
+          text="Informe um descrição de no mínimo {{form.get('description').errors?.minlength?.length}} caracteres">
         </app-message>
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">

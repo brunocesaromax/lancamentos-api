@@ -3,7 +3,7 @@ import { CategoryService } from '../../categories/category.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PersonService } from '../../persons/person.service';
 import { Launch } from '../../core/model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LaunchService } from '../launch.service';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -90,7 +90,7 @@ export class LaunchFormComponent implements OnInit {
       type: ['RECIPE', Validators.required],
       dueDate: [null, Validators.required],
       payday: [],
-      description: [null, [Validators.required, Validators.minLength(5)]],
+      description: [null, [this.requiredValidate, this.minLengthValidate(5)]],
       value: [null, Validators.required],
       person: this.formBuilder.group({
         id: [null, Validators.required],
@@ -102,6 +102,20 @@ export class LaunchFormComponent implements OnInit {
       }),
       observation: []
     });
+  }
+
+  requiredValidate(input: FormControl) {
+    // É possível obter outros campos para validar um certo campo conforme abaixo
+    // if (input.root.get('type')) {
+    //   console.log(input.root.get('type').value);
+    // }
+    return input.value ? null : {required: true};
+  }
+
+  minLengthValidate(value: number) {
+    return (input: AbstractControl) => {
+      return (!input.value || input.value.length >= value) ? null : {minlength: {length: value}};
+    };
   }
 
   loadLaunch(id: number) {
