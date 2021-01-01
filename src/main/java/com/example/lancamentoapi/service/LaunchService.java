@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.service;
 
+import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
 import com.example.lancamentoapi.model.Person;
@@ -16,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -91,5 +94,10 @@ public class LaunchService {
     @Transactional(readOnly = true)
     public boolean existsWithPersonId(Long id) {
         return launchRepository.existsByPersonId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<LaunchStatisticCategory> findByCategory(LocalDate date) {
+        return launchRepository.findByCategory(date);
     }
 }

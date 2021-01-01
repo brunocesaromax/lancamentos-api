@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.controller;
 
+import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.event.ResourceCreatedEvent;
 import com.example.lancamentoapi.exceptionHandler.LaunchExceptionHandler.Error;
 import com.example.lancamentoapi.model.Launch;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,6 +44,16 @@ public class LaunchController {
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
     public Page<LaunchSummary> sumUp(@ModelAttribute LaunchFilter launchFilter, Pageable pageable) {
         return launchService.sumUp(launchFilter, pageable);
+    }
+
+    /********************************************************************
+     * Retornar as estatísticas de lançamentos por categoria do mês atual
+     * Poderia receber uma data como parâmetro e retornar com base nessa data
+     * ******************************************************************/
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
+    @GetMapping("/statistics/category")
+    public List<LaunchStatisticCategory> findByCategory() {
+        return launchService.findByCategory(LocalDate.now());
     }
 
     @GetMapping("/{id}")
