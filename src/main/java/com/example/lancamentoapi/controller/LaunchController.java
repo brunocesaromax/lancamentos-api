@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.controller;
 
+import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.event.ResourceCreatedEvent;
 import com.example.lancamentoapi.exceptionHandler.LaunchExceptionHandler.Error;
@@ -54,6 +55,12 @@ public class LaunchController {
     @GetMapping("/statistics/category")
     public List<LaunchStatisticCategory> findByCategory() {
         return launchService.findByCategory(LocalDate.now());
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
+    @GetMapping("/statistics/day")
+    public List<LaunchStatisticByDay> findByDay() {
+        return launchService.findByDay(LocalDate.now());
     }
 
     @GetMapping("/{id}")
