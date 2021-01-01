@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.repository.query;
 
+import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
@@ -15,4 +16,5 @@ public interface LaunchRepositoryQuery {
     Page<Launch> filterOut(LaunchFilter launchFilter, Pageable pageable);
     Page<LaunchSummary> sumUp(LaunchFilter launchFilter, Pageable pageable);
     List<LaunchStatisticCategory> findByCategory(LocalDate monthReference);
+    List<LaunchStatisticByDay> findByDay(LocalDate monthReference);
 }
