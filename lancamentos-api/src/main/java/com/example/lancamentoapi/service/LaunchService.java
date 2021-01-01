@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.service;
 
+import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
@@ -99,5 +100,10 @@ public class LaunchService {
     @Transactional(readOnly = true)
     public List<LaunchStatisticCategory> findByCategory(LocalDate date) {
         return launchRepository.findByCategory(date);
+    }
+
+    @Transactional(readOnly = true)
+    public List<LaunchStatisticByDay> findByDay(LocalDate date) {
+        return launchRepository.findByDay(date);
     }
 }
