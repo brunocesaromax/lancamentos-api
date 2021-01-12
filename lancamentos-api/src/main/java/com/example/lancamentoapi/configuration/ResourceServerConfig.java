@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 
-@Profile("oauth-security")
+//@Profile("oauth-security")
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
@@ -26,7 +26,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/categories").permitAll() //Categorias todos podem acessar o restante tem que estar autenticado
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Não manter state de seção
+                .and().httpBasic()
                 .and().csrf().disable(); // Configuração para evitar problemas como um javascriptInjection na aplicação
+
     }
 
     @Override

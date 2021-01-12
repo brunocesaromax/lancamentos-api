@@ -1,7 +1,5 @@
 package com.example.lancamentoapi.repository.query;
 
-import com.example.lancamentoapi.dto.LaunchStatisticByDay;
-import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.model.Category_;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
@@ -20,7 +18,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,63 +69,6 @@ public class LaunchRepositoryImpl implements LaunchRepositoryQuery {
         addRestrictionsInPagination(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(launchFilter));
-    }
-
-    @Override
-    public List<LaunchStatisticCategory> findByCategory(LocalDate monthReference) {
-        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-
-        CriteriaQuery<LaunchStatisticCategory> criteriaQuery = criteriaBuilder
-                .createQuery(LaunchStatisticCategory.class);
-
-        Root<Launch> root = criteriaQuery.from(Launch.class);
-
-        criteriaQuery.select(criteriaBuilder.construct(LaunchStatisticCategory.class,
-                root.get(Launch_.CATEGORY),
-                criteriaBuilder.sum(root.get(Launch_.VALUE))));
-
-        LocalDate firstDay = monthReference.withDayOfMonth(1);
-        LocalDate lastDay = monthReference.withDayOfMonth(monthReference.lengthOfMonth());
-
-        criteriaQuery.where(
-                criteriaBuilder.greaterThanOrEqualTo(root.get(Launch_.DUE_DATE), firstDay),
-                criteriaBuilder.lessThanOrEqualTo(root.get(Launch_.DUE_DATE), lastDay)
-        );
-
-        criteriaQuery.groupBy(root.get(Launch_.CATEGORY));
-
-        TypedQuery<LaunchStatisticCategory> typedQuery = manager.createQuery(criteriaQuery);
-
-        return typedQuery.getResultList();
-    }
-
-    @Override
-    public List<LaunchStatisticByDay> findByDay(LocalDate monthReference) {
-        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-
-        CriteriaQuery<LaunchStatisticByDay> criteriaQuery = criteriaBuilder
-                .createQuery(LaunchStatisticByDay.class);
-
-        Root<Launch> root = criteriaQuery.from(Launch.class);
-
-        criteriaQuery.select(criteriaBuilder.construct(LaunchStatisticByDay.class,
-                root.get(Launch_.TYPE),
-                root.get(Launch_.DUE_DATE),
-                criteriaBuilder.sum(root.get(Launch_.VALUE))));
-
-        LocalDate firstDay = monthReference.withDayOfMonth(1);
-        LocalDate lastDay = monthReference.withDayOfMonth(monthReference.lengthOfMonth());
-
-        criteriaQuery.where(
-                criteriaBuilder.greaterThanOrEqualTo(root.get(Launch_.DUE_DATE), firstDay),
-                criteriaBuilder.lessThanOrEqualTo(root.get(Launch_.DUE_DATE), lastDay)
-        );
-
-        criteriaQuery.groupBy(root.get(Launch_.TYPE), root.get(Launch_.DUE_DATE));
-
-        TypedQuery<LaunchStatisticByDay> typedQuery = manager.createQuery(criteriaQuery);
-
-        return typedQuery.getResultList();
     }
 
     private Predicate[] getRestrictions(LaunchFilter launchFilter, CriteriaBuilder builder, Root<Launch> root) {
