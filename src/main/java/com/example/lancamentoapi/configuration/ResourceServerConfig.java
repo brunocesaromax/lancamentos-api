@@ -26,7 +26,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/categories").permitAll() //Categorias todos podem acessar o restante tem que estar autenticado
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Não manter state de seção
+                .and().httpBasic()
                 .and().csrf().disable(); // Configuração para evitar problemas como um javascriptInjection na aplicação
+
     }
 
     @Override
