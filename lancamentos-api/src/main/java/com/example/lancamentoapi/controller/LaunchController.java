@@ -10,12 +10,16 @@ import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.LaunchService;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import lombok.RequiredArgsConstructor;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +65,16 @@ public class LaunchController {
     @GetMapping("/statistics/day")
     public List<LaunchStatisticByDay> findByDay() {
         return launchService.findByDay(LocalDate.now());
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
+    @GetMapping("/reports/person")
+    public ResponseEntity<byte[]> reportByPerson(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+                                                 @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) throws JRException {
+        byte[] report = launchService.reportByPerson(start, end);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
+                .body(report);
     }
 
     @GetMapping("/{id}")
