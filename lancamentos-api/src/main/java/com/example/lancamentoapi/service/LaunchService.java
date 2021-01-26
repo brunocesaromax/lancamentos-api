@@ -2,6 +2,7 @@ package com.example.lancamentoapi.service;
 
 import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
+import com.example.lancamentoapi.dto.LaunchStatisticPerson;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
 import com.example.lancamentoapi.model.Person;
@@ -10,6 +11,8 @@ import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import lombok.RequiredArgsConstructor;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,9 +21,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InputStream;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -90,6 +94,21 @@ public class LaunchService {
         }else{
             return launchBD.get();
         }
+    }
+
+    public byte[] reportByPerson(LocalDate start, LocalDate end) throws JRException {
+        List<LaunchStatisticPerson> result = launchRepository.findByPerson(start, end);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("DT_BEGIN", Date.valueOf(start));
+        parameters.put("DT_END", Date.valueOf(end));
+        parameters.put("REPORT_LOCALE", new Locale("pt", "BR"));
+
+        InputStream inputStream = this.getClass().getResourceAsStream("/reports/launchs-by-person.jasper");
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parameters, new JRBeanCollectionDataSource(result));
+
+        return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
     @Transactional(readOnly = true)
