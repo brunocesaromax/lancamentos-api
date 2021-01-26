@@ -2,6 +2,7 @@ package com.example.lancamentoapi.repository.query;
 
 import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
+import com.example.lancamentoapi.dto.LaunchStatisticPerson;
 import com.example.lancamentoapi.model.Category_;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
@@ -127,6 +128,32 @@ public class LaunchRepositoryImpl implements LaunchRepositoryQuery {
         criteriaQuery.groupBy(root.get(Launch_.TYPE), root.get(Launch_.DUE_DATE));
 
         TypedQuery<LaunchStatisticByDay> typedQuery = manager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<LaunchStatisticPerson> findByPerson(LocalDate start, LocalDate end) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+
+        CriteriaQuery<LaunchStatisticPerson> criteriaQuery = criteriaBuilder
+                .createQuery(LaunchStatisticPerson.class);
+
+        Root<Launch> root = criteriaQuery.from(Launch.class);
+
+        criteriaQuery.select(criteriaBuilder.construct(LaunchStatisticPerson.class,
+                root.get(Launch_.TYPE),
+                root.get(Launch_.PERSON),
+                criteriaBuilder.sum(root.get(Launch_.VALUE))));
+
+        criteriaQuery.where(
+                criteriaBuilder.greaterThanOrEqualTo(root.get(Launch_.DUE_DATE), start),
+                criteriaBuilder.lessThanOrEqualTo(root.get(Launch_.DUE_DATE), end)
+        );
+
+        criteriaQuery.groupBy(root.get(Launch_.TYPE), root.get(Launch_.PERSON));
+
+        TypedQuery<LaunchStatisticPerson> typedQuery = manager.createQuery(criteriaQuery);
 
         return typedQuery.getResultList();
     }
