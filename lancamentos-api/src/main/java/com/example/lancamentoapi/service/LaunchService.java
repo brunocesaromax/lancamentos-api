@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,6 +110,12 @@ public class LaunchService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parameters, new JRBeanCollectionDataSource(result));
 
         return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
+
+//    @Scheduled(fixedDelay = 1000 * 2) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
+    @Scheduled(cron = "0 0 6 * * *") // SS MM HH DAY_OF_MONTH MONTH DAY_OF_WEEK
+    public void alertOverdueLaunchs() {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>Metódo sendo executado....");
     }
 
     @Transactional(readOnly = true)
