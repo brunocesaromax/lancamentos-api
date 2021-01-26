@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
-@Profile("oauth-security")
+//@Profile("oauth-security")
 @ControllerAdvice
 public class RefreshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 

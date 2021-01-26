@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 import java.util.Map;
 
-@Profile("oauth-security")
+//@Profile("oauth-security")
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE) // Filtro de prioridade alta
 public class RefreshTokenCookiePreProcessorFilter implements Filter {
