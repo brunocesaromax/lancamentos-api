@@ -1,6 +1,5 @@
 package com.example.lancamentoapi.mail;
 
-import com.example.lancamentoapi.repository.LaunchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
