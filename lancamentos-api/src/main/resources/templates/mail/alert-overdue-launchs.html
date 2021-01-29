@@ -22,7 +22,8 @@
 
     <tbody>
     <tr style="border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;"
-        th:each="launch: ${launchs}">
+        th:each="launch: ${launchs}"
+        th:styleappend="${launch.recipe} ? 'color: blue;' : 'color: red;'">
         <td th:text="${launch.type.description}">Receita</td>
         <td th:text="${launch.person.name}">João Silva</td>
         <td th:text="${launch.description}">Salário Mensal</td>

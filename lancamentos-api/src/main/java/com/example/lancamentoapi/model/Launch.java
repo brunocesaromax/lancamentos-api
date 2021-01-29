@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -45,4 +46,9 @@ public class Launch {
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
+
+    @JsonIgnore
+    public boolean isRecipe(){
+        return this.type.equals(TypeLaunch.RECIPE);
+    }
 }
