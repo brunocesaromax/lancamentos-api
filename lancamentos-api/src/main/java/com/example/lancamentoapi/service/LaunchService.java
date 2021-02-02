@@ -14,6 +14,7 @@ import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +32,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class LaunchService {
 
@@ -122,10 +124,29 @@ public class LaunchService {
 //    @Scheduled(fixedDelay = 1000 * 60 * 30) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
     @Scheduled(cron = "0 0 6 * * *") // SS MM HH DAY_OF_MONTH MONTH DAY_OF_WEEK
     public void alertOverdueLaunchs() {
+        if (log.isDebugEnabled()){
+            log.debug("Preparando envio de e-mails de aviso de lançamentos vencidos.");
+        }
+
         List<Launch> overdueLaunchs = launchRepository.findByDueDateLessThanEqualAndPaydayIsNull(LocalDate.now());
+
+        if (overdueLaunchs.isEmpty()){
+            log.info("Sem lançamentos vencidos para aviso.");
+            return;
+        }
+
+        log.info("Existem {} lançamentos vencidos.", overdueLaunchs.size());
+
         List<User> users = userRepository.findByPermissionsDescription(RECIPIENTS);
 
+        if (users.isEmpty()){
+            log.warn("Existem lançamentos vencidos, mas o sistema não encontrou destinatários.");
+            return;
+        }
+
         mailer.alertOverdueLaunchs(overdueLaunchs, users);
+
+        log.info("Envio de e-mails de aviso concluído.");
     }
 
     @Transactional(readOnly = true)
