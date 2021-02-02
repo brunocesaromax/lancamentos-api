@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,18 +27,27 @@ public class PersonService {
         this.launchService = launchService;
     }
 
+    @Transactional
+    public Person save(Person person) {
+        person.getContacts().forEach(c -> c.setPerson(person));
+        return personRepository.save(person);
+    }
+
+    @Transactional
     public Person update(Long id, Person person) {
+        Optional<Person> personBD = personRepository.findById(id);
 
-        Optional<Person> pessoaBD = personRepository.findById(id);
+        person.getContacts().forEach(c -> c.setPerson(person));
 
-        if (!pessoaBD.isPresent()) {
+        if (!personBD.isPresent()) {
             throw new EmptyResultDataAccessException(1);
         }
 
-        BeanUtils.copyProperties(person, pessoaBD.get(), Person_.ID); //Modo de update
-        return personRepository.save(pessoaBD.get());
+        BeanUtils.copyProperties(person, personBD.get(), Person_.ID); //Modo de update
+        return personRepository.save(personBD.get());
     }
 
+    @Transactional
     public void updateFieldActive(Long id, Boolean ativo) {
 
         Optional<Person> pessoaBD = personRepository.findById(id);
@@ -50,15 +60,18 @@ public class PersonService {
         personRepository.save(pessoaBD.get());
     }
 
+    @Transactional(readOnly = true)
     public Person findById(Long id) {
         Optional<Person> pessoa = personRepository.findById(id);
         return pessoa.orElse(null);
     }
 
+    @Transactional(readOnly = true)
     public Page<Person> pagination(String name, Pageable pageable) {
         return personRepository.findAllByName(name, pageable);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         if (launchService.existsWithPersonId(id)) {
             throw new PersonExistentInLaunchException();

@@ -30,7 +30,6 @@ public class Contact {
 	@Size(max = 20)
 	private String phone;
 
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name="person_id")
 	private Person person;
