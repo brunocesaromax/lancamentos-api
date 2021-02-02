@@ -1,6 +1,7 @@
 package com.example.lancamentoapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Person {
 	private Address address;
 
 	@Valid
+	@JsonIgnoreProperties("person")
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	private List<Contact> contacts;
 
