@@ -35,16 +35,19 @@ public class PersonService {
 
     @Transactional
     public Person update(Long id, Person person) {
-        Optional<Person> personBD = personRepository.findById(id);
+        Optional<Person> personOptional = personRepository.findById(id);
 
         person.getContacts().forEach(c -> c.setPerson(person));
 
-        if (!personBD.isPresent()) {
+        if (!personOptional.isPresent()) {
             throw new EmptyResultDataAccessException(1);
         }
 
-        BeanUtils.copyProperties(person, personBD.get(), Person_.ID); //Modo de update
-        return personRepository.save(personBD.get());
+        Person personBD = personOptional.get();
+        personBD.updateContacts(person.getContacts());
+
+        BeanUtils.copyProperties(person, personBD, Person_.ID, Person_.CONTACTS); //Modo de update
+        return personRepository.save(personOptional.get());
     }
 
     @Transactional

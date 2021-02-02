@@ -32,12 +32,18 @@ public class Person {
 
 	@Valid
 	@JsonIgnoreProperties("person")
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contact> contacts;
 
 	@Transient
 	@JsonIgnore
 	public Boolean isInactive(){
 		return !this.active;
+	}
+
+	public void updateContacts(List<Contact> contacts) {
+		this.getContacts().clear();
+		this.getContacts().addAll(contacts);
+		this.getContacts().forEach(c -> c.setPerson(this));
 	}
 }
