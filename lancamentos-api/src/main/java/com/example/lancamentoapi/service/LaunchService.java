@@ -3,10 +3,13 @@ package com.example.lancamentoapi.service;
 import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.dto.LaunchStatisticPerson;
+import com.example.lancamentoapi.mail.Mailer;
 import com.example.lancamentoapi.model.Launch;
 import com.example.lancamentoapi.model.Launch_;
 import com.example.lancamentoapi.model.Person;
+import com.example.lancamentoapi.model.User;
 import com.example.lancamentoapi.repository.LaunchRepository;
+import com.example.lancamentoapi.repository.UserRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
@@ -31,7 +34,11 @@ import java.util.*;
 @RequiredArgsConstructor
 public class LaunchService {
 
+    private static final String RECIPIENTS = "ROLE_SEARCH_LAUNCH";
+
     private final LaunchRepository launchRepository;
+    private final UserRepository userRepository;
+    private final Mailer mailer;
     private PersonService personService;
 
     @Autowired
@@ -112,10 +119,13 @@ public class LaunchService {
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
-//    @Scheduled(fixedDelay = 1000 * 2) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
+//    @Scheduled(fixedDelay = 1000 * 60 * 30) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
     @Scheduled(cron = "0 0 6 * * *") // SS MM HH DAY_OF_MONTH MONTH DAY_OF_WEEK
     public void alertOverdueLaunchs() {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>Metódo sendo executado....");
+        List<Launch> overdueLaunchs = launchRepository.findByDueDateLessThanEqualAndPaydayIsNull(LocalDate.now());
+        List<User> users = userRepository.findByPermissionsDescription(RECIPIENTS);
+
+        mailer.alertOverdueLaunchs(overdueLaunchs, users);
     }
 
     @Transactional(readOnly = true)

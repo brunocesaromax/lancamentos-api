@@ -1,5 +1,7 @@
 package com.example.lancamentoapi.mail;
 
+import com.example.lancamentoapi.model.Launch;
+import com.example.lancamentoapi.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,9 +11,11 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -45,12 +49,24 @@ public class Mailer {
 //    }
 
     public void sendEmail(String from, List<String> targets, String subject, String template, Map<String, Object> variables) {
-        Context context= new Context(new Locale("pt", "BR"));
+        Context context = new Context(new Locale("pt", "BR"));
 
         variables.forEach(context::setVariable);
 
         String message = templateEngine.process(template, context);
         sendEmail(from, targets, subject, message);
+    }
+
+    public void alertOverdueLaunchs(List<Launch> launches, List<User> recipients) {
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("launchs", launches);
+
+        List<String> emails = recipients.stream().map(User::getEmail).collect(Collectors.toList());
+        this.sendEmail("brunocesar.dev.test.java@gmail.com",
+                emails,
+                "Lançamentos vencidos",
+                "mail/alert-overdue-launchs",
+                variables);
     }
 
     public void sendEmail(String from, List<String> targets, String subject, String message) {
