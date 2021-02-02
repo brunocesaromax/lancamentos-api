@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
@@ -26,6 +28,10 @@ public class Person {
 	
 	@Embedded
 	private Address address;
+
+	@Valid
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	private List<Contact> contacts;
 
 	@Transient
 	@JsonIgnore
