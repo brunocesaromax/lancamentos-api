@@ -19,10 +19,13 @@ public class ApiProperty {
     @Getter
     private final Mail mail = new Mail();
 
+    @Getter
+    private final S3 s3 = new S3();
+
+    @Setter
+    @Getter
     public static class Security {
 
-        @Setter
-        @Getter
         private boolean enableHttps;
     }
 
@@ -34,5 +37,13 @@ public class ApiProperty {
         private Integer port;
         private String username;
         private String password;
+    }
+
+    @Setter
+    @Getter
+    public static class S3 {
+        private String accessKeyId;
+
+        private String secretAccessKey;
     }
 }
