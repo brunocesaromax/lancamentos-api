@@ -33,7 +33,7 @@ public class S3Config {
 
         AmazonS3 amazonS3 = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.US_EAST_1)
+                .withRegion(Regions.US_EAST_2)
                 .build();
 
         //Criando e configurando o bucket de forma programada
