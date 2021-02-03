@@ -13,14 +13,12 @@ import com.amazonaws.services.s3.model.lifecycle.LifecycleFilter;
 import com.amazonaws.services.s3.model.lifecycle.LifecycleTagPredicate;
 import com.example.lancamentoapi.configuration.property.ApiProperty;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 @Configuration
-@Slf4j
 @RequiredArgsConstructor
 public class S3Config {
 
@@ -36,8 +34,6 @@ public class S3Config {
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(Regions.US_EAST_2)
                 .build();
-
-        log.info("*********BUCKET NAME = {} ***********", apiProperty.getS3().getBucket());
 
         //Criando e configurando o bucket de forma programada
         if (!amazonS3.doesBucketExistV2(apiProperty.getS3().getBucket())) {
