@@ -1,5 +1,6 @@
 package com.example.lancamentoapi.controller;
 
+import com.example.lancamentoapi.dto.Attachment;
 import com.example.lancamentoapi.dto.LaunchStatisticByDay;
 import com.example.lancamentoapi.dto.LaunchStatisticCategory;
 import com.example.lancamentoapi.event.ResourceCreatedEvent;
@@ -9,6 +10,7 @@ import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.LaunchService;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
+import com.example.lancamentoapi.storage.S3;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.context.ApplicationEventPublisher;
@@ -43,6 +45,7 @@ public class LaunchController {
     private final LaunchService launchService;
     private final ApplicationEventPublisher publisher;
     private final MessageSource messageSource;
+    private final S3 s3;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
@@ -117,11 +120,12 @@ public class LaunchController {
 
     @PostMapping("/attachment")
     @PreAuthorize("hasAuthority('ROLE_CREATE_LAUNCH') and #oauth2.hasScope('write')")
-    public String uploadAttachment(@RequestParam MultipartFile attachment) throws IOException {
-        OutputStream out = new FileOutputStream("/home/brunocesar/Documents/anexo--" + attachment.getOriginalFilename());
-        out.write(attachment.getBytes());
-        out.close();
-        return "ok";
+    public Attachment uploadAttachment(@RequestParam MultipartFile attachment) throws IOException {
+//        OutputStream out = new FileOutputStream("/home/brunocesar/Documents/anexo--" + attachment.getOriginalFilename());
+//        out.write(attachment.getBytes());
+//        out.close();
+        String name = s3.saveTemp(attachment);
+        return new Attachment(name, s3.configureUrl(name));
     }
 
     /*Como é um tratamento particular de Lançamento pode ser tratado no próprio controlador*/

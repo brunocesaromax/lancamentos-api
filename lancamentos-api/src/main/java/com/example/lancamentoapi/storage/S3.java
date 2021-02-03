@@ -61,4 +61,9 @@ public class S3 {
     private String generateUniqueName(String originalFilename) {
         return UUID.randomUUID().toString() + "_" + originalFilename;
     }
+
+    public String configureUrl(String objectName) {
+        // o '\\\\' não importará se o protocolo é http ou https
+        return "\\\\"+ apiProperty.getS3().getBucket() + ".s3.amazonaws.com/" + objectName;
+    }
 }
