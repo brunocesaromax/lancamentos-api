@@ -62,6 +62,7 @@ public class S3 {
 
     public String configureUrl(String object) {
         // o '\\\\' não importará se o protocolo é http ou https
+        // o '\\\\' só será utilizado no contexto do cliente
         return "\\\\" + apiProperty.getS3().getBucket() + ".s3.amazonaws.com/" + object;
     }
 

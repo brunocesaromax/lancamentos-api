@@ -99,7 +99,7 @@ public class LaunchService {
             && StringUtils.hasText(launchBD.getAttachment())) {
             s3.delete(launchBD.getAttachment());
 
-        } else if (StringUtils.hasLength(launch.getAttachment())
+        } else if (StringUtils.hasText(launch.getAttachment())
                    && !launch.getAttachment().equals(launchBD.getAttachment())) {
             s3.update(launchBD.getAttachment(), launch.getAttachment());
         }
