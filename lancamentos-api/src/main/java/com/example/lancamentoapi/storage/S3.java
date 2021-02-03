@@ -58,12 +58,24 @@ public class S3 {
         }
     }
 
-    private String generateUniqueName(String originalFilename) {
-        return UUID.randomUUID().toString() + "_" + originalFilename;
+
+    public String configureUrl(String object) {
+        // o '\\\\' não importará se o protocolo é http ou https
+        return "\\\\" + apiProperty.getS3().getBucket() + ".s3.amazonaws.com/" + object;
     }
 
-    public String configureUrl(String objectName) {
-        // o '\\\\' não importará se o protocolo é http ou https
-        return "\\\\"+ apiProperty.getS3().getBucket() + ".s3.amazonaws.com/" + objectName;
+    //Salvar arquivo temporário como permanente
+    public void save(String object) {
+        SetObjectTaggingRequest setObjectTaggingRequest = new SetObjectTaggingRequest(
+                apiProperty.getS3().getBucket(),
+                object,
+                new ObjectTagging(Collections.emptyList())
+        );
+
+        amazonS3.setObjectTagging(setObjectTaggingRequest);
+    }
+
+    private String generateUniqueName(String originalFilename) {
+        return UUID.randomUUID().toString() + "_" + originalFilename;
     }
 }

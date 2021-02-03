@@ -13,9 +13,13 @@ import com.example.lancamentoapi.repository.UserRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
+import com.example.lancamentoapi.storage.S3;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.io.InputStream;
 import java.sql.Date;
@@ -40,7 +45,10 @@ public class LaunchService {
 
     private final LaunchRepository launchRepository;
     private final UserRepository userRepository;
+
     private final Mailer mailer;
+    private final S3 s3;
+
     private PersonService personService;
 
     @Autowired
@@ -64,6 +72,11 @@ public class LaunchService {
 
     public Launch save(Launch launch) {
         validatePerson(launch.getPerson());
+
+        if (StringUtils.hasText(launch.getAttachment())){
+            s3.save(launch.getAttachment());
+        }
+
         return launchRepository.save(launch);
     }
 

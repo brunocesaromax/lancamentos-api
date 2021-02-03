@@ -50,6 +50,11 @@ public class Launch {
     @JoinColumn(name = "person_id")
     private Person person;
 
+    private String attachment;
+
+    @Transient
+    private String urlAttachment;
+
     @JsonIgnore
     public boolean isRecipe(){
         return this.type.equals(TypeLaunch.RECIPE);

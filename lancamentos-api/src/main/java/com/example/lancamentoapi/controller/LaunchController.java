@@ -29,10 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -131,7 +128,7 @@ public class LaunchController {
     /*Como é um tratamento particular de Lançamento pode ser tratado no próprio controlador*/
     @ExceptionHandler({PersonInexistentOrInactiveException.class})
     public ResponseEntity<Object> handlePersonInexistentOrInactiveException(PersonInexistentOrInactiveException ex) {
-        String msgUser = messageSource.getMessage("person.inesistent-or-inactive", null, LocaleContextHolder.getLocale());
+        String msgUser = messageSource.getMessage("person.not-exists-or-inactive", null, LocaleContextHolder.getLocale());
         String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
