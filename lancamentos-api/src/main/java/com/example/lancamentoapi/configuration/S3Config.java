@@ -38,10 +38,6 @@ public class S3Config {
                 .build();
 
         log.info("*********BUCKET NAME = {} ***********", apiProperty.getS3().getBucket());
-        log.info("*********ID = {} ***********", apiProperty.getS3().getAccessKeyId());
-        log.info("*********KEY = {} ***********", apiProperty.getS3().getSecretAccessKey());
-        log.info("*********USERNAME = {} ***********", apiProperty.getMail().getUsername());
-
 
         //Criando e configurando o bucket de forma programada
         if (!amazonS3.doesBucketExistV2(apiProperty.getS3().getBucket())) {
