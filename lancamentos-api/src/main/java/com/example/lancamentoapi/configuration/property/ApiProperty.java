@@ -45,5 +45,7 @@ public class ApiProperty {
         private String accessKeyId;
 
         private String secretAccessKey;
+
+        private String bucket;
     }
 }
