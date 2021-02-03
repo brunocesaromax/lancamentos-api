@@ -73,7 +73,7 @@ public class LaunchService {
     public Launch save(Launch launch) {
         validatePerson(launch.getPerson());
 
-        if (StringUtils.hasText(launch.getAttachment())){
+        if (StringUtils.hasText(launch.getAttachment())) {
             s3.save(launch.getAttachment());
         }
 
@@ -91,8 +91,17 @@ public class LaunchService {
     public Launch update(Long id, Launch launch) {
         Launch launchBD = findExistentLaunch(id);
 
-        if (!launch.getPerson().equals(launchBD.getPerson())){
+        if (!launch.getPerson().equals(launchBD.getPerson())) {
             validatePerson(launch.getPerson());
+        }
+
+        if (StringUtils.isEmpty(launch.getAttachment())
+            && StringUtils.hasText(launchBD.getAttachment())) {
+            s3.delete(launchBD.getAttachment());
+
+        } else if (StringUtils.hasLength(launch.getAttachment())
+                   && !launch.getAttachment().equals(launchBD.getAttachment())) {
+            s3.update(launchBD.getAttachment(), launch.getAttachment());
         }
 
         BeanUtils.copyProperties(launch, launchBD, Launch_.ID);
@@ -100,11 +109,11 @@ public class LaunchService {
     }
 
     private void validatePerson(Person person) {
-        if (Optional.ofNullable(person).map(Person::getId).isPresent()){
+        if (Optional.ofNullable(person).map(Person::getId).isPresent()) {
             person = personService.findById(person.getId());
         }
 
-        if (!Optional.ofNullable(person).isPresent() || person.isInactive()){
+        if (!Optional.ofNullable(person).isPresent() || person.isInactive()) {
             throw new PersonInexistentOrInactiveException();
         }
     }
@@ -112,9 +121,9 @@ public class LaunchService {
     private Launch findExistentLaunch(Long id) {
         Optional<Launch> launchBD = launchRepository.findById(id);
 
-        if (!launchBD.isPresent()){
+        if (!launchBD.isPresent()) {
             throw new IllegalArgumentException();
-        }else{
+        } else {
             return launchBD.get();
         }
     }
@@ -134,16 +143,16 @@ public class LaunchService {
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
-//    @Scheduled(fixedDelay = 1000 * 60 * 30) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
+    //    @Scheduled(fixedDelay = 1000 * 60 * 30) //Evita enfileiramento de execuções do método, somente quando uma execução termina que outra começa
     @Scheduled(cron = "0 0 6 * * *") // SS MM HH DAY_OF_MONTH MONTH DAY_OF_WEEK
     public void alertOverdueLaunchs() {
-        if (log.isDebugEnabled()){
+        if (log.isDebugEnabled()) {
             log.debug("Preparando envio de e-mails de aviso de lançamentos vencidos.");
         }
 
         List<Launch> overdueLaunchs = launchRepository.findByDueDateLessThanEqualAndPaydayIsNull(LocalDate.now());
 
-        if (overdueLaunchs.isEmpty()){
+        if (overdueLaunchs.isEmpty()) {
             log.info("Sem lançamentos vencidos para aviso.");
             return;
         }
@@ -152,7 +161,7 @@ public class LaunchService {
 
         List<User> users = userRepository.findByPermissionsDescription(RECIPIENTS);
 
-        if (users.isEmpty()){
+        if (users.isEmpty()) {
             log.warn("Existem lançamentos vencidos, mas o sistema não encontrou destinatários.");
             return;
         }
