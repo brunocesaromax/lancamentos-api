@@ -13,7 +13,7 @@ import com.example.lancamentoapi.repository.UserRepository;
 import com.example.lancamentoapi.repository.filter.LaunchFilter;
 import com.example.lancamentoapi.repository.projection.LaunchSummary;
 import com.example.lancamentoapi.service.exception.PersonInexistentOrInactiveException;
-import com.example.lancamentoapi.storage.S3;
+//import com.example.lancamentoapi.storage.S3;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JRException;
@@ -47,7 +47,7 @@ public class LaunchService {
     private final UserRepository userRepository;
 
     private final Mailer mailer;
-    private final S3 s3;
+//    private final S3 s3;
 
     private PersonService personService;
 
@@ -73,9 +73,9 @@ public class LaunchService {
     public Launch save(Launch launch) {
         validatePerson(launch.getPerson());
 
-        if (StringUtils.hasText(launch.getAttachment())) {
-            s3.save(launch.getAttachment());
-        }
+//        if (StringUtils.hasText(launch.getAttachment())) {
+//            s3.save(launch.getAttachment());
+//        }
 
         return launchRepository.save(launch);
     }
@@ -97,11 +97,11 @@ public class LaunchService {
 
         if (StringUtils.isEmpty(launch.getAttachment())
             && StringUtils.hasText(launchBD.getAttachment())) {
-            s3.delete(launchBD.getAttachment());
+//            s3.delete(launchBD.getAttachment());
 
         } else if (StringUtils.hasText(launch.getAttachment())
                    && !launch.getAttachment().equals(launchBD.getAttachment())) {
-            s3.update(launchBD.getAttachment(), launch.getAttachment());
+//            s3.update(launchBD.getAttachment(), launch.getAttachment());
         }
 
         BeanUtils.copyProperties(launch, launchBD, Launch_.ID);
