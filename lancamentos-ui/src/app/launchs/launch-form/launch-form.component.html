@@ -15,7 +15,7 @@
                     [inline]="false"
                     [readonlyInput]="false"
                     [showIcon]="true"
-                    [locale]="ptBrLocale"
+                    appLocale
                     name="dueDate"
                     formControlName="dueDate"
         ></p-calendar>
@@ -28,7 +28,7 @@
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{form.get('type').value === 'RECIPE' ? 'Recebimento' : 'Pagamento'}} </label>
-        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="payday" formControlName="payday" [locale]="ptBrLocale"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="payday" formControlName="payday" appLocale></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">

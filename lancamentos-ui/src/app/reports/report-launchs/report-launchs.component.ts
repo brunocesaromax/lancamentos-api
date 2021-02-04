@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportLaunchsComponent implements OnInit {
 
-  constructor() { }
+  startDate: Date;
+  endDate: Date;
+
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  generate() {
+    console.log(this.startDate);
+    console.log(this.endDate);
   }
 
 }
