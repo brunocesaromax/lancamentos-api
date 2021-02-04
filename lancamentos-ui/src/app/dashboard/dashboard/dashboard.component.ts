@@ -9,27 +9,14 @@ import { DashboardService } from '../dashboard.service';
 export class DashboardComponent implements OnInit {
 
   pieChartData: any;
-  lineChartData = {
-    labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [4, 10, 18, 5, 1, 20, 3],
-        borderColor: '#3366CC'
-      },
-      {
-        label: 'Despesas',
-        data: [10, 15, 8, 5, 1, 7, 9],
-        borderColor: '#D62B00'
-      }
-    ]
-  };
+  lineChartData: any;
 
   constructor(private dashboardService: DashboardService) {
   }
 
   ngOnInit() {
     this.configurePieChart();
+    this.configureLineChart();
   }
 
   configurePieChart() {
@@ -48,4 +35,61 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  configureLineChart() {
+    this.dashboardService.launchsByDay()
+      .then(response => {
+        const daysOfMonth = this.configureDaysOfMonth();
+        const recipeTotals = this.totalByDayOfMonth(response.filter(d => d.type === 'RECIPE'), daysOfMonth);
+        const expenseTotals = this.totalByDayOfMonth(response.filter(d => d.type === 'EXPENSE'), daysOfMonth);
+
+        this.lineChartData = {
+          labels: daysOfMonth,
+          datasets: [
+            {
+              label: 'Receitas',
+              data: recipeTotals,
+              borderColor: '#3366CC'
+            },
+            {
+              label: 'Despesas',
+              data: expenseTotals,
+              borderColor: '#D62B00'
+            }
+          ]
+        };
+      });
+  }
+
+  private configureDaysOfMonth() {
+    const referenceMonth = new Date();
+    referenceMonth.setMonth(referenceMonth.getMonth() + 1);
+    referenceMonth.setDate(0); // Pegando último dia do mês anterior
+
+    const quantityDays = referenceMonth.getDate();
+    const days: number[] = [];
+
+    for (let i = 1; i <= quantityDays; i++) {
+      days.push(i);
+    }
+
+    return days;
+  }
+
+  private totalByDayOfMonth(data, daysOfMonth) {
+    const totals: number[] = [];
+    for (const day of daysOfMonth) {
+      let total = 0;
+
+      for (const d of data) {
+        if (d.day.getDate() === day) {
+          total = d.total;
+          break;
+        }
+      }
+
+      totals.push(total);
+    }
+
+    return totals;
+  }
 }
