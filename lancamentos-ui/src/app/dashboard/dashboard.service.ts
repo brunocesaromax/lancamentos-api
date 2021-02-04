@@ -15,16 +15,17 @@ export class DashboardService {
   launchsByCategory(): Promise<Array<any>> {
     return this.httpClient.get(`${this.launchsUrl}/statistics/category`)
       .toPromise()
-      .then((response: any) => response.json());
+      .then((response: any) => {
+        return response;
+      });
   }
 
   launchsByDay(): Promise<Array<any>> {
     return this.httpClient.get(`${this.launchsUrl}/statistics/day`)
       .toPromise()
       .then((response: any) => {
-        const data = response.json();
-        this.convertStringsToDates(data);
-        return data;
+        this.convertStringsToDates(response);
+        return response;
       });
   }
 
