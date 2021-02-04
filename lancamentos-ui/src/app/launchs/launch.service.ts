@@ -14,9 +14,7 @@ export class LaunchFilter {
   pageSize = 4;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LaunchService {
 
   launchsUrl: string;

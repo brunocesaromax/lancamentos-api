@@ -11,9 +11,7 @@ export class PersonFilter {
   pageSize = 2;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PersonService {
 
   personsUrl: string;

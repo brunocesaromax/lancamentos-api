@@ -7,9 +7,7 @@ import {environment} from '../../environments/environment';
 
 export const TOKEN_NAME = 'token';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   oauthTokenUrl: string;
