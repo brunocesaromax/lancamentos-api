@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportsService } from '../reports.service';
 
 @Component({
   selector: 'app-report-launchs',
@@ -10,15 +11,17 @@ export class ReportLaunchsComponent implements OnInit {
   startDate: Date;
   endDate: Date;
 
-  constructor() {
+  constructor(private reportsService: ReportsService) {
   }
 
   ngOnInit() {
   }
 
   generate() {
-    console.log(this.startDate);
-    console.log(this.endDate);
+    this.reportsService.reportLaunchsByPerson(this.startDate, this.endDate)
+      .then(report => {
+        const url = window.URL.createObjectURL(report);
+        window.open(url);
+      });
   }
-
 }

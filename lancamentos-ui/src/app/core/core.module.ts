@@ -16,6 +16,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { LaunchService } from '../launchs/launch.service';
 import { PersonService } from '../persons/person.service';
 import { CategoryService } from '../categories/category.service';
+import { ReportsService } from '../reports/reports.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CategoryService } from '../categories/category.service';
     PersonService,
     CategoryService,
     DashboardService,
+    ReportsService,
     ErrorHandlerService,
 
     AuthService,
