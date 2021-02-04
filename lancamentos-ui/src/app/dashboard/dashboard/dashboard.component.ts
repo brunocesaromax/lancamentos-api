@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { CurrencyPipe } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,10 +30,13 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(private dashboardService: DashboardService,
-              private currencyPipe: CurrencyPipe) {
+              private currencyPipe: CurrencyPipe,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('Dashboard');
+
     this.configurePieChart();
     this.configureLineChart();
   }

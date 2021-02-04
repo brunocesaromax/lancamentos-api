@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {Observable, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export const TOKEN_NAME = 'token';
 
@@ -45,9 +45,12 @@ export class AuthService {
   }
 
   getNewAccessToken() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers = headers.append('Authorization', 'Basic YW5ndWxhcjoxMjM0NTY=');
+    // Removendo atual token inválido, para não envia-lo na requisição
+    this.clearAccessToken();
+
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic YW5ndWxhcjoxMjM0NTY=');
 
     const body = 'grant_type=refresh_token';
 

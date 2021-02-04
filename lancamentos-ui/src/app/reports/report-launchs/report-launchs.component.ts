@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportsService } from '../reports.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-report-launchs',
@@ -11,10 +12,12 @@ export class ReportLaunchsComponent implements OnInit {
   startDate: Date;
   endDate: Date;
 
-  constructor(private reportsService: ReportsService) {
+  constructor(private reportsService: ReportsService,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('Relatório');
   }
 
   generate() {
