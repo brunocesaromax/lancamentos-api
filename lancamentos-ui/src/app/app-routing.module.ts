@@ -6,7 +6,9 @@ import { NotAuthorizedComponent } from './core/not-authorized/not-authorized.com
 const routes: Routes = [
   {path: 'launchs', loadChildren: () => import('./launchs/launchs.module').then(m => m.LaunchsModule)},
   {path: 'persons', loadChildren: () => import('./persons/persons.module').then(m => m.PersonsModule)},
-  {path: '', redirectTo: 'launchs', pathMatch: 'full'},
+  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
+
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'page-not-found', component: PageNotFoundComponent},
   {path: 'not-authorized', component: NotAuthorizedComponent},
   // ** = Qualquer rota não encontrada

@@ -23,7 +23,7 @@ export class LoginFormComponent implements OnInit {
   login() {
     this.authService.login(this.username, this.password)
       .subscribe(() => {
-        this.router.navigate(['/launchs']);
+        this.router.navigate(['/dashboard']);
       }, error => {
         this.password = '';
         this.errorHandlerService.handle(error);
