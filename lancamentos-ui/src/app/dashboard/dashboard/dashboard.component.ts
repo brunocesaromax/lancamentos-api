@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,24 @@ export class DashboardComponent implements OnInit {
   pieChartData: any;
   lineChartData: any;
 
-  constructor(private dashboardService: DashboardService) {
+  // Para mais detalhes verificar documentação do Chart.js
+  options = {
+    tooltips: {
+      callbacks: {
+        // Posição do valor a ser exibido e o dataset
+        label: (tooltipItem, data) => {
+          const dataset = data.datasets[tooltipItem.datasetIndex];
+          const value = dataset.data[tooltipItem.index];
+          const label = dataset.label ? (dataset.label + ': ') : '';
+
+          return label + this.currencyPipe.transform(value, 'BRL');
+        }
+      }
+    }
+  };
+
+  constructor(private dashboardService: DashboardService,
+              private currencyPipe: CurrencyPipe) {
   }
 
   ngOnInit() {
