@@ -19,7 +19,7 @@ export class LaunchsSearchComponent implements OnInit {
   totalElements = 0;
   filter = new LaunchFilter();
   launchs = [];
-  headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', ''];
+  headers = ['Pessoa', 'Descrição', 'Vencimento', 'Pagamento', 'Valor', 'Ações'];
 
   @ViewChild('table', {static: true}) table;
 

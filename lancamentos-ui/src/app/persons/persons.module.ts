@@ -16,31 +16,33 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {InputMaskModule} from 'primeng/inputmask';
 import {SharedModule} from '../shared/shared.module';
 import {PersonsRoutingModule} from './persons-routing.module';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
     PersonsSearchComponent,
     PersonFormComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SelectButtonModule,
-    InputTextModule,
-    ButtonModule,
-    TableModule,
-    TooltipModule,
-    FormsModule,
-    MessageModule,
-    InputTextareaModule,
-    CalendarModule,
-    SelectButtonModule,
-    DropdownModule,
-    CurrencyMaskModule,
-    InputMaskModule,
-    SharedModule,
-    PersonsRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        SelectButtonModule,
+        InputTextModule,
+        ButtonModule,
+        TableModule,
+        TooltipModule,
+        FormsModule,
+        MessageModule,
+        InputTextareaModule,
+        CalendarModule,
+        SelectButtonModule,
+        DropdownModule,
+        CurrencyMaskModule,
+        InputMaskModule,
+        SharedModule,
+        PersonsRoutingModule,
+        PanelModule
+    ],
   exports: []
 })
 export class PersonsModule { }

@@ -17,7 +17,7 @@ export class PersonsSearchComponent implements OnInit {
   totalElements = 0;
   filter = new PersonFilter();
   persons: Person[] = [];
-  headers = ['nome', 'cidade', 'estado', 'status', ''];
+  headers = ['nome', 'cidade', 'estado', 'status', 'Ações'];
 
   @ViewChild('table', {static: true}) table;
 

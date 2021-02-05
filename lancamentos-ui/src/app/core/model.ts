@@ -8,11 +8,19 @@ export class Address {
   state: string;
 }
 
+export class Contact {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+}
+
 export class Person {
   id: number;
   name: string;
   active = true;
   address = new Address();
+  contacts = new Array<Contact>();
 }
 
 export class Category {
