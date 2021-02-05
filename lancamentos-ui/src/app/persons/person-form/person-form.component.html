@@ -164,7 +164,7 @@
 <p-dialog header="Novo Contato"
           [(visible)]="showContactForm"
           modal="modal" *ngIf="showContactForm">
-  <form #formContact="ngForm">
+  <form #formContact="ngForm" (ngSubmit)="addContact(formContact)">
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>
       <input pInputText type="text" name="name"
@@ -185,8 +185,10 @@
     <div class="ui-g-12 ui-fluid">
       <label>Telefone</label>
       <p-inputMask name="phone" [(ngModel)]="contact.phone"
-                   mask="(99) 99999-999?9">
+                   mask="(99) 99999-999?9" required
+                   #contactPhone="ngModel">
       </p-inputMask>
+      <app-message [control]="contactPhone" error="required" text="Informe o telefone"></app-message>
     </div>
 
     <div class="ui-g-12">

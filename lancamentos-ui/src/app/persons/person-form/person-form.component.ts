@@ -80,6 +80,16 @@ export class PersonFormComponent implements OnInit {
     this.showContactForm = true;
   }
 
+  addContact(form: NgForm) {
+    this.person.contacts.push(this.cloneContact(this.contact));
+    this.showContactForm = false;
+    form.reset();
+  }
+
+  cloneContact(contact: Contact): Contact {
+    return new Contact(contact.id, contact.name, contact.email, contact.phone);
+  }
+
   private loadPerson(id: number) {
     this.personService.findById(id)
       .subscribe(person => {
