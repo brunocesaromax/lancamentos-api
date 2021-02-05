@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Launch, Person} from '../../core/model';
-import {ErrorHandlerService} from '../../core/error-handler.service';
-import {PersonService} from '../person.service';
-import {ToastyService} from 'ng2-toasty';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Title} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Person } from '../../core/model';
+import { ErrorHandlerService } from '../../core/error-handler.service';
+import { PersonService } from '../person.service';
+import { ToastyService } from 'ng2-toasty';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-person-form',
@@ -14,6 +14,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class PersonFormComponent implements OnInit {
 
+  showContactForm = false;
   person = new Person();
 
   constructor(private errorHandlerService: ErrorHandlerService,
@@ -24,6 +25,10 @@ export class PersonFormComponent implements OnInit {
               private title: Title) {
   }
 
+  get isEdit() {
+    return Boolean(this.person.id);
+  }
+
   ngOnInit() {
     this.title.setTitle('Nova pessoa');
 
@@ -32,10 +37,6 @@ export class PersonFormComponent implements OnInit {
     if (personId) {
       this.loadPerson(personId);
     }
-  }
-
-  get isEdit() {
-    return Boolean(this.person.id);
   }
 
   save(launchForm: NgForm) {
@@ -71,6 +72,10 @@ export class PersonFormComponent implements OnInit {
   new(personForm: NgForm) {
     personForm.reset();
     this.router.navigate(['/persons/new']);
+  }
+
+  buildNewContact() {
+    this.showContactForm = true;
   }
 
   private loadPerson(id: number) {
