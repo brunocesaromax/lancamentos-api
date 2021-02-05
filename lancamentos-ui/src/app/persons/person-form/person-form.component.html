@@ -163,5 +163,34 @@
 
 <p-dialog header="Novo Contato"
           [(visible)]="showContactForm"
-          modal="modal">
+          modal="modal" *ngIf="showContactForm">
+  <form #formContact="ngForm">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText type="text" name="name"
+             required [(ngModel)]="contact.name"
+             #contactName="ngModel"/>
+      <app-message [control]="contactName" error="required" text="Informe o nome"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>E-mail</label>
+      <input pInputText type="text" name="email"
+             required email [(ngModel)]="contact.email"
+             #contactEmail="ngModel"/>
+      <app-message [control]="contactEmail" error="required" text="Informe o e-mail"></app-message>
+      <app-message [control]="contactEmail" error="email" text="Informe um e-mail válido"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Telefone</label>
+      <p-inputMask name="phone" [(ngModel)]="contact.phone"
+                   mask="(99) 99999-999?9">
+      </p-inputMask>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Confirmar" [disabled]="formContact.invalid"></button>
+    </div>
+  </form>
 </p-dialog>

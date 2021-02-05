@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from '../../core/model';
+import { Contact, Person } from '../../core/model';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PersonService } from '../person.service';
 import { ToastyService } from 'ng2-toasty';
@@ -16,6 +16,7 @@ export class PersonFormComponent implements OnInit {
 
   showContactForm = false;
   person = new Person();
+  contact: Contact;
 
   constructor(private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
@@ -75,6 +76,7 @@ export class PersonFormComponent implements OnInit {
   }
 
   buildNewContact() {
+    this.contact = new Contact();
     this.showContactForm = true;
   }
 
