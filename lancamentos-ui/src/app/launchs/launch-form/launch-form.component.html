@@ -115,7 +115,7 @@
                 type="submit"
                 label="Salvar"
                 style="margin:5px"
-                [disabled]="form.invalid"></button>
+                [disabled]="form.invalid || uploadStarted"></button>
         <button pButton type="button" label="Novo" (click)="new()" class="ui-button-info"></button>
         <a style="margin:10px" routerLink="/launchs" href="javascript:;">Voltar para a pesquisa</a>
       </div>
