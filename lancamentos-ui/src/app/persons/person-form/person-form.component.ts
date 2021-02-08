@@ -14,10 +14,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class PersonFormComponent implements OnInit {
 
-  showContactForm = false;
   person = new Person();
-  contact: Contact;
-  contactIndex: number;
 
   constructor(private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
@@ -74,32 +71,6 @@ export class PersonFormComponent implements OnInit {
   new(personForm: NgForm) {
     personForm.reset();
     this.router.navigate(['/persons/new']);
-  }
-
-  buildNewContact() {
-    this.contact = new Contact();
-    this.contactIndex = this.person.contacts.length;
-    this.showContactForm = true;
-  }
-
-  addContact(form: NgForm) {
-    this.person.contacts[this.contactIndex] = this.cloneContact(this.contact);
-    this.showContactForm = false;
-    form.reset();
-  }
-
-  cloneContact(contact: Contact): Contact {
-    return new Contact(contact.id, contact.name, contact.email, contact.phone);
-  }
-
-  editContact(contact: Contact, index: number) {
-    this.contact = this.cloneContact(contact);
-    this.showContactForm = true;
-    this.contactIndex = index;
-  }
-
-  deleteContact(index: number) {
-    this.person.contacts.splice(index, 1);
   }
 
   private loadPerson(id: number) {

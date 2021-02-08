@@ -18,11 +18,13 @@ import {SharedModule} from '../shared/shared.module';
 import {PersonsRoutingModule} from './persons-routing.module';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { PersonRegisterContactComponent } from './person-register-contact/person-register-contact.component';
 
 @NgModule({
   declarations: [
     PersonsSearchComponent,
     PersonFormComponent,
+    PersonRegisterContactComponent,
   ],
   imports: [
     CommonModule,
