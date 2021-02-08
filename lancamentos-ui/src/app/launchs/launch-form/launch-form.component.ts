@@ -45,6 +45,16 @@ export class LaunchFormComponent implements OnInit {
     return this.launchService.urlUploadAttachment();
   }
 
+  get attachmentName() {
+    const attachmentName = this.form.get('attachment').value;
+
+    if (attachmentName) {
+      return attachmentName.substring(attachmentName.indexOf('_') + 1, attachmentName.length);
+    }
+
+    return '';
+  }
+
   ngOnInit() {
     this.configureForm();
     this.title.setTitle('Novo lançamento');
@@ -75,7 +85,9 @@ export class LaunchFormComponent implements OnInit {
         id: [null, Validators.required],
         name: []
       }),
-      observation: []
+      observation: [],
+      attachment: [],
+      urlAttachment: []
     });
   }
 
@@ -175,6 +187,15 @@ export class LaunchFormComponent implements OnInit {
     if (event && event.xhr) {
       event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem(TOKEN_NAME));
     }
+  }
+
+  finishUpload(event: any) {
+    const attachment = event.originalEvent.body;
+
+    this.form.patchValue({
+      attachment: attachment.name,
+      urlAttachment: attachment.url
+    });
   }
 
   validateFileSize(event: any, maxFileSize: number) {

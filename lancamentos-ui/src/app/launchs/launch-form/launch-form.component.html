@@ -91,14 +91,20 @@
         <label>Observação </label>
         <textarea pInputTextarea rows="3" name="observation" formControlName="observation"></textarea>
       </div>
-      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid">
+      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid" *ngIf="!form.get('attachment').value">
         <p-fileUpload name="attachment" mode="basic" auto="true" maxFileSize="10485760"
                       chooseLabel="Anexar" accept="image/*,application/*"
                       [url]="urlUploadAttachment"
                       (onBeforeUpload)="beforeUploadAttachment($event)"
+                      (onUpload)="finishUpload($event)"
                       #attachment
                       (onSelect)="validateFileSize($event, attachment.maxFileSize)">
         </p-fileUpload>
+      </div>
+
+      <div class="ui-g-12 ui-fluid" *ngIf="form.get('attachment').value" dir="rtl">
+        <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
+           [href]="form.get('urlAttachment').value">{{ attachmentName}}</a>
       </div>
 
       <div class="ui-g-12">

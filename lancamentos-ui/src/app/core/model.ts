@@ -44,4 +44,6 @@ export class Launch {
   type = 'RECIPE';
   person = new Person();
   category = new Category();
+  attachment: string;
+  urlAttachment: string;
 }
