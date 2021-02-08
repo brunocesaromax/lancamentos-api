@@ -116,14 +116,14 @@
                   </tr>
                 </ng-template>
 
-                <ng-template pTemplate="body" let-contact>
+                <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                   <tr>
                     <td>{{contact.name}}</td>
                     <td>{{contact.email}}</td>
                     <td>{{contact.phone}}</td>
                     <td class="col-actions">
                       <a pButton class="edit-button" pTooltip="Editar"
-                         tooltipPosition="top" style="margin:5px">
+                         tooltipPosition="top" style="margin:5px" (click)="editContact(contact, rowIndex)">
                         <i class="pi pi-pencil"></i></a>
                       <button pButton class="trash-button"
                               pTooltip="Excluir"
