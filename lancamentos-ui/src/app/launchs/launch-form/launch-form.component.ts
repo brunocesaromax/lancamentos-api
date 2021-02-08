@@ -203,4 +203,8 @@ export class LaunchFormComponent implements OnInit {
       this.toastyService.error('Envie um anexo de no máximo 10MB');
     }
   }
+
+  errorUpload(event: any) {
+    this.toastyService.error('Erro ao tentar enviar anexo');
+  }
 }

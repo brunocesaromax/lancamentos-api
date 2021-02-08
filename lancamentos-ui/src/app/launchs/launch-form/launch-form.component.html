@@ -98,7 +98,8 @@
                       (onBeforeUpload)="beforeUploadAttachment($event)"
                       (onUpload)="finishUpload($event)"
                       #attachment
-                      (onSelect)="validateFileSize($event, attachment.maxFileSize)">
+                      (onSelect)="validateFileSize($event, attachment.maxFileSize)"
+                      (onError)="errorUpload($event)">
         </p-fileUpload>
       </div>
 
