@@ -98,6 +98,10 @@ export class PersonFormComponent implements OnInit {
     this.contactIndex = index;
   }
 
+  deleteContact(index: number) {
+    this.person.contacts.splice(index, 1);
+  }
+
   private loadPerson(id: number) {
     this.personService.findById(id)
       .subscribe(person => {
