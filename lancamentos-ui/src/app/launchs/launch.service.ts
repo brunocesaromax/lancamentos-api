@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import {Launch} from '../core/model';
-import {LaunchHttp} from '../security/lauch-http.service';
-import {environment} from '../../environments/environment';
+import { Launch } from '../core/model';
+import { LaunchHttp } from '../security/lauch-http.service';
+import { environment } from '../../environments/environment';
 
 export class LaunchFilter {
   description: string;
@@ -72,5 +72,9 @@ export class LaunchService {
         launch.dueDate = moment(launch.dueDate).toDate();
       }
     });
+  }
+
+  urlUploadAttachment(): string {
+    return `${this.launchsUrl}/attachment`;
   }
 }

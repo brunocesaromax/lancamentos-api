@@ -16,32 +16,34 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {InputMaskModule} from 'primeng/inputmask';
 import {SharedModule} from '../shared/shared.module';
 import {LaunchsRoutingModule} from './launchs-routing.module';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
     LaunchFormComponent,
     LaunchsSearchComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SelectButtonModule,
-    InputTextModule,
-    ButtonModule,
-    TableModule,
-    TooltipModule,
-    FormsModule,
-    MessageModule,
-    InputTextareaModule,
-    CalendarModule,
-    SelectButtonModule,
-    DropdownModule,
-    CurrencyMaskModule,
-    InputMaskModule,
-    SharedModule,
-    LaunchsRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SelectButtonModule,
+        InputTextModule,
+        ButtonModule,
+        TableModule,
+        TooltipModule,
+        FormsModule,
+        MessageModule,
+        InputTextareaModule,
+        CalendarModule,
+        SelectButtonModule,
+        DropdownModule,
+        CurrencyMaskModule,
+        InputMaskModule,
+        SharedModule,
+        LaunchsRoutingModule,
+        FileUploadModule
+    ],
   exports: []
 })
 export class LaunchsModule { }

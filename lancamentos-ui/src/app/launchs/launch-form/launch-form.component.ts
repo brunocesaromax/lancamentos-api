@@ -8,6 +8,7 @@ import { LaunchService } from '../launch.service';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { TOKEN_NAME } from '../../security/auth.service';
 
 @Component({
   selector: 'app-launch-form',
@@ -38,6 +39,10 @@ export class LaunchFormComponent implements OnInit {
 
   get isEdit() {
     return Boolean(this.form.get('id').value);
+  }
+
+  get urlUploadAttachment() {
+    return this.launchService.urlUploadAttachment();
   }
 
   ngOnInit() {
@@ -164,5 +169,17 @@ export class LaunchFormComponent implements OnInit {
 
   updateEditTitle() {
     this.title.setTitle(`Edição de lançamento: ${this.form.get('description').value}`);
+  }
+
+  beforeUploadAttachment(event) {
+    if (event && event.xhr) {
+      event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem(TOKEN_NAME));
+    }
+  }
+
+  validateFileSize(event: any, maxFileSize: number) {
+    if (event.files[0].size > maxFileSize) {
+      this.toastyService.error('Envie um anexo de no máximo 10MB');
+    }
   }
 }

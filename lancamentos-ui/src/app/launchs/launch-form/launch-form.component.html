@@ -28,7 +28,8 @@
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{form.get('type').value === 'RECIPE' ? 'Recebimento' : 'Pagamento'}} </label>
-        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="payday" formControlName="payday" appLocale></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="payday" formControlName="payday"
+                    appLocale></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -90,6 +91,16 @@
         <label>Observação </label>
         <textarea pInputTextarea rows="3" name="observation" formControlName="observation"></textarea>
       </div>
+      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid">
+        <p-fileUpload name="attachment" mode="basic" auto="true" maxFileSize="10485760"
+                      chooseLabel="Anexar" accept="image/*,application/*"
+                      [url]="urlUploadAttachment"
+                      (onBeforeUpload)="beforeUploadAttachment($event)"
+                      #attachment
+                      (onSelect)="validateFileSize($event, attachment.maxFileSize)">
+        </p-fileUpload>
+      </div>
+
       <div class="ui-g-12">
         <button pButton
                 type="submit"
