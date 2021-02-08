@@ -216,4 +216,11 @@ export class LaunchFormComponent implements OnInit {
     this.toastyService.error('Erro ao tentar enviar anexo');
     this.uploadStarted = false;
   }
+
+  deleteAttachment() {
+    this.form.patchValue({
+      attachment: null,
+      urlAttachment: null
+    });
+  }
 }

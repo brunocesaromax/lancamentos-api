@@ -105,7 +105,11 @@
         <p-progressSpinner [style]="{width: '25px', height: '25px'}" [hidden]="!uploadStarted"></p-progressSpinner>
       </div>
 
-      <div class="ui-g-12 ui-fluid" *ngIf="form.get('attachment').value" dir="rtl">
+      <div class="ui-g-12" *ngIf="form.get('attachment').value" dir="rtl">
+        <button pButton type="button" class="ui-button-danger btn-del-attachment" pTooltip="Remover anexo"
+                tooltipPosition="top" (click)="deleteAttachment()">
+          <i class="pi pi-trash"></i>
+        </button>
         <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
            [href]="form.get('urlAttachment').value">{{ attachmentName}}</a>
       </div>
@@ -121,5 +125,4 @@
       </div>
     </div>
   </form>
-  {{form.value | json}}
 </div>
