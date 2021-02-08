@@ -26,6 +26,8 @@ export class LaunchFormComponent implements OnInit {
 
   form: FormGroup;
 
+  uploadStarted = false;
+
   constructor(private categoryService: CategoryService,
               private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
@@ -187,6 +189,8 @@ export class LaunchFormComponent implements OnInit {
     if (event && event.xhr) {
       event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem(TOKEN_NAME));
     }
+
+    this.uploadStarted = true;
   }
 
   finishUpload(event: any) {
@@ -196,15 +200,20 @@ export class LaunchFormComponent implements OnInit {
       attachment: attachment.name,
       urlAttachment: attachment.url
     });
+
+    this.uploadStarted = false;
   }
 
   validateFileSize(event: any, maxFileSize: number) {
     if (event.files[0].size > maxFileSize) {
       this.toastyService.error('Envie um anexo de no máximo 10MB');
     }
+
+    this.uploadStarted = false;
   }
 
   errorUpload(event: any) {
     this.toastyService.error('Erro ao tentar enviar anexo');
+    this.uploadStarted = false;
   }
 }

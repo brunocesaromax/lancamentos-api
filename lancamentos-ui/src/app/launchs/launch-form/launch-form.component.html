@@ -99,8 +99,10 @@
                       (onUpload)="finishUpload($event)"
                       #attachment
                       (onSelect)="validateFileSize($event, attachment.maxFileSize)"
-                      (onError)="errorUpload($event)">
+                      (onError)="errorUpload($event)"
+                      [hidden]="uploadStarted">
         </p-fileUpload>
+        <p-progressSpinner [style]="{width: '25px', height: '25px'}" [hidden]="!uploadStarted"></p-progressSpinner>
       </div>
 
       <div class="ui-g-12 ui-fluid" *ngIf="form.get('attachment').value" dir="rtl">
