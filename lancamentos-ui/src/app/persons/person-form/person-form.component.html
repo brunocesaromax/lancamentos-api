@@ -89,7 +89,6 @@
         <p-dropdown placeholder="Selecione..." [autoWidth]="false"
                     [filter]="true" [options]="cities" [(ngModel)]="person.address.city.id"
                     name="city" #city="ngModel" required [disabled]="!stateSelected" emptyFilterMessage="Nenhum resultado encontrado"></p-dropdown>
-
         <app-message [control]="city"
                      text="Informe a cidade"
                      error="required"

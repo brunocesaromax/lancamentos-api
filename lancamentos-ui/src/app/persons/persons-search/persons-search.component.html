@@ -34,8 +34,8 @@
         <ng-template pTemplate="body" let-person>
           <tr>
             <td>{{person.name}}</td>
-            <td>{{person.address.city}}</td>
-            <td>{{person.address.state}}</td>
+            <td>{{person.address.city?.name}}</td>
+            <td>{{person.address.city?.state.name}}</td>
             <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'"
                    tooltipPosition="top" (click)="changeStatus(person)">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-actions">
