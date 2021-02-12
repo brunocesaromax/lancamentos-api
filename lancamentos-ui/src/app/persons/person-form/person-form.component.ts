@@ -100,6 +100,14 @@ export class PersonFormComponent implements OnInit {
     this.personService.findById(id)
       .subscribe(person => {
           this.person = person;
+
+          this.stateSelected = (this.person.address.city) ?
+            this.person.address.city.state.id : null;
+
+          if (this.stateSelected) {
+            this.loadCities();
+          }
+
           this.updateEditTitle();
         },
         error => this.errorHandlerService.handle(error));
