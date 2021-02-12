@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from '../../core/model';
+import { Person, State } from '../../core/model';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PersonService } from '../person.service';
 import { ToastyService } from 'ng2-toasty';
@@ -16,6 +16,8 @@ export class PersonFormComponent implements OnInit {
 
   person = new Person();
   states: any[];
+  cities: any[];
+  stateSelected: number;
 
   constructor(private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
@@ -45,6 +47,15 @@ export class PersonFormComponent implements OnInit {
     this.personService.listStates()
       .subscribe(listStates => {
         this.states = listStates.map(uf => ({label: uf.name, value: uf.id}));
+      }, error => {
+        this.errorHandlerService.handle(error);
+      });
+  }
+
+  loadCities() {
+    this.personService.listCities(this.stateSelected)
+      .subscribe(listCities => {
+        this.cities = listCities.map(city => ({label: city.name, value: city.id}));
       }, error => {
         this.errorHandlerService.handle(error);
       });

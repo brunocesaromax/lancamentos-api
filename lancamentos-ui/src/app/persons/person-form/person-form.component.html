@@ -75,20 +75,15 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Estado</label>
-
         <p-dropdown placeholder="Selecione..." [autoWidth]="false"
-                    [filter]="true" [options]="states"></p-dropdown>
+                    [filter]="true" [options]="states" [(ngModel)]="stateSelected" name="stateSelected"
+                    (onChange)="loadCities()"></p-dropdown>
       </div>
 
       <div class="ui-g-6 ui-fluid">
         <label>Cidade</label>
-        <input pInputText type="text"
-               name="city" [(ngModel)]="person.address.city" #city="ngModel"
-               required/>
-        <app-message [control]="city"
-                     text="Informe a cidade"
-                     error="required"
-        ></app-message>
+        <p-dropdown placeholder="Selecione..." [autoWidth]="false"
+                    [filter]="true" [options]="cities"></p-dropdown>
       </div>
 
       <div class="ui-g-12">
