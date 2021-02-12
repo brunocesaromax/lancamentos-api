@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact, Person } from '../../core/model';
+import { Person } from '../../core/model';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PersonService } from '../person.service';
 import { ToastyService } from 'ng2-toasty';
@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser';
 export class PersonFormComponent implements OnInit {
 
   person = new Person();
+  states: any[];
 
   constructor(private errorHandlerService: ErrorHandlerService,
               private personService: PersonService,
@@ -33,9 +34,20 @@ export class PersonFormComponent implements OnInit {
 
     const personId = this.activatedRoute.snapshot.params.id;
 
+    this.loadStates();
+
     if (personId) {
       this.loadPerson(personId);
     }
+  }
+
+  loadStates() {
+    this.personService.listStates()
+      .subscribe(listStates => {
+        this.states = listStates.map(uf => ({label: uf.name, value: uf.id}));
+      }, error => {
+        this.errorHandlerService.handle(error);
+      });
   }
 
   save(launchForm: NgForm) {
