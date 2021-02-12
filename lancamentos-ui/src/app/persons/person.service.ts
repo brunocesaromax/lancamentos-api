@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Person} from '../core/model';
-import {LaunchHttp} from '../security/lauch-http.service';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { City, Person, State } from '../core/model';
+import { LaunchHttp } from '../security/lauch-http.service';
+import { environment } from '../../environments/environment';
 
 export class PersonFilter {
   name = null;
@@ -15,9 +15,13 @@ export class PersonFilter {
 export class PersonService {
 
   personsUrl: string;
+  statesUrl: string;
+  citiesUrl: string;
 
   constructor(private httpClient: LaunchHttp) {
     this.personsUrl = `${environment.apiUrl}/persons`;
+    this.statesUrl = `${environment.apiUrl}/states`;
+    this.citiesUrl = `${environment.apiUrl}/cities`;
   }
 
   search(filter: PersonFilter): Observable<any> {
@@ -56,5 +60,16 @@ export class PersonService {
 
   findById(id: number): Observable<any> {
     return this.httpClient.get(`${this.personsUrl}/${id}`);
+  }
+
+  listStates(): Observable<State[]> {
+    return this.httpClient.get(this.statesUrl);
+  }
+
+  listCities(stateId: number): Observable<City[]> {
+    let params = new HttpParams();
+    params = params.set('stateId', stateId.toString());
+
+    return this.httpClient.get(this.citiesUrl, {params});
   }
 }
