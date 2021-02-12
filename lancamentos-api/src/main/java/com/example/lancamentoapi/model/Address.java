@@ -3,10 +3,14 @@ package com.example.lancamentoapi.model;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Data
+@Embeddable
 class Address {
-	
+
 	private String street;
 	private String number;
 	private String complement;
@@ -14,6 +18,8 @@ class Address {
 
 	@Column(name = "zip_code")
 	private String zipCode;
-	private String city;
-	private String state;
+
+	@ManyToOne
+  @JoinColumn(name = "city_id")
+  private City city;
 }
