@@ -27,6 +27,10 @@ public class ApiProperty {
     public static class Security {
 
         private boolean enableHttps;
+        private String frontEndClient;
+        private String frontEndPassword;
+        private String mobileClient;
+        private String mobilePassword;
     }
 
     @Setter

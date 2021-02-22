@@ -15,9 +15,6 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 
 @Profile("oauth-security")
 @Configuration
-@EnableWebSecurity
-@EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true) //Habilitar segurança nos metódos
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
@@ -32,7 +29,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources) {
         resources.stateless(true); // Não guardar seção
     }
 
@@ -40,5 +37,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public MethodSecurityExpressionHandler createExpressionHandler(){
         return new OAuth2MethodSecurityExpressionHandler();
     }
-
 }
