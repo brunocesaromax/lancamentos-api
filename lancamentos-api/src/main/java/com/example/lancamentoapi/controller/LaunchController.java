@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/launchs")
@@ -85,7 +86,8 @@ public class LaunchController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_SEARCH_LAUNCH') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        return launchService.findById(id);
+        Optional<Launch> launch = launchService.findById(id);
+        return launch.isPresent() ? ResponseEntity.ok(launch.get()) : ResponseEntity.notFound().build();
     }
 
     @PostMapping

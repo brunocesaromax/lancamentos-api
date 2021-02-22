@@ -23,7 +23,7 @@ public class CategoryController {
     private final CategoryRepository categoryRepository;
     private final ApplicationEventPublisher publisher;
 
-//    @CrossOrigin(maxAge = 10) // Permitir que todas origens consiguem fazer essa requisição
+    //    @CrossOrigin(maxAge = 10) // Permitir que todas origens consiguem fazer essa requisição
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
     public List<Category> list() {
@@ -35,20 +35,15 @@ public class CategoryController {
     public ResponseEntity<Category> save(@Valid @RequestBody Category category, HttpServletResponse response) {
         Category categorySave = categoryRepository.save(category);
         publisher.publishEvent(new ResourceCreatedEvent(this, response, categorySave.getId()));
-        
+
         /*Retornando objeto criado para o cliente, facilita o desenvolvimento da parte cliente*/
         return ResponseEntity.status(HttpStatus.CREATED).body(categorySave);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_SEARCH_CATEGORY') and #oauth2.hasScope('read')")
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Category> category = categoryRepository.findById(id);
-
-        if (category.isPresent()){
-            return ResponseEntity.ok(category.get());
-        }
-
-        return ResponseEntity.notFound().build();
+        return category.isPresent() ? ResponseEntity.ok(category.get()) : ResponseEntity.notFound().build();
     }
 }

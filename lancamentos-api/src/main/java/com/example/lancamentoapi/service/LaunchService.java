@@ -60,14 +60,8 @@ public class LaunchService {
         return launchRepository.filterOut(launchFilter, pageable);
     }
 
-    public ResponseEntity<?> findById(Long id) {
-        Optional<Launch> lancamentoBD = launchRepository.findById(id);
-
-        if (lancamentoBD.isPresent()) {
-            return ResponseEntity.ok(lancamentoBD.get());
-        }
-
-        return ResponseEntity.notFound().build();
+    public Optional<Launch> findById(Long id) {
+        return launchRepository.findById(id);
     }
 
     public Launch save(Launch launch) {

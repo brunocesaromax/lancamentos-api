@@ -58,12 +58,7 @@ public class PersonController {
     @PreAuthorize("hasAuthority('ROLE_SEARCH_PERSON') and #oauth2.hasScope('read')")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Person> person = personRepository.findById(id);
-
-        if (person.isPresent()) {
-            return ResponseEntity.ok(person.get());
-        }
-
-        return ResponseEntity.notFound().build();
+        return person.isPresent() ? ResponseEntity.ok(person.get()) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
