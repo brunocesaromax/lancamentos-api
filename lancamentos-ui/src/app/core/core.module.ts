@@ -5,7 +5,6 @@ import { ErrorHandlerService } from './error-handler.service';
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { LogService } from '../examples/log.service';
-import { ConfirmationService } from 'primeng/primeng';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { Title } from '@angular/platform-browser';
@@ -17,6 +16,7 @@ import { LaunchService } from '../launchs/launch.service';
 import { PersonService } from '../persons/person.service';
 import { CategoryService } from '../categories/category.service';
 import { ReportsService } from '../reports/reports.service';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [

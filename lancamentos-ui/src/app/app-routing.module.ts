@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found.component';
-import { NgModule } from '@angular/core';
 import { NotAuthorizedComponent } from './core/not-authorized/not-authorized.component';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {path: 'launchs', loadChildren: () => import('./launchs/launchs.module').then(m => m.LaunchsModule)},

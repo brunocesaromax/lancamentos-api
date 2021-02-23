@@ -4,7 +4,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {Person} from '../Person';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {ToastyService} from 'ng2-toasty';
-import {ConfirmationService} from 'primeng/primeng';
+import {ConfirmationService} from 'primeng/api';
 import {Title} from '@angular/platform-browser';
 
 @Component({

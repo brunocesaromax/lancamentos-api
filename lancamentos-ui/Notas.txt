@@ -79,3 +79,9 @@ do projeto
 
 Build da aplicação angular e geração do diretório 'dist':
 - ng build --prod --configuration=production
+
+***********Atualização do angular**********
+- https://update.angular.io/
+- executar o comando: ng build --prod , ajuda a descobrir os possíveis erros
+- atualizar o primeng para a versão compatível com o angular
+
