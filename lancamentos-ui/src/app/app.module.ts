@@ -9,13 +9,8 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { AppRoutingModule } from './app-routing.module';
 import { SecurityModule } from './security/security.module';
-import { JwtModule } from '@auth0/angular-jwt';
 
 registerLocaleData(localePt);
-
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
 
 @NgModule({
   declarations: [
@@ -25,14 +20,6 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     SecurityModule,
-    // Configuração para que o token seja automaticamente adicionado ao cabeçalho de cada requisição
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        allowedDomains: ['localhost:8080', 'launchs-api.herokuapp.com'],
-        disallowedRoutes: [],
-      },
-    }),
     CoreModule,
     ExamplesModule,
     AppRoutingModule

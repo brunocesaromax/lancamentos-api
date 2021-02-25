@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'
+  apiUrl: 'http://localhost:8080',
+
+  // Expressões regulares
+  tokenAllowedDomains: [/localhost:8080/], // Domínios permitidos para o token ser enviado
+  tokenDisallowedRoutes: [/\/oauth\/token/] // Domínios não permitidos para o envio de token
 };
 
 /*
