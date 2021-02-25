@@ -3,9 +3,7 @@ import {Injectable} from '@angular/core';
 import {from as observableFromPromise, Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LaunchHttp extends HttpClient {
 
   constructor(private authService: AuthService,

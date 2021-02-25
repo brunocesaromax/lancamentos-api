@@ -17,6 +17,7 @@ import { PersonService } from '../persons/person.service';
 import { CategoryService } from '../categories/category.service';
 import { ReportsService } from '../reports/reports.service';
 import { ConfirmationService } from 'primeng/api';
+import { LaunchHttp } from '../security/lauch-http.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ConfirmationService } from 'primeng/api';
     ErrorHandlerService,
 
     AuthService,
+    LaunchHttp,
     ConfirmationService,
     LogService,
     Title,

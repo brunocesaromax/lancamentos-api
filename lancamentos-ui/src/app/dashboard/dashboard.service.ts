@@ -13,17 +13,14 @@ export class DashboardService {
   }
 
   launchsByCategory(): Promise<Array<any>> {
-    return this.httpClient.get(`${this.launchsUrl}/statistics/category`)
-      .toPromise()
-      .then((response: any) => {
-        return response;
-      });
+    return this.httpClient.get<Array<any>>(`${this.launchsUrl}/statistics/category`)
+      .toPromise();
   }
 
   launchsByDay(): Promise<Array<any>> {
-    return this.httpClient.get(`${this.launchsUrl}/statistics/day`)
+    return this.httpClient.get<Array<any>>(`${this.launchsUrl}/statistics/day`)
       .toPromise()
-      .then((response: any) => {
+      .then(response => {
         this.convertStringsToDates(response);
         return response;
       });

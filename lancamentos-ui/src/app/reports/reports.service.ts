@@ -22,7 +22,6 @@ export class ReportsService {
 
     return this.httpClient.get(`${this.launchsUrl}/reports/person`,
       {params, responseType: 'blob'})
-      .toPromise()
-      .then((response: any) => response);
+      .toPromise();
   }
 }

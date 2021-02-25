@@ -24,10 +24,12 @@ export class LaunchService {
   }
 
   search(filter: LaunchFilter): Observable<any> {
-    let params = new HttpParams();
-
-    params = params.set('page', filter.page.toString());
-    params = params.set('size', filter.pageSize.toString());
+    let params = new HttpParams({
+      fromObject: {
+        page: filter.page.toString(),
+        size: filter.pageSize.toString()
+      }
+    });
 
     if (filter.description) {
       params = params.append('description', filter.description);

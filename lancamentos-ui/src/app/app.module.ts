@@ -9,6 +9,12 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { AppRoutingModule } from './app-routing.module';
 import { SecurityModule } from './security/security.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 registerLocaleData(localePt);
 
@@ -19,6 +25,14 @@ registerLocaleData(localePt);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    // Configuração para que o token seja automaticamente adicionado ao cabeçalho de cada requisição
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environment.tokenAllowedDomains,
+        disallowedRoutes: environment.tokenDisallowedRoutes
+      },
+    }),
     SecurityModule,
     CoreModule,
     ExamplesModule,
