@@ -1,6 +1,6 @@
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {from as observableFromPromise, Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -50,7 +50,7 @@ export class LaunchHttp extends HttpClient {
         .then(() => {
           return fn().toPromise();
         });
-      return from(newAccessTokenCall);
+      return observableFromPromise(newAccessTokenCall);
     } else {
       return fn();
     }
