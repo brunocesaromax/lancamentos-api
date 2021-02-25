@@ -4,6 +4,7 @@ a {
 }
 
 .btn-del-attachment {
+  margin-left: 10px;
   width: 25px;
   height: 22px;
 }
