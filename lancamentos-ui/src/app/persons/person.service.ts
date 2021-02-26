@@ -46,6 +46,7 @@ export class PersonService {
   }
 
   changeStatus(id: number, currentStatus: boolean): Observable<any> {
+    // Necessário acrescentar o content type json explicitamente
     const headers = new HttpHeaders().append('Content-Type', 'application/json');
     return this.httpClient.put(`${this.personsUrl}/${id}/active`, !currentStatus, {headers});
   }

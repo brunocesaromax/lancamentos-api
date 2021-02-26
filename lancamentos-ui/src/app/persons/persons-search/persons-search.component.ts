@@ -18,6 +18,7 @@ export class PersonsSearchComponent implements OnInit {
   filter = new PersonFilter();
   persons: Person[] = [];
   headers = ['nome', 'cidade', 'estado', 'status', 'Ações'];
+  currentPage = 0;
 
   @ViewChild('table', {static: true}) table;
 
@@ -45,6 +46,7 @@ export class PersonsSearchComponent implements OnInit {
   changePage(event: LazyLoadEvent) {
     const page = event.first / event.rows;
     this.search(page);
+    this.currentPage = page;
   }
 
   deleteConfirm(person: any) {
@@ -59,7 +61,6 @@ export class PersonsSearchComponent implements OnInit {
   delete(person: any) {
     this.personService.delete(person.id)
       .subscribe(() => {
-          this.table.first = 0;
           this.search();
           this.toastyService.success('Pessoa excluída com sucesso!');
         },
@@ -70,8 +71,7 @@ export class PersonsSearchComponent implements OnInit {
   changeStatus(person: any) {
     this.personService.changeStatus(person.id, person.active)
       .subscribe(() => {
-          this.table.first = 0;
-          this.search();
+          this.search(this.currentPage);
           this.toastyService.success(person.active ? 'Pessoa inativada com sucesso!' : 'Pessoa ativada com sucesso!');
         },
         error => this.errorHandlerService.handle(error)

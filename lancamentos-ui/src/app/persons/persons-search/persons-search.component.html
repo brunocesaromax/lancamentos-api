@@ -36,7 +36,7 @@
             <td>{{person.name}}</td>
             <td>{{person.address.city?.name}}</td>
             <td>{{person.address.city?.state.name}}</td>
-            <td><a style="color: #333333" href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'"
+            <td><a href="javascript:;" [pTooltip]="person.active ? 'Desativar' : 'Ativar'"
                    tooltipPosition="top" (click)="changeStatus(person)">{{person.active ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-actions">
               <a pButton class="edit-button" pTooltip="Editar" [routerLink]="['/persons', person.id]" tooltipPosition="top" style="margin:5px"><i
