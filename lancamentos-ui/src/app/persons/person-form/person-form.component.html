@@ -75,7 +75,7 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Estado</label>
-        <p-dropdown placeholder="Selecione..." [autoWidth]="false"
+        <p-dropdown placeholder="Selecione..."
                     [filter]="true" [options]="states" [(ngModel)]="stateSelected" name="stateSelected"
                     (onChange)="loadCities()" #state="ngModel" required emptyFilterMessage="Nenhum resultado encontrado"></p-dropdown>
         <app-message [control]="state"
@@ -86,7 +86,7 @@
 
       <div class="ui-g-6 ui-fluid">
         <label>Cidade</label>
-        <p-dropdown placeholder="Selecione..." [autoWidth]="false"
+        <p-dropdown placeholder="Selecione..."
                     [filter]="true" [options]="cities" [(ngModel)]="person.address.city.id"
                     name="city" #city="ngModel" required [disabled]="!stateSelected" emptyFilterMessage="Nenhum resultado encontrado"></p-dropdown>
         <app-message [control]="city"
