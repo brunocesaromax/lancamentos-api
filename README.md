@@ -22,8 +22,13 @@ Senha: admin
 ![Img 5](https://github.com/brunocesaromax/lancamentos/blob/master/lancamentos-ui/src/assets/img5.png)
 ![Img 6](https://github.com/brunocesaromax/lancamentos/blob/master/lancamentos-ui/src/assets/img6.png)
 
-<!-- ## Modelo Conceitual -->
-<!-- Imagem com o modelo conceitual -->
+## Modelo Conceitual
+
+![Modelo Conceitual](https://github.com/brunocesaromax/lancamentos/blob/master/lancamentos-ui/src/assets/class-diagram.png)
+
+## Modelo de banco de dados
+
+![Modelo bd](https://github.com/brunocesaromax/lancamentos/blob/master/lancamentos-ui/src/assets/entity-diagram.png)
 
 ## Tecnologias utilizadas
 
