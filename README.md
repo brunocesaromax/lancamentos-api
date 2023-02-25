@@ -3,8 +3,6 @@
 
 # Sobre o projeto
 
-https://launchs-angular.herokuapp.com/launchs
-
 Lançamentos é uma aplicação full stack web construída durante o acompanhamento do curso __Full Stack Angular and Spring__ da Algaworks.
 
 A aplicação consiste no gerenciamento financeiro do usuário, através de lançamentos de débitos e créditos.
